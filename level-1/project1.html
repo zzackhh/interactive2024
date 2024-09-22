@@ -7,7 +7,7 @@
             font-family: 'Verdana';
             font-size: 40px;
             font-weight: normal;
-            text-align: center;
+            text-align: center
         }
         body {
             font-family: 'Times New Roman';
@@ -32,18 +32,37 @@
     <br> 
     <p>The following is a list of now defunct pieces of tech:</p>
     <ul>
-        <li><a href="blackberry.html">The BlackBerry</a></li>
-        <li>OG Tumblr</li>
-        <li>The Polaroid</li>
-        <li>Sundial (lol)</li>
-        <li><a href="ipodnano.html">iPod Nano</a></li>
-        <li>The record player</li>
-        <li>The Cassette</li>
-        <li><a href="tamagotchi.html">A Tamagotchi (not completely defunct...but)</a></li>
-        <li>Google Glass</li>
-        <li><a href="Gameboy.html">Nintendo Game Boy</a></li>
-        <li><a href="dellstreak.html">Dell's Streak</a></li>
-        <li>iPod Touch</li> 
+        <div class="container">
+            <div class="item"><a href="blackberry.html">The BlackBerry</a></div>
+            <div class="item">OG Tumblr</div>
+            <div class="item">The Polaroid</div>
+            <div class="item">Sundial (lol)</div>
+            <div class="item"><a href="ipodnano.html">iPod Nano</a></div>
+            <div class="item">The record player</div>
+            <div class="item">The Cassette</div>
+            <div class="item"><a href="tamagotchi.html">A Tamagotchi (not completely defunct...but)</a></div>
+            <div class="item">Google Glass</div>
+            <div class="item"><a href="Gameboy.html">Nintendo Game Boy</a></div>
+            <div class="item"><a href="dellstreak.html">Dell's Streak</a></div>
+            <div class="item">iPod Touch</div>
+            <div class="item"><a href="ipodnano2.html">iPod Nano Level 5</a></div>
+        </div>
     </ul>
+<style>
+    .container {
+        display:flex;
+        flex-wrap: wrap;
+            gap: 10px;
+            align-items: flex-start;
+    .item {
+            border: 2px solid #ccc;
+            padding: 15px;
+
+    } 
+
+
+      }
+</style>
+    
 </body>
 </html>
