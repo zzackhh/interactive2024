@@ -1,0 +1,90 @@
+body{
+  text-align: center;
+}
+img {
+  height: 200px;
+  display: inline-block;
+}
+
+#img-0 {
+ 
+  display: block;
+  margin: 0 auto;
+  border: 2px solid yellow;
+}
+
+#img-1 {
+
+  position:absolute;
+  left: 5 px; 
+  top: 0; 
+  border: 2px solid yellow;
+  
+}
+
+#img-2 {
+position: absolute;
+display: inline-block;
+right: 0px;
+border: 2px solid yellow;
+
+}
+
+#img-3 {
+
+  position: absolute; 
+  align: center; 
+  border: 2px solid yellow
+}
+
+#img-4 {
+
+  border: 2px solid yellow;
+  align: center;
+  
+}
+
+#img-5 {
+  
+  border: 2px solid yellow
+
+}
+
+#img-6 {
+
+  border: 2px solid yellow
+  
+}
+
+#img-7 {
+  
+  border: 2px solid yellow;
+  text-align: center;
+
+}
+
+#img-8 {
+  
+  border: 2px solid yellow;
+}
+
+#img-9 {
+
+  border: 2px solid yellow;
+  
+}
+
+#img-10 {
+
+  border: 5px solid magenta;
+  
+}
+
+#img-11 {
+display: block;
+  border: 5px solid magenta;
+  text-align: end;
+  position: absolute;
+  
+  
+}
