@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html, body {
       height: 100%;
@@ -13,10 +15,9 @@
 
     #grad1 {
       position: relative;
-      width: 100px;
-      height: 600px;
+      width: 800px;
+      height: 800px;
       cursor: pointer;
-      border: black 2px solid;
     }
 
     #grad1::before {
@@ -26,11 +27,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: blue;
       background-image: linear-gradient(blue, yellow, pink, magenta, violet, lightpink);
       z-index: 1;
       opacity: 1;
-      animation: fadeOut 5s ease-in-out infinite;
+      animation: fadeOut 4s ease-in-out infinite;
     }
 
     #grad1::after {
@@ -40,12 +40,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      scale: 3x;
-      background-color: red;
       background-image: linear-gradient(to bottom, turquoise, lightgreen, green, darkgreen);
       z-index: 2;
       opacity: 0;
-      animation: fadeIn 5s ease-in-out infinite;
+      animation: fadeIn 4s ease-in-out infinite;
     }
 
     @keyframes fadeOut {
@@ -71,6 +69,10 @@
         opacity: 0;
       }
     }
+
+#image1
+
+
   </style>
 </head>
 <body>
