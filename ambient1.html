@@ -19,6 +19,18 @@
       height: 600px;
       border-radius: 50%;
       cursor: pointer;
+      clip-path: polygon(
+        50% 0%, 
+        61% 35%, 
+        98% 35%, 
+        68% 57%, 
+        79% 91%, 
+        50% 70%, 
+        21% 91%, 
+        32% 57%, 
+        2% 35%, 
+        39% 35%
+      );
     }
 
     #grad1::before {
@@ -32,7 +44,7 @@
       background-image: linear-gradient(blue, yellow, pink, magenta, violet, lightpink);
       z-index: 1;
       opacity: 1;
-      animation: fadeOut 10s ease-in-out infinite;
+      animation: fadeOut 6s ease-in-out infinite;
     }
 
     #grad1::after {
@@ -46,7 +58,7 @@
       background-image: linear-gradient(to bottom, turquoise, lightgreen, green, darkgreen);
       z-index: 2;
       opacity: 0;
-      animation: fadeIn 10s ease-in-out infinite;
+      animation: fadeIn 6s ease-in-out infinite;
     }
 
     @keyframes fadeOut {
@@ -71,6 +83,18 @@
       100% {
         opacity: 0;
       }
+    }
+
+    #grad1:hover {
+      transform: rotate(180deg)
+    }
+
+    #grad1:active::hover {
+      opacity: 0; 
+    }
+
+    #grad1:active::hover {
+      opacity: 1; 
     }
   </style>
 </head>
