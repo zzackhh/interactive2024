@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+
+height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+    #grad1 {
+      position: relative;
+      width: 500px;
+      height: 600px;
+      cursor: pointer;
+      border: black 2px;
+    }
+
+    #grad1::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: blue;
+      background-image: linear-gradient(blue, yellow, pink, magenta, violet, lightpink);
+      transition: opacity 1s ease;
+      z-index: 1;
+    }
+
+    #grad1::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: red;
+      background-image: linear-gradient(to bottom, turquoise, lightgreen, green, darkgreen);
+      transition: opacity 1s ease;
+      z-index: 2;
+      opacity: 0;
+    }
+
+    #grad1:hover::before {
+      opacity: 0;
+    }
+
+    #grad1:hover::after {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="grad1"></div>
+
+</body>
+</html>
