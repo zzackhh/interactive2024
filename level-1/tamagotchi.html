@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+      <style>
+            .move-image {
+                position: relative;
+                animation: none;
+                transition: transform 2s ease-in-out;
+            }
+    
+            .move-image:hover {
+                animation: move 5s ease-in-out infinite alternate;
+                transform: rotate(90deg);
+            }
+    
+            @keyframes move {
+                from {
+                    transform: translateX(0px) rotate(0deg) scale(1);
+                }
+                to {
+                    transform: translateX(500px) rotate(90deg) scale(.2);
+                }
+            }
+        </style>
 <body> 
 	<p>
 <h1>Who even knows when I got a tamagotchi? 
@@ -10,7 +31,8 @@
       src="https://retrospekt.com/cdn/shop/files/LF-1141_3.jpg?v=1698958664&width=3000"
       width="500" 
      height="400" 
-
+     class="move-image"
+     />
      <p>
 <body>
    
