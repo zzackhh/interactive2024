@@ -20,6 +20,7 @@
       border-radius: 50%;
       cursor: pointer;
       animation: moveUpDown 4s ease-in-out infinite;
+      transition: transform 0.3s ease;
     } 
 
     #grad1::before {
@@ -76,20 +77,17 @@
 
     @keyframes moveUpDown {
       0%, 100% {
-        transform: translateY(0); /* Start and end at the center */
+        transform: translateY(0); 
       }
       50% {
-        transform: translateY(100px); /* Move 100px to the right at midpoint */
+        transform: translateY(100px);
       }
     }
 
     #grad1:hover {
-      transform: rotate(180deg)
+      animation-play-state: paused; 
     }
 
-    #grad1:active:hover {
-      opacity: 1; 
-    }
   </style>
 </head>
 <body>
