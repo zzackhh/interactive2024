@@ -26,33 +26,41 @@
             flex-wrap: wrap;
             gap: 10px;
             align-items: center;
-            align-self: center;
+            justify-content: center;
         }
         .item {
             border: 2px solid #ccc;
             padding: 15px;
             background: lightgrey;
-            width: 200px; 
+            width: 200px;
             text-align: center;
         }
-
+        img {
+            max-width: 45%;
+            height: auto;
+            margin-bottom: 20px;
+        }
         @media (max-width: 900px) {
             .item {
-                width: 45%; 
+                width: 45%;
             }
         }
-
         @media (max-width: 600px) {
             .item {
-                width: 100%; 
+                width: 100%;
             }
             .title {
-                font-size: 32px; 
+                font-size: 32px;
             }
         }
     </style>
 </head>
 <body>
+    <div style="display: flex; justify-content: space-between;">
+        <img src="/images/Ad1.jpg" alt="Ad 1">
+        <img src="/images/Ad2.jpg" alt="Ad 2">
+    </div>
+    
     <p class="title">WELCOME!</p>
     
     <p>The following is a list of now defunct pieces of tech:</p>
@@ -73,8 +81,6 @@
             <div class="item"><a href="ipodnano2.html">iPod Nano Level 5</a></div>
         </div>
     </ul>
-<p><a href="description.html">Read more about this site here</a></p>
-
-
+    <p><a href="description.html">Read more about this site here</a></p>
 </body>
 </html>
