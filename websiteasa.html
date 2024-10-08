@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Image</title>
+    <style>
+        .moving-image {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            animation: move 4s linear infinite;
+        }
+
+        @keyframes move {
+            0% {
+                left: 0;
+            }
+            50% {
+                left: calc(100% - 100px); 
+            }
+            100% {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="/images/stickfigure.png" alt="Moving Image" class="moving-image">
+</body>
+</html>
