@@ -3,76 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moving Image</title>
+    <title>Simple Curtain Effect</title>
     <style>
-        .moving-image {
-            position: absolute;
-            width: 100px;
-            bottom: 0;
-            animation: move 15s linear infinite;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        @keyframes move {
-            0% {
-                left: 0;
-            }
-            50% {
-                left: calc(100% - 100px); 
-            }
-            100% {
-                left: 0;
-            }
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #111;
         }
 
-        /* Left side light rotating */
-        .moving-light-left { 
-            position: absolute;
-            width: 100px;
-            top: 10px;
-            left: 10px; /* Light on the left */
-            animation: rotateLightLeft 3s infinite alternate;
+        .stage {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
         }
 
-        /* Right side light rotating */
-        .moving-light-right { 
-            position: absolute;
-            width: 100px;
-            top: 10px;
-            right: 10px; /* Light on the right */
-            animation: rotateLightRight 3s infinite alternate;
+        .curtain {
+            width: 50%;
+            height: 100%;
+            background-color: #b22222; /* Red curtain */
+            transition: transform 6s ease;
         }
 
-        /* Animation for rotating left light */
-        @keyframes rotateLightLeft {
-            0% {
-                transform: rotate(0deg);
-            }
-            50% {
-                transform: rotate(90deg);  /* Rotate 90 degrees in one direction */
-            }
-            100% {
-                transform: rotate(-90deg); /* Rotate 90 degrees in the other direction */
-            }
+        .curtain.left {
+            transform: translateX(0); /* Default position for left curtain */
         }
 
-        /* Animation for rotating right light in the opposite direction */
-        @keyframes rotateLightRight {
-            0% {
-                transform: rotate(0deg);
-            }
-            50% {
-                transform: rotate(-90deg);  /* Rotate 90 degrees in the opposite direction */
-            }
-            100% {
-                transform: rotate(90deg); /* Rotate back in the opposite direction */
-            }
+        .curtain.right {
+            transform: translateX(0); /* Default position for right curtain */
         }
 
+        /* Hover effect to open the curtains */
+        .stage:hover .curtain.left {
+            transform: translateX(-100%);
+        }
+
+        .stage:hover .curtain.right {
+            transform: translateX(100%);
+        }
     </style>
 </head>
 <body>
-    <img src="https://img.freepik.com/premium-vector/projector-icon-stage-electric-light-lamp-doodle_80590-17853.jpg" alt="Rotating Light Left" class="moving-light-left">
-
-    <img src="https://img.freepik.com/premium-vector/projector-icon-stage-electric-light-lamp-doodle_80590-17853.jpg" alt="Rotating Light Right" class="moving-light-right">
-
-   <img src="data:image/png;base64,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" alt="Moving Image" class="moving-image">
+    <div class="stage">
+        <div class="curtain left"></div>
+        <div class="curtain right"></div>
+    </div>
+</body>
+</html>
