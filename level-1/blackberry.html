@@ -1,58 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-<body> 
-<style> 
+    <style> 
+        body {
+            background-color: lightgrey;
+            font-family: "Verdana", sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-h3 {font-family:'Courier New', Courier, monospace;
-	font-size: 20px;
-} 
+        h3 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            text-align: center;
+            color: grey;
+        }
 
-a {
-			color: black;
-			transition: 5s;
-			display: inline-block
-		}
+        .content {
+            width: 80%;
+            max-width: 800px;
+            padding: 50px;
+            background-color: #FFFFFF;
+            border: 2px solid #0000FF;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
 
-		a:hover {
-			color: darkcyan;
-			cursor: pointer;
-		}
-	</style>
-	<p>
-		<h3>The Classic Blackberry (1999–2016).</h3>
-	<br>
-		<body> 
-			<p> 
-				CBS Local News: <a href="http s://www.cbsnews.com/sanfrancisco/news/rip-crackberry-classic-blackberry-phones-stop-working-support-ends/">You can no longer use that old BlackBerry phone sitting at the bottom of your drawer somewhere.<a>
+        p {
+            font-size: 16px;
+            text-align: left;
+            color: grey;
+        }
 
-				On Tuesday, the company will stop running support for its classic devices running BlackBerry 10, 7.1 OS and earlier. This means all of its older devices not running on Android software will no longer be able to use data, send text messages, access the internet or make calls, even to 911.
-				
-				While most mobile users have moved on from BlackBerry -- the last version of its operating system launched in 2013 -- the decision to discontinue support for its phones represents the end of what was once considered bleeding-edge technology.
-				
-				The company originally announced the news in September 2020 as part of its efforts to focus on providing security software and services to enterprises and governments around the world under the name BlackBerry Limited.
-				
-				BlackBerry has been mostly out of the phone business since 2016, but over the years it continued to license its brand to phone manufacturers, including TCL and more recently OnwardMobility, an Austin, Texas-based security startup, for a 5G Blackberry device running on Android software. (BlackBerry's Android devices are not affected by the end of service.)
-				
-				
-				BlackBerry's old school cell phones with physical keyboards from the late 1990s and early 2000s were once so popular people nicknamed them "CrackBerries." The keyboard appealed to professionals who wanted the flexibility of working outside the office with some of the tools they used on a desktop computer.
-				
-				The devices became a status symbol and fixture for people on Wall Street, celebrities like Kim Kardashian, and even former President Barack Obama, thanks in part to its great reputation for security. At its peak in 2012, BlackBerry had more than 80 million active users.
-				
-				The company got its start in 1996 as Research In Motion with what it called two-way pagers. Its first gadget, the "Inter@ctive Pager," allowed customers to respond to pages with a physical keyboard, a kind of text messaging/email hybrid. Three years later, RIM introduced the BlackBerry name with the BlackBerry 850.
-				
-				Eventually, BlackBerry phones gained support for email, apps, web browsing and BBM, an encrypted text messaging platform that predated WhatsApp and survived long after BlackBerry was surpassed by its rivals.
-				
-				
-				But Apple's touchscreen revolution with the iPhone in 2007 made BlackBerry's offerings appear lacking. It tried touch screens and slide-out keyboard models, with little success. It developed a few phones with no physical keyboard, but those were missing BlackBerry's key differentiator: its tactile keyboard.
-				
-				BlackBerry eventually gave up on its own software, embracing Android and layering its security software on top. It found some success in enterprise security software and automotive software.
-				
-				Although TCL stopped making devices with the BlackBerry name in 2020, some fans are holding out for the arrival of OnwardMobility's BlackBerry 5G device, which was originally expected to launch in 2021. Despite the delay, its website still features a banner that says "coming 2021."
+        a {
+            color: #0000FF;
+            text-decoration: none;
+        }
 
-				
-				
+        a:hover {
+            text-decoration: underline;
+        }
 
+        footer {
+            font-size: 12px;
+            color: #555555;
+            margin-top: 30px;
+        }
+    </style>
+</head>
 
-<head></head>
-</html>
+<body>
+    <div class="content">
+        <h3>The Classic Blackberry (1999–2016)</h3>
+        <br>
+        <p>CBS Local News: <a href="https://www.cbsnews.com/sanfrancisco/news/rip-crackberry-classic-blackberry-phones-stop-working-support-ends/">You can no longer use that old BlackBerry phone sitting at the bottom of your drawer somewhere.</a></p>
+
+        <p>On Tuesday, the company will stop running support for its classic devices running BlackBerry 10, 7.1 OS, and earlier. This means all of its older devices not running on Android software will no longer be able to use data, send text messages, access the internet, or make calls, even to 911.</p>
+
+        <p>While most mobile users have moved on from BlackBerry — the last version of its operating system launched in 2013 — the decision to discontinue support for its phones represents the end of what was once considered bleeding-edge technology.</p>
+
+        <p>The company originally announced the news in September 2020 as part of its efforts to focus on providing security software and services to enterprises and governments around the world under the name BlackBerry Limited.</p>
+
+        <p>BlackBerry has been mostly out of the phone business since 2016, but over the years it continued to license its brand to phone manufacturers, including TCL and more recently OnwardMobility, an Austin, Texas-based security startup, for a 5G BlackBerry device running on Android software. (BlackBerry's Android devices are not affected by the end of service.)</p>
+
+        <p>BlackBerry's old school cell phones with physical keyboards from the late 1990s and early 2000s were once so popular people nicknamed them "CrackBerries." The keyboard appealed to professionals who wanted the flexibility of working outside the office with some of the tools they used on a desktop computer.</p>
+
+        <p>The devices became a status symbol and fixture for people on Wall Street, celebrities like Kim Kardashian, and even former President Barack Obama, thanks in part to its great reputation for security. At its peak in 2012, BlackBerry had more than 80 million active users.</p>
+
+        <p>The company got its start in 1996 as Research In Motion with what it called two-way pagers. Its first gadget, the "Inter@ctive Pager," allowed customers to respond to pages with a physical keyboard, a kind of text messaging/email hybrid. Three years later, RIM introduced the BlackBerry name with the BlackBerry 850.</p>
+
+        <p>Eventually, BlackBerry phones gained support for email, apps, web browsing, and BBM, an encrypted text messaging platform that predated WhatsApp and survived long after BlackBerry was surpassed by its rivals.</p>
+
+        <p>But Apple's touchscreen revolution with the iPhone in 2007 made BlackBerry's offerings appear lacking. It tried touch screens and slide-out keyboard models, with little success. It developed a few phones with no physical keyboard, but those were missing BlackBerry's key differentiator: its tactile keyboard.</p>

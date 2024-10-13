@@ -8,34 +8,78 @@
     <style>
         body {
             font-family: 'Times New Roman', Times, serif;
-            background-color: lightpink;
+            background-color: lightgrey;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .content {
+            width: 80%;
+            max-width: 800px;
+            padding: 50px;
+            background-color: #FFFFFF;
+            border: 2px solid #0000FF;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h3 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            color: grey;
+        }
+
+        p {
+            font-size: 16px;
+            text-align: left;
+            color: grey;
+        }
+
+        a {
+            color: #0000FF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #555555;
         }
     </style>
 </head>
 
-    <h3>Dell's Streak (2010–2011)</h3>
-    <style>
-        body {
-            position: absolute;
-            top: 10px;
-            left: 20px;
-        }
-    </style>
-    <p>
-        <a href="https://archive.nytimes.com/bits.blogs.nytimes.com/2010/06/02/dells-streak-the-harbinger-of-smartphone-tablet-hybrids/">
-            On the heels of the Kno, a tablet for the college market, Dell introduced its own take on the tablet on Wednesday. The Streak, a 5-inch touchscreen device, had made appearances earlier at Google’s developer conference, but it received a fuller introduction at D8, The Wall Street Journal’s technology conference on Wednesday.
-        </a>
-    </p>
+<body>
+    <div class="content">
+        <h3>Dell's Streak (2010–2011)</h3>
 
-    <p>
-        Many people are likely to say that the Streak, which runs Google’s Android operating system, is not a tablet, but rather a large phone. It is, and one that is only slightly larger than another Android phone, the HTC EVO 4G, which just debuted at Sprint stores. The Streak comes with 3G and Wi-Fi and is intended to be sold like a phone, that is with a carrier subsidy and a two-year plan. Dell plans to introduce the device first in Europe and at the end of July in the United States. Prices with the carrier subsidy have not been set, but the company said the Streak will also be sold at Dell.com without a subsidy for about $500.
-    </p>
+        <p>
+            <a href="https://archive.nytimes.com/bits.blogs.nytimes.com/2010/06/02/dells-streak-the-harbinger-of-smartphone-tablet-hybrids/">
+                On the heels of the Kno, a tablet for the college market, Dell introduced its own take on the tablet on Wednesday. The Streak, a 5-inch touchscreen device, had made appearances earlier at Google’s developer conference, but it received a fuller introduction at D8, The Wall Street Journal’s technology conference on Wednesday.
+            </a>
+        </p>
 
-    <p>
-        If the Kno and the Streak are any indication, we are about to see an explosion of variations on the tablet. They will range from lightweight devices barely larger than a phone, to heavier, full-featured touchscreen computers, and everything in between.
-    </p>
-    
-    <img
+        <p>
+            Many people are likely to say that the Streak, which runs Google’s Android operating system, is not a tablet, but rather a large phone. It is, and one that is only slightly larger than another Android phone, the HTC EVO 4G, which just debuted at Sprint stores. The Streak comes with 3G and Wi-Fi and is intended to be sold like a phone, that is with a carrier subsidy and a two-year plan. Dell plans to introduce the device first in Europe and at the end of July in the United States. Prices with the carrier subsidy have not been set, but the company said the Streak will also be sold at Dell.com without a subsidy for about $500.
+        </p>
 
+        <p>
+            If the Kno and the Streak are any indication, we are about to see an explosion of variations on the tablet. They will range from lightweight devices barely larger than a phone, to heavier, full-featured touchscreen computers, and everything in between.
+        </p>
+    </div>
+
+    <footer>
+        By The New York Times
+    </footer>
 </body>
 </html>

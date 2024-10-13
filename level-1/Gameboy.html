@@ -7,29 +7,63 @@
     <title>Nintendo Game Boy</title>
     <style>
         body {
-            font-family: 'Verdana', Times, serif;
-            position: relative;
+            font-family: 'Verdana', sans-serif;
+            background-color: lightgrey;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
-        .colored-box {
-            background-color: #8a8475; 
-            color: white; 
-            padding: 20px; 
-            border-radius: 10px; 
-            border: 2px solid #439c7d;
-            width: fit-content;
+
+        .content {
+            width: 80%;
+            max-width: 800px;
+            padding: 50px;
+            background-color: #FFFFFF;
+            border: 2px solid #0000FF;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
+
+        h3 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            color: grey;
+        }
+
+        p {
+            font-size: 16px;
+            text-align: left;
+            color: grey;
+        }
+
         a {
-            color: white; 
+            color: #0000FF;
+            text-decoration: none;
             transition: transform 5s ease, font-size 5s ease;
         }
+
         a:hover {
             font-size: 25px;
-            cursor: pointer; 
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #555555;
         }
     </style>
 </head>
+
 <body>
-    <div class="colored-box">
+    <div class="content">
         <h3>Nintendo Game Boy (1989–2008)</h3>
 
         <p>
@@ -37,16 +71,23 @@
                 The Game Boy was the most dominant line of products in the history of video games.
             With its early competitors all but vanquished, Nintendo solidified its grip on the market in 1996 with the release of the Game Boy Pocket. To this day, it’s one of the more dramatic “slim” console revisions of all time, and the Pocket shed a huge amount of the original Game Boy’s bulk and did away with its notorious green-on-green display. The Pocket’s screen was the same size, but it had a faster refresh rate and a much more attractive grayscale look. The system also ran off of just two AAA batteries, compared to the original’s four AAs.
         </p>
+
         <p>
             The Pocket didn’t change anything about the Game Boy as a platform. At that point, the system’s library of games spoke for itself, and it wasn’t until two years later that Nintendo would do anything to expand its capabilities. 1998’s Game Boy Color was roughly as powerful as an NES, allowing for Color-exclusive ports of games like Super Mario Bros. But crucially, the Color maintained full backwards compatibility with the Game Boy, so games like Pokémon Yellow were able to support the color screen while also running on the tens of millions of monochrome systems that were already out there.
-        </b>
         </p>
+
         <p>
             1998 also saw the release of SNK’s Japan-only Neo Geo Pocket, followed the next year by the globally sold Neo Geo Pocket Color. This was arguably the best shot anyone had taken at the Game Boy until this point. The hardware was similarly solid and affordable, with strong battery life and a great microswitched mini-joystick. The software library also contained several impressive titles. Fans of SNK’s fighting franchises were particularly well-served, and the system even played host to a surprisingly good Sonic the Hedgehog game years before Sega would consider putting its IP on Nintendo platforms.
         </p>
+
         <p>
             It would prove impossible to compete with the exploding Pokémon phenomenon, however, and SNK’s financial troubles caused it to back out of its global operations in 2000 before going bankrupt in Japan the next year. It didn’t help that, in Japan, the NGPC had another serious competitor to deal with: Bandai’s WonderSwan...
         </a> 
-        </div>
+        </p>
+    </div>
+
+    <footer>
+        By The Verge
+    </footer>
 </body>
 </html>
