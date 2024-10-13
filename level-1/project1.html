@@ -28,19 +28,26 @@
             background: lightgrey;
             padding: 10px;
         }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-            justify-content: center;
-        }
-        .item {
+        .blog-post {
             border: 2px solid #ccc;
-            padding: 15px;
-            background: lightgrey;
-            width: 200px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: lightgrey;
             text-align: center;
+        }
+        .blog-post h2 {
+            font-family: 'Verdana', sans-serif;
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        .blog-post p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .blog-post img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
         }
         .ad-left {
             position: fixed;
@@ -79,24 +86,86 @@
     <img class="ad-right" src="https://pbs.twimg.com/media/E7OvqxFXMAcxINz?format=jpg&name=900x900" alt="Ad 2">
 
     <div class="main-content">
-        <p class="title">this site is dedicated to the beginning of tech.</p>
-        <ul>
-            <div class="container">
-                <div class="item"><a href="blackberry.html">The BlackBerry</a></div>
-                <div class="item">OG Tumblr</div>
-                <div class="item">The Polaroid</div>
-                <div class="item">Sundial (lol)</div>
-                <div class="item"><a href="ipodnano.html">iPod Nano</a></div>
-                <div class="item">The record player</div>
-                <div class="item">The Cassette</div>
-                <div class="item"><a href="tamagotchi.html">A Tamagotchi (not completely defunct...but)</a></div>
-                <div class="item">Google Glass</div>
-                <div class="item"><a href="Gameboy.html">Nintendo Game Boy</a></div>
-                <div class="item"><a href="dellstreak.html">Dell's Streak</a></div>
-                <div class="item">iPod Touch</div>
-                <div class="item"><a href="ipodnano2.html">iPod Nano Level 5</a></div>
-            </div>
-        </ul>
+        <p class="title">This site is dedicated to the beginning of tech.</p>
+
+        <article class="blog-post">
+            <h2><a href="blackberry.html">The BlackBerry</a></h2>
+            <img src="path-to-image.jpg" alt="BlackBerry Image" />
+            <p>The BlackBerry was once the king of mobile devices. Known for its physical keyboard, it was a favorite among business professionals. Learn more about the rise and fall of the BlackBerry in this article.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2>OG Tumblr</h2>
+            <img src="path-to-image.jpg" alt="Tumblr Image" />
+            <p>Tumblr was a unique blend of blogging and social media. It gave rise to internet subcultures and provided a platform for creatives before its decline after the content ban.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2>The Polaroid</h2>
+            <img src="path-to-image.jpg" alt="Polaroid Image" />
+            <p>The Polaroid camera allowed people to capture moments and see the results instantly. Discover how this innovation left a lasting impact on photography.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2>Sundial (lol)</h2>
+            <img src="path-to-image.jpg" alt="Sundial Image" />
+            <p>The sundial may not be the most modern technology, but it certainly marks the beginning of timekeeping devices! A humorous look at the sundial's place in the tech timeline.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2><a href="ipodnano.html">iPod Nano</a></h2>
+            <img src="path-to-image.jpg" alt="iPod Nano Image" />
+            <p>The iPod Nano was a pocket-sized music player that changed the way we listened to music. This post takes you through the different generations of the Nano and its evolution.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2>The Record Player</h2>
+            <img src="path-to-image.jpg" alt="Record Player Image" />
+            <p>Vinyl records and record players made a comeback in recent years, but their roots go deep in music history. Learn about the resurgence of vinyl in the digital age.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2>The Cassette</h2>
+            <img src="path-to-image.jpg" alt="Cassette Image" />
+            <p>Cassettes were once the most portable way to carry your music. Revisit the era of mixtapes and Walkmans in this nostalgic article.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2><a href="tamagotchi.html">A Tamagotchi (not completely defunct...but)</a></h2>
+            <img src="path-to-image.jpg" alt="Tamagotchi Image" />
+            <p>The Tamagotchi, a digital pet, was a sensation in the '90s. Explore its cultural impact and why it's still beloved by many today.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2>Google Glass</h2>
+            <img src="path-to-image.jpg" alt="Google Glass Image" />
+            <p>Google Glass was an ambitious project that aimed to bring augmented reality to everyday life. Find out what went wrong and what lessons were learned from this tech experiment.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2><a href="Gameboy.html">Nintendo Game Boy</a></h2>
+            <img src="path-to-image.jpg" alt="Game Boy Image" />
+            <p>The Nintendo Game Boy revolutionized handheld gaming. Learn about its legacy and why it remains iconic even in the age of smartphones.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2><a href="dellstreak.html">Dell's Streak</a></h2>
+            <img src="path-to-image.jpg" alt="Dell Streak Image" />
+            <p>The Dell Streak was one of the first attempts at creating a tablet. Although it didn’t catch on, it paved the way for future devices. Discover more about its short-lived moment in the spotlight.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2>iPod Touch</h2>
+            <img src="path-to-image.jpg" alt="iPod Touch Image" />
+            <p>The iPod Touch brought the iPhone experience to a wider audience without the phone capabilities. Take a walk down memory lane with this iconic device.</p>
+        </article>
+
+        <article class="blog-post">
+            <h2><a href="ipodnano2.html">iPod Nano Level 5</a></h2>
+            <img src="path-to-image.jpg" alt="iPod Nano 5 Image" />
+            <p>The iPod Nano evolved over several generations, each introducing new features. Dive into the advancements brought by the 5th generation.</p>
+        </article>
+
         <p><a href="description.html">Read more about this site here</a></p>
     </div>
 
