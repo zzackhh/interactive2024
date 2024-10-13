@@ -2,12 +2,21 @@
 <html>
 <head>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
             background-color: #E0E0E0;
             font-family: "Verdana", sans-serif;
-            margin: 0;
-            height: 100vh;
+        }
+
+        body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -40,10 +49,18 @@
             text-align: center;
         }
 
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: #E0E0E0;
+        }
+
         footer {
             font-size: 12px;
             color: #555555;
-            margin-top: 30px;
         }
     </style>
 </head>
@@ -53,7 +70,6 @@
         <h1>Who even knows when I got a Tamagotchi?</h1>
         <h2>I loved them growing up<span> and had one hanging from my bulletin board.</h2>
 
-
         <p>Will Tamagotchi become a post-Beanie Babies craze? It's safe to say it's going to be successful, but we don't know yet if it will be a megasuccess. To be up there with Beanie Babies, kids will have to collect them.</p>
 
         <p>Gene Morra from Bandai America said a well-nurtured Tamagotchi can live about 30 days, but some in Japan have lasted nearly three months.</p>
@@ -62,11 +78,13 @@
 
         <p>Teenagers like Courtney, 13, also found it overwhelming. "It was like taking care of a real child," she said, after turning off the sound because it beeped every five minutes.</p>
 
-        <p>Psychologists say the toy teaches responsibility, and Bandai plans to release an improved version with a 'pause' button soon.</p>
+        <p>Psychologists say the toy teaches responsibility, and Bandai plans to release an improved version with a <a href="https://www.nytimes.com/1997/05/22/garden/love-it-feed-it-mourn-it.html">pause button</a> soon.</p>
     </div>
 
-    <footer>
-        By Carol Lawson, 1997, New York Times.
-    </footer>
+    <div class="footer">
+        <footer>
+            By Carol Lawson, 1997, New York Times.
+        </footer>
+    </div>
 </body>
 </html>
