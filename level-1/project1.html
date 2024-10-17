@@ -18,7 +18,6 @@
             position: relative;
         }
 
-        /* Overlay for background */
         body::before {
             content: '';
             position: fixed;
@@ -87,7 +86,6 @@
             border-radius: 4px;
         }
 
-        /* Make larger posts */
         .large-post {
             grid-column: span 2;
             grid-row: span 2;
@@ -95,10 +93,14 @@
 
         .ad-left, .ad-right {
             position: fixed;
-            top: 100px;
-            width: 150px;
+            width: 100px; 
             z-index: 0;
             opacity: 0.8;
+        }
+
+        .ad-left:hover, .ad-right:hover {
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
         }
 
         .ad-left {
@@ -107,11 +109,6 @@
 
         .ad-right {
             right: 10px;
-        }
-
-        .ad-left:hover, .ad-right:hover {
-            opacity: 1;
-            transition: opacity 0.3s ease-in-out;
         }
 
         a {
@@ -124,7 +121,7 @@
             color: #1a1a1a;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1100px) {
             .ad-left, .ad-right {
                 display: none;
             }
@@ -146,8 +143,16 @@
     </style>
 </head>
 <body>
-    <img class="ad-left" src="https://i.redd.it/93aa1hzs2ye01.jpg" alt="Ad 1">
-    <img class="ad-right" src="https://pbs.twimg.com/media/E7OvqxFXMAcxINz?format=jpg&name=900x900" alt="Ad 2">
+    <img class="ad-left" src="https://i.redd.it/93aa1hzs2ye01.jpg" alt="Ad 1" style="top: 100px;">
+    <img class="ad-right" src="https://pbs.twimg.com/media/E7OvqxFXMAcxINz?format=jpg&name=900x900" alt="Ad 2" style="top: 100px;">
+    <img class="ad-left" src="https://i.pinimg.com/enabled_hi/474x/ca/c6/fe/cac6fe63ab5de674aecacc26cd9ab45a.jpg" alt="Ad 3" style="top: 400px;">
+    <img class="ad-right" src="https://i.pinimg.com/enabled_hi/474x/ef/51/c4/ef51c4a78685fc3a4fec4f654541b108.jpg" alt="Ad 4" style="top: 600px;">
+    <img class="ad-left" src="https://i.pinimg.com/564x/d0/e1/6a/d0e16ae0d937569fc4b9ddd33681b272.jpg" alt="Ad 5" style="top: 800px;">
+    <img class="ad-right" src="https://i.pinimg.com/enabled_hi/474x/d3/99/1c/d3991c78d57828857948e221b83a946b.jpg" alt="Ad 6" style="top: 1000px;">
+    <img class="ad-left" src="https://i.pinimg.com/736x/e1/79/1b/e1791b2f8d0d8ad2d31e0ae7d478dd1b.jpg" alt="Ad 7" style="top: 1200px;">
+    <img class="ad-right" src="https://i.pinimg.com/736x/9d/de/98/9dde98b2b29d5f9d983f09be2e3f2270.jpg" alt="Ad 8" style="top: 1400px;">
+    <img class="ad-left" src="https://i.pinimg.com/736x/af/f4/54/aff4549a57864afb33e242a2fb34ccf6.jpg" alt="Ad 9" style="top: 1600px;">
+    <img class="ad-right" src="https://i.pinimg.com/564x/03/27/9b/03279b15ce789a73fc1b3a8530aa1cb0.jpg" alt="Ad 10" style="top: 1800px;">
 
     <div class="main-content">
         <p class="title">This site is dedicated to the beginning of tech.</p>
@@ -235,10 +240,9 @@
     </div>
 
     <script>
-        // JavaScript to randomly make some posts larger
         document.addEventListener("DOMContentLoaded", () => {
             const posts = document.querySelectorAll('.blog-post');
-            const numberOfLargePosts = Math.min(3, posts.length); // Make up to 3 posts larger
+            const numberOfLargePosts = Math.min(3, posts.length);
             const selectedIndexes = new Set();
 
             while (selectedIndexes.size < numberOfLargePosts) {
