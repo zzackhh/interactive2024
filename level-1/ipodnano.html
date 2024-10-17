@@ -1,35 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style>
-        body {
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
             background-color: lightskyblue;
-            font-family: Verdana, sans-serif;
+            font-family: "Verdana", sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1, h2, p {
+            color: grey;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .content {
+            width: 80%;
+            max-width: 800px;
+            padding: 50px;
+            background-color: #FFFFFF;
+            border: 2px solid #0000FF;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: lightskyblue;
+        }
+
+        footer {
+            font-size: 12px;
+            color: #555555;
+        }
+
+        a {
+            color: #0000FF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
+</head>
 
-<body> 
-	<p><h3>The iPod Nano (2005–2017).</h3><p>
-		<p> 
-		<body> 
-			The following is Press Release from Apple: 
-			<a href="https://www.apple.com/newsroom/2005/09/07Apple-Introduces-iPod-nano/">SAN FRANCISCO—September 7, 2005—Apple® today introduced the iPod® nano, a revolutionary full-featured iPod that holds 1,000 songs yet is thinner than a standard #2 pencil and less than half the size of competitive players. <a></a>
-			The iPod nano features an ultra-portable, lightweight design with a gorgeous color screen, Apple’s patent pending Click Wheel and the ability to hold 1,000 songs or 25,000 photos. iPod nano works seamlessly with the iTunes® Music Store, the world’s number one digital music service. The iPod nano is available immediately in a 4GB model priced at just $249 and a 2GB model priced at just $199, with both models available in stunning white or black designs.
-“iPod nano is the biggest revolution since the original iPod,” said Steve Jobs, Apple’s CEO. “iPod nano is a full-featured iPod in an impossibly small size, and it’s going to change the rules for the entire portable music market.”
-iPod nano is the perfect combination of innovative design, storage capacity and ease of use. Thinner than a standard #2 pencil and weighing only 1.5 ounces, iPod nano comes in two models—the 4GB iPod nano holds up to 1,000 songs and the 2GB iPod nano holds up to 500 songs. iPod nano features Apple’s innovative Click Wheel for precise, one-handed navigation, and its ultra-portable design fits into even the smallest pocket making it easy to take iPod nano to the gym, in the car, traveling, commuting or anywhere you go.
-The most fashionable and wearable iPod ever, the iPod nano features optional accessories including lanyard headphones, which integrate the headphone cables into the lanyard, so users can wear their iPod nano around their neck without dangling headphone cables. For customers looking to personalize their iPod nano with colors, an optional set of iPod nano Tubes in pink, purple, blue, green and clear offers fashionable protection in a sheer casing while enabling full operation of all functions including the Click Wheel. Optional armbands available in gray, pink, blue, red and green allow users to wear their iPod nano as the ultimate fashion and sports accessory.
-iPod nano features the same 30-pin dock connector as the iPod and iPod mini, allowing it to work effortlessly with a wide range of over 1,000 accessories developed for iPod, including home stereo speakers and iPod car adapters for an incredible music experience at home or in the car.
-Featuring seamless integration with the iTunes Music Store and the iTunes digital music jukebox, iPod nano includes Apple’s patent pending Auto-Sync technology that automatically downloads a user’s digital music collection, photos or Podcasts onto iPod nano and keeps it up-to-date whenever iPod nano is plugged into a Mac® or Windows computer using USB 2.0. With its stunning, high-resolution color screen, iPod nano allows users to display album art while playing music, view photo slideshows or play games in full color. iPod nano features up to 14 hours battery life* and completely skip-free playback, as well as new stopwatch, world clock and screen lock applications.
-Pricing & Availability 
-The 4GB and 2GB white and black models of iPod nano for Mac or Windows are available worldwide immediately for a suggested retail price of $249 (US) and $199 (US) respectively, through the Apple Store® (www.apple.com), Apple’s retail stores and Apple Authorized Resellers. All iPod nano models include earbud headphones, a USB 2.0 cable and a CD with iTunes for Mac and Windows computers.
-New optional accessories designed for iPod nano with the following suggested retail prices include: Lanyard headphones for $39 (US), armbands in five colors each for $29 (US), dock for $29 (US) and a set of iPod nano Tubes in five different colors for $29 (US) and will be available within the next 30 days.
-iPod nano requires a Mac with a USB 2.0 port and Mac OS® X version 10.3.4 or later and iTunes 4.9 (or later); or a Windows PC with a USB 2.0 port and Windows 2000, XP Home or Professional (SP2) and iTunes 4.9 (or later).
-* Battery life and number of charge cycles vary by use and settings. See www.apple.com/batteries for more information. Music capacity is based on four minutes per song and 128-Kbps AAC encoding; photo capacity is based on iPod-viewable photos transferred from iTunes.
-Apple ignited the personal computer revolution in the 1970s with the Apple II and reinvented the personal computer in the 1980s with the Macintosh. Today, Apple continues to lead the industry in innovation with its award-winning desktop and notebook computers, OS X operating system, and iLife and professional applications. Apple is also spearheading the digital music revolution with its iPod portable music players and iTunes online music store.<body> 
+<body>
+    <div class="content">
+        <h1>The iPod Nano (2005–2017)</h1>
 
-		</p>
+        <p><a href="https://www.apple.com/newsroom/2005/09/07Apple-Introduces-iPod-nano/">Apple today introduced the iPod® nano, a revolutionary full-featured iPod that holds 1,000 songs yet is thinner than a pencil and smaller than competing players.</a></p>
 
-<head></head>
+        <p>The iPod nano features an ultra-portable design, a gorgeous color screen, and Apple's patent pending Click Wheel. It syncs with the iTunes® Music Store, the world’s leading digital music service, and comes in white or black models.</p>
+
+        <p>According to Steve Jobs, "iPod nano is the biggest revolution since the original iPod," as it transformed the portable music market with its innovative design and ease of use.</p>
+
+        <p>With its optional accessories like lanyard headphones and colorful protective cases, the iPod nano became both a fashion and tech icon.</p>
+    </div>
+
+    <div class="footer">
+        <footer>
+            By Apple Press Release, 2005.
+        </footer>
+    </div>
+</body>
 </html>
-
-
