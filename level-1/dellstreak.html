@@ -23,9 +23,9 @@
         }
 
         .content {
-            width: 80%;
+            width: 90%; 
             max-width: 800px;
-            padding: 50px;
+            padding: 5vw; 
             background-color: #FFFFFF;
             border: 2px solid #0000FF;
             box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
@@ -34,12 +34,12 @@
 
         h3 {
             font-family: 'Courier New', Courier, monospace;
-            font-size: 20px;
+            font-size: 6vw;
             color: grey;
         }
 
         p {
-            font-size: 16px;
+            font-size: 4vw; 
             text-align: left;
             color: grey;
         }
@@ -54,7 +54,7 @@
         }
 
         footer {
-            position: absolute;
+            position: relative; 
             bottom: 10px;
             width: 100%;
             text-align: center;
@@ -83,6 +83,25 @@
             transform: scale(1.02);
         }
 
+        @media (max-width: 600px) {
+            h3 {
+                font-size: 24px; 
+            }
+
+            p {
+                font-size: 14px; 
+            }
+
+            .button-home {
+                font-size: 12px; 
+                padding: 8px 12px;
+            }
+
+            .content {
+                width: 95%; 
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 

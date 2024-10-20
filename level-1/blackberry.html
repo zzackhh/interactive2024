@@ -34,23 +34,23 @@
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 8vw; 
             margin-top: 20px;
         }
 
         h2 {
-            font-size: 28px;
+            font-size: 6vw;
             margin-bottom: 20px;
         }
 
         p {
-            font-size: 16px;
+            font-size: 4vw; 
         }
 
         .content {
-            width: 80%;
+            width: 90%;
             max-width: 800px;
-            padding: 50px;
+            padding: 5vw; 
             background-color: #FFFFFF;
             border: 2px solid #0000FF;
             box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
@@ -58,7 +58,7 @@
         }
 
         .footer {
-            position: absolute;
+            position: relative; 
             bottom: 0;
             width: 100%;
             text-align: center;
@@ -99,6 +99,30 @@
         .button-home:hover {
             background-color: #eee;
             transform: scale(1.02);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .content {
+                width: 95%;
+                padding: 10px;
+            }
+
+            .button-home {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
         }
 
     </style>
