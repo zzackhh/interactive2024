@@ -6,17 +6,24 @@
     <title>The Early Web.</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', 'Courier New', cursive, sans-serif;
-            background-color: #ffffff;
-            background-image: 
-                linear-gradient(0deg, #e6e6e6 1px, transparent 1px),
-                linear-gradient(90deg, #e6e6e6 1px, transparent 1px);
-            background-size: 20px 20px;
-            color: #1a1a1a;
-            margin: 0;
-            padding: 20px;
-            position: relative;
-        }
+    font-family: 'Comic Sans MS', sans-serif;
+    background-color: #ffffff;
+    background-image: 
+        linear-gradient(0deg, #e6e6e6 1px, transparent 1px),
+        linear-gradient(90deg, #e6e6e6 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 20px;
+    position: relative;
+}
+
+@media (max-width: 600px) {
+    body {
+        background-size: 10px 10px;
+    }
+}
+
 
         body::before {
             content: '';
