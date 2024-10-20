@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * {
             box-sizing: border-box;
@@ -23,7 +25,7 @@
             background-image: 
                 linear-gradient(0deg, #e6e6e6 1px, transparent 1px),
                 linear-gradient(90deg, #e6e6e6 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-size: 20px 20px; /* Creates the grid background */
         }
 
         h1, h2, p {
@@ -68,7 +70,7 @@
             font-size: 12px;
             color: #555555;
         }
-        
+
         a {
             color: #0000FF;
             text-decoration: none;
@@ -77,6 +79,28 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .button-home {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background-color: #f8f8ff;
+            color: #333;
+            font-family: 'Helvetica', sans-serif;
+            font-size: 14px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .button-home:hover {
+            background-color: #eee;
+            transform: scale(1.02);
+        }
+
     </style>
 </head>
 
@@ -84,13 +108,11 @@
     <div class="content">
         <h1>The Cassette</h1>
 
-        <p><a href="https://nypost.com/2024/08/14/lifestyle/gen-z-buying-vintage-cassette-tapes-en-masse-but-doesnt-know-how-to-play-them-i-struggled/">The streaming generation is trading Spotify for cassette tapes.</p>
+        <p><a href="https://nypost.com/2024/08/14/lifestyle/gen-z-buying-vintage-cassette-tapes-en-masse-but-doesnt-know-how-to-play-them-i-struggled/">The streaming generation is trading Spotify for cassette tapes.</a></p>
 
-        <p>But despite Gen Z’s obsession with all things vintage — from flip phones to Y2K fashion reboots like Ed Hardy and Von Dutch — the integration of retro technologies is difficult even for the tech savants.
+        <p>But despite Gen Z’s obsession with all things vintage — from flip phones to Y2K fashion reboots like Ed Hardy and Von Dutch — the integration of retro technologies is difficult even for the tech savants.</p>
 
-            “I struggled a little bit,” 26-year-old Amy Campbell, who purchased Kacey Musgrave’s album on a cassette tape this year, told the Wall Street Journal.
-            
-            The Rockford, Illinois, resident borrowed her mom’s cassette player but found it confusing to use. She didn’t understand how to insert the tape or shuffle through songs.</p>
+        <p>“I struggled a little bit,” 26-year-old Amy Campbell, who purchased Kacey Musgrave’s album on a cassette tape this year, told the Wall Street Journal. The Rockford, Illinois, resident borrowed her mom’s cassette player but found it confusing to use. She didn’t understand how to insert the tape or shuffle through songs.</p>
     </div>
 
     <div class="footer">
@@ -98,5 +120,8 @@
             By New York Post
         </footer>
     </div>
+
+    <a href="/interactive2024/level-1/project1.html" class="button-home">Home</a>
+
 </body>
 </html>
