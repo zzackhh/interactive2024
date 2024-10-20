@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nintendo Wii U</title>
+    <title>Nintendo Wii U (2012–2017)</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Verdana', sans-serif;
             background-color: lightgrey;
@@ -48,7 +53,10 @@
             color: #0000FF;
             text-decoration: none;
             transition: transform 5s ease, font-size 5s ease;
-    
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
 
         footer {
@@ -60,7 +68,7 @@
             color: #555555;
         }
 
-          .button-home {
+        .button-home {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -80,6 +88,50 @@
             background-color: #eee;
             transform: scale(1.02);
         }
+
+        @media screen and (max-width: 767px) { 
+            h3 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .button-home {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) { 
+            h3 {
+                font-size: 19px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            .content {
+                padding: 30px;
+                width: 85%;
+            }
+
+            .button-home {
+                bottom: 15px;
+                right: 15px;
+                padding: 9px 13px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 
@@ -89,26 +141,22 @@
 
         <p>
             <a href="https://www.forbes.com/sites/erikkain/2012/11/20/wii-u-review-part-one-first-impressions/">
-                I set off on Sunday morning to purchase a brand new Wii U console. My first stop: Walmart. </a>
+                I set off on Sunday morning to purchase a brand new Wii U console. My first stop: Walmart. 
+            </a>
         </p>
 
-        Upon arrival I was informed that I was too late. Nintendo's shiny new system had sold out earlier that morning.
+        <p>Upon arrival I was informed that I was too late. Nintendo's shiny new system had sold out earlier that morning.</p>
         
-        Best Buy would open in twenty minutes so I headed across town, where I found myself waiting in line outside in the cold.
+        <p>Best Buy would open in twenty minutes so I headed across town, where I found myself waiting in line outside in the cold.</p>
         
-        Fortunately, I was the fourth person in line. I say fortunately because soon after I arrived several other people showed up. There were some middle-aged folks, some kids, and many people in-between. It was like a miniature Black Friday..
-        </a> 
-        </p>
+        <p>Fortunately, I was the fourth person in line. I say fortunately because soon after I arrived several other people showed up. There were some middle-aged folks, some kids, and many people in-between. It was like a miniature Black Friday.</p>
     </div>
-    
 
     <footer>
         By Forbes
     </footer>
 
-</div>
-
-<a href="/interactive2024/level-1/project1.html" class="button-home">Home</a>
+    <a href="/interactive2024/level-1/project1.html" class="button-home">Home</a>
 
 </body>
 </html>

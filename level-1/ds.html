@@ -69,7 +69,7 @@
             font-size: 12px;
             color: #555555;
         }
-        
+
         a {
             color: #0000FF;
             text-decoration: none;
@@ -98,6 +98,50 @@
         .button-home:hover {
             background-color: #eee;
             transform: scale(1.02);
+        }
+
+        @media screen and (max-width: 767px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .button-home {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) { 
+            h1 {
+                font-size: 32px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            .content {
+                padding: 30px;
+                width: 85%;
+            }
+
+            .button-home {
+                bottom: 15px;
+                right: 15px;
+                padding: 9px 13px;
+                font-size: 13px;
+            }
         }
 
     </style>

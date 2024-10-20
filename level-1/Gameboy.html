@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nintendo Game Boy</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Verdana', sans-serif;
             background-color: lightgrey;
@@ -48,7 +53,6 @@
             color: #0000FF;
             text-decoration: none;
             transition: transform 5s ease, font-size 5s ease;
-    
         }
 
         footer {
@@ -60,7 +64,6 @@
             color: #555555;
         }
 
-        /* Button Styling */
         .button-home {
             position: fixed;
             bottom: 20px;
@@ -80,6 +83,50 @@
         .button-home:hover {
             background-color: #eee;
             transform: scale(1.02);
+        }
+        
+        @media screen and (max-width: 767px) { 
+            h3 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .button-home {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) { 
+            h3 {
+                font-size: 19px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            .content {
+                padding: 30px;
+                width: 85%;
+            }
+
+            .button-home {
+                bottom: 15px;
+                right: 15px;
+                padding: 9px 13px;
+                font-size: 13px;
+            }
         }
 
     </style>
@@ -112,8 +159,6 @@
     <footer>
         By The Verge
     </footer>
-
-</div>
 
 <a href="/interactive2024/level-1/project1.html" class="button-home">Home</a>
 

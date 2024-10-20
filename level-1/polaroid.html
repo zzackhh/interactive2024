@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Polaroid</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Times New Roman', Times, serif;
             background-color: lightgrey;
@@ -62,7 +67,7 @@
             color: #555555;
         }
 
-          .button-home {
+        .button-home {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -82,6 +87,49 @@
             background-color: #eee;
             transform: scale(1.02);
         }
+
+        @media screen and (max-width: 767px) {
+            h3 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .button-home {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) { 
+                font-size: 19px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            .content {
+                padding: 30px;
+                width: 85%;
+            }
+
+            .button-home {
+                bottom: 15px;
+                right: 15px;
+                padding: 9px 13px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 
@@ -92,24 +140,25 @@
         <p>
             <a href="https://www.nytimes.com/2000/03/27/business/through-a-lens-digitally-polaroid-girds-for-the-new-era-in-instant-photography.html">
                 There is a paradox here somewhere.
-
             </a>
             Last year, Polaroid not only outsold its competitors in the growing digital camera field, it even turned a slim profit on those sales. Since analysts say that no one else is making money on digital cameras, it was a coup.
-
-But talk to Polaroid executives and they shrug off digital cameras as simply Polaroid's way of marking time. They expect that a few years down the road, people will be snapping pictures with cell phones, Palm Pilots and the like -- and, they hope, printing them out on wireless Polaroid printers.
-
-''The cameras are just another way of capturing images, many of which we hope people will want to print,'' said Gary T. DiCamillo, Polaroid's chief executive.
-
-The accuracy of this forecast could determine Polaroid's chances for survival in a digital world.
+        </p>
+        <p>
+            But talk to Polaroid executives and they shrug off digital cameras as simply Polaroid's way of marking time. They expect that a few years down the road, people will be snapping pictures with cell phones, Palm Pilots and the like — and, they hope, printing them out on wireless Polaroid printers.
+        </p>
+        <p>
+            "The cameras are just another way of capturing images, many of which we hope people will want to print," said Gary T. DiCamillo, Polaroid's chief executive.
+        </p>
+        <p>
+            The accuracy of this forecast could determine Polaroid's chances for survival in a digital world.
+        </p>
     </div>
 
     <footer>
         By The New York Times
     </footer>
 
-</div>
-
-<a href="/interactive2024/level-1/project1.html" class="button-home">Home</a>
+    <a href="/interactive2024/level-1/project1.html" class="button-home">Home</a>
 
 </body>
 </html>

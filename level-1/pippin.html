@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple PiPP!N</title>
     <style>
         * {
             box-sizing: border-box;
@@ -68,7 +71,7 @@
             color: #555555;
         }
 
-          .button-home {
+        .button-home {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -88,6 +91,50 @@
             background-color: #eee;
             transform: scale(1.02);
         }
+
+        @media screen and (max-width: 767px) { 
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .button-home {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) { 
+            h1 {
+                font-size: 32px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            .content {
+                padding: 30px;
+                width: 85%;
+            }
+
+            .button-home {
+                bottom: 15px;
+                right: 15px;
+                padding: 9px 13px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 
@@ -95,19 +142,20 @@
     <div class="content">
         <h1>Apple PiPP!N</h1>
 
-        <p>The early 90s were pretty grim for Apple. Employees didn't feel great about then-CEO John Sculley's hands-off leadership, and lots of the company's cash — too much, perhaps — was tied up in R&D for projects that either wouldn't connect with the market, or failed to see the light of day. The company's competitiveness was waning fast, and something had to change.
+        <p>The early 90s were pretty grim for Apple. Employees didn't feel great about then-CEO John Sculley's hands-off leadership, and lots of the company's cash — too much, perhaps — was tied up in R&D for projects that either wouldn't connect with the market, or failed to see the light of day. The company's competitiveness was waning fast, and something had to change.</p>
 
-            Meanwhile, 5,000 miles away, one of Japan's biggest toymakers was grappling with change of its own. To Bandai CEO Makoto Yamashina, his business — handed to him by his father, no less — was about being a "servant to children", and those children wanted to play video games.
-        <p> <a href="https://www.engadget.com/apple-bandai-pippin-mac-clone-game-console-internet-1996-history-180057447.html">This is the story of how two strikingly different companies decided to work toward a common goal: building a home video game console.</a></p>
+        <p>Meanwhile, 5,000 miles away, one of Japan's biggest toymakers was grappling with change of its own. To Bandai CEO Makoto Yamashina, his business — handed to him by his father, no less — was about being a "servant to children", and those children wanted to play video games.</p>
+        
+        <p><a href="https://www.engadget.com/apple-bandai-pippin-mac-clone-game-console-internet-1996-history-180057447.html">This is the story of how two strikingly different companies decided to work toward a common goal: building a home video game console.</a></p>
     </div>
 
     <div class="footer">
         <footer>
-            By Engadet 
+            By Engadget
         </footer>
     </div>
 
-<a href="/interactive2024/level-1/project1.html" class="button-home">Home</a>
+    <a href="/interactive2024/level-1/project1.html" class="button-home">Home</a>
 
 </body>
 </html>

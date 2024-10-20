@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamagotchi Memories</title>
     <style>
         * {
             box-sizing: border-box;
@@ -65,11 +68,10 @@
 
         footer {
             font-size: 12px;
-            color: 
-            #555555;
+            color: #555555;
         }
 
-          .button-home {
+        .button-home {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -89,13 +91,57 @@
             background-color: #eee;
             transform: scale(1.02);
         }
+
+        @media screen and (max-width: 767px) { 
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .button-home {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) { 
+            h1 {
+                font-size: 32px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            .content {
+                padding: 30px;
+                width: 85%;
+            }
+
+            .button-home {
+                bottom: 15px;
+                right: 15px;
+                padding: 9px 13px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="content">
         <h1>Who even knows when I got a Tamagotchi?</h1>
-        <h2>I loved them growing up<span> and had one hanging from my bulletin board.</h2>
+        <h2>I loved them growing up and had one hanging from my bulletin board.</h2>
 
         <p>Will Tamagotchi become a post-Beanie Babies craze? It's safe to say it's going to be successful, but we don't know yet if it will be a megasuccess. To be up there with Beanie Babies, kids will have to collect them.</p>
 

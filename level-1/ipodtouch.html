@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iPod Touch (2007-2022)</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Times New Roman', Times, serif;
             background-color: lightgrey;
@@ -62,7 +68,7 @@
             color: #555555;
         }
 
-          .button-home {
+        .button-home {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -82,6 +88,50 @@
             background-color: #eee;
             transform: scale(1.02);
         }
+
+        @media screen and (max-width: 767px) { 
+            h3 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .button-home {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) { 
+            h3 {
+                font-size: 19px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            .content {
+                padding: 30px;
+                width: 85%;
+            }
+
+            .button-home {
+                bottom: 15px;
+                right: 15px;
+                padding: 9px 13px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 
@@ -99,16 +149,13 @@
             Basically an iPhone without the whole phone part, the iPod Touch will still be available “while supplies last,” and if you’re seeking a dedicated music player or kid-friendly iOS device — or just need an occasional break from your phone — there are some good reasons to scoop one up while you still can.
         </p>
 
-        </p>
     </div>
 
     <footer>
         By CNN
     </footer>
     
-</div>
-
-<a href="/interactive2024/level-1/project1.html" class="button-home">Home</a>
+    <a href="/interactive2024/level-1/project1.html" class="button-home">Home</a>
 
 </body>
 </html>
