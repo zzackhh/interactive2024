@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lila's Cookbook</title>
+  <style>
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: white;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: palevioletred;
+      margin-bottom: 20px;
+    }
+
+    .book {
+      display: flex;
+      border: 2px solid #000;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .page {
+      width: 200px;
+      height: 300px;
+      padding: 20px;
+      font-family: Helvetica, Arial, sans-serif; 
+      border: 1px solid #ccc;
+      background-color: #f7f1e3; 
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .left-page {
+      border-right: 0;
+    }
+
+    .right-page {
+      border-left: 0;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    .button {
+      padding: 8px 16px;
+      margin: 0 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="title">LILA'S COOKBOOK!</div>
+
+  <div class="book">
+    <div class="page left-page" id="leftPage" contenteditable="true">
+
+    </div>
+    <div class="page right-page" id="rightPage" contenteditable="true">
+      
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="button" onclick="previousPage()">Previous Page</button>
+    <button class="button" onclick="nextPage()">Next Page</button>
+  </div>
+
+  <script>
+    let currentPage = 1;
+    const pages = [{left: "", right: ""}]; 
+
+    function loadPage() {
+      const leftPage = document.getElementById("leftPage");
+      const rightPage = document.getElementById("rightPage");
+
+      if (pages[currentPage - 1]) {
+        leftPage.innerHTML = pages[currentPage - 1].left;
+        rightPage.innerHTML = pages[currentPage - 1].right;
+      } else {
+        leftPage.innerHTML = "";
+        rightPage.innerHTML = "";
+      }
+    }
+
+    function savePage() {
+      const leftPage = document.getElementById("leftPage").innerHTML;
+      const rightPage = document.getElementById("rightPage").innerHTML;
+
+      pages[currentPage - 1] = {left: leftPage, right: rightPage};
+    }
+
+
+    function nextPage() {
+      savePage();
+      currentPage++;
+      if (!pages[currentPage - 1]) pages.push({left: "", right: ""}); 
+      loadPage();
+    }
+
+    function previousPage() {
+      if (currentPage > 1) {
+        savePage();
+        currentPage--;
+        loadPage();
+      }
+    }
+
+    loadPage();
+  </script>
+</body>
+</html>
