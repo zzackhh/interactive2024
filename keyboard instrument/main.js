@@ -57,14 +57,14 @@ document.body.onkeydown = function(keypress_event) {
     helloText.style.transform = "translate(-50%, -50%)";
     document.body.appendChild(helloText);
   } else if (key === "o") {
-    document.body.style.backgroundColor = "lightred";
+    document.body.style.backgroundColor = "indigo";
   } else if (key === "p") {
     document.body.style.backgroundColor = "lightpink";
   } else if (key === "q") {
     document.body.style.fontFamily = "Comic Sans MS";
     document.body.style.fontSize = "50px";
   } else if (key === "r") {
-    document.body.style.backgroundColor = "red";
+    document.body.style.backgroundColor = "purple";
   } else if (key === "s") {
     let img = document.createElement("img");
     img.src = "https://t4.ftcdn.net/jpg/04/07/73/91/360_F_407739154_jiDUMKxaBjVUER7wplCn3kCxxkDTjeWJ.jpg";
@@ -88,10 +88,8 @@ document.body.onkeydown = function(keypress_event) {
   } else if (key === "z") {
     document.body.style.backgroundColor = "lightblue";
   } else {
-    // Default behavior for any other key
-    document.body.style.backgroundColor = "rgb(255, 255, 255)"; // White background
+    document.body.style.backgroundColor = "rgb(255, 255, 255)";
     let defaultText = document.createElement("div");
-    defaultText.innerHTML = "Key not mapped!";
     defaultText.style.fontSize = "30px";
     defaultText.style.color = "black";
     document.body.appendChild(defaultText);
