@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lila's Cookbook</title>
   <style>
+    @font-face {
+      font-family: 'EB Garamond';
+      src: url('/mnt/data/EBGaramond-VariableFont_wght.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
     body {
       display: flex;
       flex-direction: column;
@@ -13,7 +21,7 @@
       height: 100vh;
       margin: 0;
       background-color: white;
-      font-family: "1st Handwritten"; 
+      font-family: Helvetica, Arial, sans-serif;
     }
 
     .title {
@@ -21,7 +29,7 @@
       font-weight: bold;
       color: palevioletred;
       margin-bottom: 20px;
-      font-family: 'Times New Roman', Times, serif;
+      font-family: Helvetica, Arial, sans-serif;
     }
 
     .book {
@@ -36,16 +44,34 @@
       padding: 20px;
       background-color: #f7f1e3;
       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
-      outline: none; 
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      text-align: center;
     }
 
     .left-page, .right-page {
       border: none; 
     }
 
-    /* Applying the custom font to the right page */
-    .right-page {
-      font-family: '1stHandwritten', sans-serif;
+    .page-title, .page-body {
+      outline: none;
+    }
+
+    .page-title {
+      font-weight: bold;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .page-body {
+      flex: 1;
+      font-family: "EB Garamond", serif;
+      font-size: 14px;
+      text-align: center;
+      display: block;
     }
 
     .controls {
@@ -58,22 +84,20 @@
       font-size: 16px;
       cursor: pointer;
     }
-
-    @font-face {
-      font-family: '1stHandwritten';
-      src: url('/mnt/data/1stHandwritten.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
   </style>
 </head>
 <body>
   <div class="title">LILA'S COOKBOOK!</div>
 
   <div class="book">
-    <div class="page left-page" id="leftPage" contenteditable="true"></div>
-    <div class="page right-page" id="rightPage" contenteditable="true"></div>
+    <div class="page left-page" id="leftPage">
+      <div class="page-title" id="leftTitle" contenteditable="true" oninput="savePage()"></div>
+      <div class="page-body" id="leftBody" contenteditable="true" oninput="savePage()"></div>
+    </div>
+    <div class="page right-page" id="rightPage">
+      <div class="page-title" id="rightTitle" contenteditable="true" oninput="savePage()"></div>
+      <div class="page-body" id="rightBody" contenteditable="true" oninput="savePage()"></div>
+    </div>
   </div>
 
   <div class="controls">
@@ -83,32 +107,35 @@
 
   <script>
     let currentPage = 1;
-    const pages = [{left: "", right: ""}]; 
+    const pages = JSON.parse(localStorage.getItem('pages')) || [{left: {title: "", body: ""}, right: {title: "", body: ""}}]; 
 
     function loadPage() {
-      const leftPage = document.getElementById("leftPage");
-      const rightPage = document.getElementById("rightPage");
+      const leftPage = pages[currentPage - 1].left;
+      const rightPage = pages[currentPage - 1].right;
 
-      if (pages[currentPage - 1]) {
-        leftPage.innerHTML = pages[currentPage - 1].left;
-        rightPage.innerHTML = pages[currentPage - 1].right;
-      } else {
-        leftPage.innerHTML = "";
-        rightPage.innerHTML = "";
-      }
+      document.getElementById("leftTitle").innerHTML = leftPage.title || "";
+      document.getElementById("leftBody").innerHTML = leftPage.body || "";
+      document.getElementById("rightTitle").innerHTML = rightPage.title || "";
+      document.getElementById("rightBody").innerHTML = rightPage.body || "";
     }
 
     function savePage() {
-      const leftPage = document.getElementById("leftPage").innerHTML;
-      const rightPage = document.getElementById("rightPage").innerHTML;
-
-      pages[currentPage - 1] = {left: leftPage, right: rightPage};
+      pages[currentPage - 1].left = {
+        title: document.getElementById("leftTitle").innerHTML,
+        body: document.getElementById("leftBody").innerHTML
+      };
+      pages[currentPage - 1].right = {
+        title: document.getElementById("rightTitle").innerHTML,
+        body: document.getElementById("rightBody").innerHTML
+      };
+      
+      localStorage.setItem('pages', JSON.stringify(pages));
     }
 
     function nextPage() {
       savePage();
       currentPage++;
-      if (!pages[currentPage - 1]) pages.push({left: "", right: ""}); 
+      if (!pages[currentPage - 1]) pages.push({left: {title: "", body: ""}, right: {title: "", body: ""}}); 
       loadPage();
     }
 
