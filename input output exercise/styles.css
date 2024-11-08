@@ -1,18 +1,29 @@
 body {
   overflow-y: auto;
   margin: 0;
-  padding-top: 50px; 
+  padding-top: 20px;
+  font-family: Helvetica, sans-serif;
+}
+
+#header {
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  background-color: white;
+  padding: 10px 0;
+}
 
 input {
   width: 100%;
   position: fixed;
-  top: 0;
+  top: 40px; 
   left: 0;
+  z-index: 1;
 }
 
 .text-wrapper {
   width: 100vw;
-  padding-top: 10px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -20,10 +31,10 @@ input {
 }
 
 .text-wrapper p {
-  font-family: Arial, sans-serif;
   color: black;
-  display: none;
+  display: none; 
   margin: 5px 0;
+  font-size: 25px; 
 }
 
 a {
