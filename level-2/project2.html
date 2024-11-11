@@ -20,7 +20,7 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
-      background-color: #ffe6e6; /* Faint pink background */
+      background-color: #ffe6e6;
       font-family: Helvetica, Arial, sans-serif;
     }
 
@@ -34,8 +34,9 @@
 
     .book {
       display: flex;
-      border: 2px solid #000; 
+      border: 2px solid #000;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
 
     .page {
@@ -46,15 +47,14 @@
       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
       display: flex;
       flex-direction: column;
-      justify-content: start;
       text-align: center;
     }
 
     .left-page, .right-page {
-      border: none; 
+      border: none;
     }
 
-    .page-title, .page-body {
+    .page-title, .page-body, .notes-section {
       outline: none;
     }
 
@@ -63,15 +63,38 @@
       font-family: 'Courier New', Courier, monospace;
       font-size: 16px;
       margin-bottom: 8px;
-      display: block;
     }
 
     .page-body {
-      flex: 1;
-      font-family: "EB Garamond", serif;
+      font-family: 'EB Garamond', serif;
       font-size: 14px;
       text-align: center;
-      display: block;
+    }
+
+    .ingredients li {
+      cursor: pointer;
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    .checked {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    .rating, .difficulty {
+      margin: 5px 0;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .star {
+      font-size: 20px;
+      cursor: pointer;
+      color: lightgray;
+    }
+
+    .star.checked {
+      color: gold;
     }
 
     .controls {
@@ -83,6 +106,12 @@
       margin: 0 5px;
       font-size: 16px;
       cursor: pointer;
+    }
+
+    .notes-section {
+      font-family: "Patrick Hand", cursive;
+      font-size: 12px;
+      margin-top: 10px;
     }
 
     /* Mobile Styles */
@@ -117,14 +146,33 @@
 <body>
   <div class="title">LILA'S COOKBOOK!</div>
 
-  <div class="book">
+  <div class="book" id="book">
     <div class="page left-page" id="leftPage">
       <div class="page-title" id="leftTitle" contenteditable="true" oninput="savePage()"></div>
-      <div class="page-body" id="leftBody" contenteditable="true" oninput="savePage()"></div>
+      <ul class="page-body ingredients" id="leftIngredients" contenteditable="true" onclick="toggleIngredient(event)" oninput="savePage()"></ul>
+      <div class="rating">
+        Rating:
+        <span class="star" onclick="rateRecipe(1)">&#9733;</span>
+        <span class="star" onclick="rateRecipe(2)">&#9733;</span>
+        <span class="star" onclick="rateRecipe(3)">&#9733;</span>
+        <span class="star" onclick="rateRecipe(4)">&#9733;</span>
+        <span class="star" onclick="rateRecipe(5)">&#9733;</span>
+      </div>
+      <div class="difficulty">
+        Difficulty:
+        <select id="difficultyLevel" onchange="savePage()">
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </div>
+      <div class="notes-section" id="leftNotes" contenteditable="true" oninput="savePage()">Notes or tips...</div>
     </div>
+    
     <div class="page right-page" id="rightPage">
       <div class="page-title" id="rightTitle" contenteditable="true" oninput="savePage()"></div>
-      <div class="page-body" id="rightBody" contenteditable="true" oninput="savePage()"></div>
+      <ul class="page-body ingredients" id="rightIngredients" contenteditable="true" onclick="toggleIngredient(event)" oninput="savePage()"></ul>
+      <div class="notes-section" id="rightNotes" contenteditable="true" oninput="savePage()">Notes or tips...</div>
     </div>
   </div>
 
@@ -135,35 +183,66 @@
 
   <script>
     let currentPage = 1;
-    const pages = JSON.parse(localStorage.getItem('pages')) || [{left: {title: "", body: ""}, right: {title: "", body: ""}}]; 
+    const pages = JSON.parse(localStorage.getItem('pages')) || [{left: {title: "", ingredients: "", notes: "", rating: 0, difficulty: "Easy"}, right: {title: "", ingredients: "", notes: "", rating: 0, difficulty: "Easy"}}];
 
     function loadPage() {
       const leftPage = pages[currentPage - 1].left;
       const rightPage = pages[currentPage - 1].right;
 
       document.getElementById("leftTitle").innerHTML = leftPage.title || "";
-      document.getElementById("leftBody").innerHTML = leftPage.body || "";
+      document.getElementById("leftIngredients").innerHTML = leftPage.ingredients || "";
+      document.getElementById("leftNotes").innerHTML = leftPage.notes || "";
+
       document.getElementById("rightTitle").innerHTML = rightPage.title || "";
-      document.getElementById("rightBody").innerHTML = rightPage.body || "";
+      document.getElementById("rightIngredients").innerHTML = rightPage.ingredients || "";
+      document.getElementById("rightNotes").innerHTML = rightPage.notes || "";
+
+      setRating(leftPage.rating);
+      document.getElementById("difficultyLevel").value = leftPage.difficulty;
     }
 
     function savePage() {
       pages[currentPage - 1].left = {
         title: document.getElementById("leftTitle").innerHTML,
-        body: document.getElementById("leftBody").innerHTML
+        ingredients: document.getElementById("leftIngredients").innerHTML,
+        notes: document.getElementById("leftNotes").innerHTML,
+        rating: currentRating,
+        difficulty: document.getElementById("difficultyLevel").value
       };
+
       pages[currentPage - 1].right = {
         title: document.getElementById("rightTitle").innerHTML,
-        body: document.getElementById("rightBody").innerHTML
+        ingredients: document.getElementById("rightIngredients").innerHTML,
+        notes: document.getElementById("rightNotes").innerHTML
       };
       
       localStorage.setItem('pages', JSON.stringify(pages));
     }
 
+    function toggleIngredient(event) {
+      if (event.target.tagName === "LI") {
+        event.target.classList.toggle("checked");
+      }
+    }
+
+    let currentRating = 0;
+    function rateRecipe(stars) {
+      currentRating = stars;
+      setRating(stars);
+      savePage();
+    }
+
+    function setRating(stars) {
+      const starElements = document.querySelectorAll(".star");
+      starElements.forEach((star, index) => {
+        star.classList.toggle("checked", index < stars);
+      });
+    }
+
     function nextPage() {
       savePage();
       currentPage++;
-      if (!pages[currentPage - 1]) pages.push({left: {title: "", body: ""}, right: {title: "", body: ""}}); 
+      if (!pages[currentPage - 1]) pages.push({left: {title: "", ingredients: "", notes: "", rating: 0, difficulty: "Easy"}, right: {title: "", ingredients: "", notes: "", rating: 0, difficulty: "Easy"}});
       loadPage();
     }
 
