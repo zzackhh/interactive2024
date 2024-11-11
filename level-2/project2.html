@@ -46,9 +46,11 @@
       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
       display: flex;
       flex-direction: column;
-      justify-content: start;
-      text-align: center;
+      align-items: center;
+      justify-content: center;
       position: relative;
+      text-align: center;
+      overflow: hidden;
     }
 
     .left-page, .right-page {
@@ -57,6 +59,8 @@
 
     .page-title, .page-body {
       outline: none;
+      position: relative; /* Keeps text above the image */
+      z-index: 1; /* Ensures text is above the image */
     }
 
     .page-title {
@@ -65,6 +69,7 @@
       font-size: 16px;
       margin-bottom: 8px;
       display: block;
+      cursor: text;
     }
 
     .page-body {
@@ -73,13 +78,18 @@
       font-size: 14px;
       text-align: center;
       display: block;
+      cursor: text;
     }
 
     .food-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       max-width: 80%;
       max-height: 80%;
-      margin: auto;
-      display: block;
+      opacity: 1; /* Full opacity for the image */
+      z-index: 0; /* Ensures image is behind text */
     }
 
     .controls {
@@ -148,12 +158,12 @@
     const pages = JSON.parse(localStorage.getItem('pages')) || [{left: {title: "", body: ""}, right: {title: "", body: ""}}];
     
     const foodImages = [
-      'level-2/images/food1.jpg',
-      'level-2/images/food2.jpg',
-      'level-2/images/food3.jpg',
-      'level-2/images/food4.jpg',
-      'level-2/images/food5.jpg',
-      'level-2/images/food6.jpg'
+      'food1.jpg',
+      'food2.jpg',
+      'food3.jpg',
+      'food4.jpg',
+      'food5.jpg',
+      'food6.jpg'
     ];
 
     function loadPage() {
