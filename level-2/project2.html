@@ -29,7 +29,7 @@
       font-weight: bold;
       color: palevioletred;
       margin-bottom: 20px;
-      font-family: Helvetica, Arial, sans-serif;
+      font-family: 'Courier New', Courier, monospace;
     }
 
     .book {
@@ -48,6 +48,7 @@
       flex-direction: column;
       justify-content: start;
       text-align: center;
+      position: relative;
     }
 
     .left-page, .right-page {
@@ -60,7 +61,7 @@
 
     .page-title {
       font-weight: bold;
-      font-family: Helvetica, Arial, sans-serif;
+      font-family: 'Courier New', Courier, monospace;
       font-size: 16px;
       margin-bottom: 8px;
       display: block;
@@ -71,6 +72,13 @@
       font-family: "EB Garamond", serif;
       font-size: 14px;
       text-align: center;
+      display: block;
+    }
+
+    .food-image {
+      max-width: 80%;
+      max-height: 80%;
+      margin: auto;
       display: block;
     }
 
@@ -119,10 +127,12 @@
 
   <div class="book">
     <div class="page left-page" id="leftPage">
+      <img class="food-image" id="leftImage" alt="Random food image">
       <div class="page-title" id="leftTitle" contenteditable="true" oninput="savePage()"></div>
       <div class="page-body" id="leftBody" contenteditable="true" oninput="savePage()"></div>
     </div>
     <div class="page right-page" id="rightPage">
+      <img class="food-image" id="rightImage" alt="Random food image">
       <div class="page-title" id="rightTitle" contenteditable="true" oninput="savePage()"></div>
       <div class="page-body" id="rightBody" contenteditable="true" oninput="savePage()"></div>
     </div>
@@ -135,7 +145,16 @@
 
   <script>
     let currentPage = 1;
-    const pages = JSON.parse(localStorage.getItem('pages')) || [{left: {title: "", body: ""}, right: {title: "", body: ""}}]; 
+    const pages = JSON.parse(localStorage.getItem('pages')) || [{left: {title: "", body: ""}, right: {title: "", body: ""}}];
+    
+    const foodImages = [
+      'level-2/images/food1.jpg',
+      'level-2/images/food2.jpg',
+      'level-2/images/food3.jpg',
+      'level-2/images/food4.jpg',
+      'level-2/images/food5.jpg',
+      'level-2/images/food6.jpg'
+    ];
 
     function loadPage() {
       const leftPage = pages[currentPage - 1].left;
@@ -145,6 +164,9 @@
       document.getElementById("leftBody").innerHTML = leftPage.body || "";
       document.getElementById("rightTitle").innerHTML = rightPage.title || "";
       document.getElementById("rightBody").innerHTML = rightPage.body || "";
+
+      document.getElementById("leftImage").src = getRandomImage();
+      document.getElementById("rightImage").src = getRandomImage();
     }
 
     function savePage() {
@@ -163,7 +185,7 @@
     function nextPage() {
       savePage();
       currentPage++;
-      if (!pages[currentPage - 1]) pages.push({left: {title: "", body: ""}, right: {title: "", body: ""}}); 
+      if (!pages[currentPage - 1]) pages.push({left: {title: "", body: ""}, right: {title: "", body: ""}});
       loadPage();
     }
 
@@ -173,6 +195,11 @@
         currentPage--;
         loadPage();
       }
+    }
+
+    function getRandomImage() {
+      const randomIndex = Math.floor(Math.random() * foodImages.length);
+      return foodImages[randomIndex];
     }
 
     loadPage();
