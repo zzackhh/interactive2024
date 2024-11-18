@@ -4,29 +4,100 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="contact form example">
-  <title>Favorite Song Submission</title>
-  <link rel="stylesheet" href="style.css">
+    <title>Favorite Song Submission</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .form-wrapper {
+            position: relative;
+            padding: 20px;
+            border: 5px solid transparent;
+            border-radius: 10px;
+            background: linear-gradient(white, white) padding-box, 
+                        linear-gradient(90deg, red, orange, yellow, green, blue, purple, red) border-box;
+        }
+
+        @keyframes snake-border {
+            0% {
+                background-position: 0%;
+            }
+            100% {
+                background-position: 200%;
+            }
+        }
+
+        form {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: green;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        .thankyou_message {
+            text-align: center;
+        }
+
+        .thankyou_message a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .thankyou_message a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-
 <body>
-  <div>This website collects data about your favorite songs. <a href="https://docs.google.com/spreadsheets/d/1JFfZTroBnun15PG3ziz4EKmVgT8HdbuW5nheD7_TZMo/edit?usp=sharing">Google Sheet</a>.</div>
-
-  <div><a href="index.html">View data here</a></div>
-
-  <h1>Form to submit new data</h1>
-  
-  <!-- change the form action to your script url -->
-  <form class="gform pure-form pure-form-stacked" method="POST" data-email="example@email.net"
-  action="https://script.google.com/macros/s/AKfycbxjAjE83hKZMtFN0pETjEkiq44-6efkbvONntTPrwPamu9UfdvZNt8FJ62fh9bZaRsz-Q/exec">
+  <div class="form-wrapper">
+    <h1>What's your favorite song?</h1>
     
-
-    <div class="form-elements">
+    <form class="gform pure-form pure-form-stacked" method="POST" data-email="example@email.net"
+    action="https://script.google.com/macros/s/AKfycbxjAjE83hKZMtFN0pETjEkiq44-6efkbvONntTPrwPamu9UfdvZNt8FJ62fh9bZaRsz-Q/exec">
       <fieldset>
         <label for="name">Name: </label>
         <input id="name" name="name" placeholder="Hi Alvin!" />
       </fieldset>
       
-      <fieldset class="pure-group">
+      <fieldset>
         <label for="song">Favorite Song: </label>
         <input id="song" type="text" name="song" placeholder="Enter your favorite song..." />
       </fieldset>
@@ -37,20 +108,18 @@
       </fieldset>
 
       <button class="button-success pure-button button-xlarge">
-        Submit form
+        Add it to the site!
       </button>
-    </div>
+    </form>
 
     <!-- Customise the Thankyou Message People See when they submit the form: -->
     <div class="thankyou_message" style="display:none;">
       <h2>Thanks for adding to this lit site!</h2>
       <div><a href="index.html">See results</a></div>
     </div>
-
-  </form>
+  </div>
 
   <!-- Submit the Form to Google Using "AJAX" -->
   <script data-cfasync="false" src="submit-data.js"></script>
-
 </body>
 </html>
