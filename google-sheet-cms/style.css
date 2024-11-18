@@ -71,13 +71,6 @@ ul {
   background-image: linear-gradient(white, white), linear-gradient(90deg, #ff66cc, #ff99cc, #ffccff);
   background-origin: border-box;
   background-clip: content-box, border-box;
-  animation: borderAnimation 3s infinite linear;
-}
-
-@keyframes borderAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 li {
@@ -86,11 +79,6 @@ li {
   list-style-type: square;
   font-size: 18px;
   line-height: 1.5;
-  transition: box-shadow 0.5s ease;
-}
-
-li:hover {
-  box-shadow: 0 0 10px #ff66cc, 0 0 20px #ff99cc;
 }
 
 .Timestamp {
@@ -106,9 +94,4 @@ button {
   cursor: pointer;
   font-family: "Courier New", monospace;
   font-size: 16px;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background: #ff3399;
 }
