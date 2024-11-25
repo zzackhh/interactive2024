@@ -216,7 +216,11 @@
     }
 
     function navigateTo(tab) {
-      alert(`Navigating to ${tab}...`);
+      if (tab === 'grocery') {
+        window.location.href = 'grocery.html';
+      } else {
+        alert(`Navigating to ${tab}...`);
+      }
     }
 
     loadPage();
