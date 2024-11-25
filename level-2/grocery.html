@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grocery List</title>
+  <style>
+    @font-face {
+      font-family: 'Poppins';
+      src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: #fdf5e6;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      position: relative;
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #ff6f61;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .list-container {
+      width: 80%;
+      max-width: 600px;
+      background-color: white;
+      border: 3px solid #ff6f61;
+      border-radius: 12px;
+      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+    }
+
+    .list-container h2 {
+      font-size: 24px;
+      color: #ff6f61;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .grocery-list {
+      font-size: 16px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      outline: none;
+      border: none;
+      width: 100%;
+      height: 300px;
+      padding: 10px;
+      resize: none;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .controls {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #ff6f61;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+      margin: 5px;
+    }
+
+    .button:hover {
+      background-color: #e65b50;
+    }
+  </style>
+</head>
+<body>
+  <div class="title">Lila's Grocery List</div>
+  <div class="subtitle">Keep track of your ingredients and groceries here!</div>
+
+  <div class="list-container">
+    <h2>Editable Grocery List</h2>
+    <textarea id="groceryList" class="grocery-list" oninput="saveList()" placeholder="Type your grocery items here..."></textarea>
+  </div>
+
+  <div class="controls">
+    <button class="button" onclick="clearList()">Clear List</button>
+  </div>
+
+  <script>
+    const groceryList = document.getElementById('groceryList');
+
+    function saveList() {
+      localStorage.setItem('groceryList', groceryList.value);
+    }
+
+    function loadList() {
+      const savedList = localStorage.getItem('groceryList');
+      if (savedList) {
+        groceryList.value = savedList;
+      }
+    }
+
+    function clearList() {
+      if (confirm('Are you sure you want to clear your grocery list?')) {
+        groceryList.value = '';
+        saveList();
+      }
+    }
+
+    // Load the grocery list on page load
+    loadList();
+  </script>
+</body>
+</html>
