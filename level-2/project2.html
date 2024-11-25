@@ -174,24 +174,28 @@
 
     function loadPage() {
       const page = pages[currentPage];
-      document.getElementById("leftTitle").textContent = page.left.title || "";
-      document.getElementById("leftBody").textContent = page.left.body || "";
-      document.getElementById("rightTitle").textContent = page.right.title || "";
-      document.getElementById("rightBody").textContent = page.right.body || "";
+      document.getElementById("leftTitle").textContent = sanitizeContent(page.left.title || "");
+      document.getElementById("leftBody").textContent = sanitizeContent(page.left.body || "");
+      document.getElementById("rightTitle").textContent = sanitizeContent(page.right.title || "");
+      document.getElementById("rightBody").textContent = sanitizeContent(page.right.body || "");
     }
 
     function savePage() {
       pages[currentPage] = {
         left: {
-          title: document.getElementById("leftTitle").textContent,
-          body: document.getElementById("leftBody").textContent,
+          title: sanitizeContent(document.getElementById("leftTitle").textContent),
+          body: sanitizeContent(document.getElementById("leftBody").textContent),
         },
         right: {
-          title: document.getElementById("rightTitle").textContent,
-          body: document.getElementById("rightBody").textContent,
+          title: sanitizeContent(document.getElementById("rightTitle").textContent),
+          body: sanitizeContent(document.getElementById("rightBody").textContent),
         },
       };
       localStorage.setItem("pages", JSON.stringify(pages));
+    }
+
+    function sanitizeContent(content) {
+      return content.replace(/<br>/g, "").trim();
     }
 
     function nextPage() {
