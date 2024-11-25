@@ -6,11 +6,8 @@
   <title>Lila's Cookbook</title>
   <style>
     @font-face {
-      font-family: 'EB Garamond';
-      src: url('/mnt/data/EBGaramond-VariableFont_wght.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
+      font-family: 'Poppins';
+      src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
     }
 
     body {
@@ -18,86 +15,105 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
       margin: 0;
-      background-color: lightpink;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      font-family: Helvetica, Arial, sans-serif;
+      padding: 0;
+      height: 100vh;
+      background-color: #fdf5e6;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      position: relative;
     }
 
     .title {
-      font-size: 24px;
-      font-weight: bold;
-      color: palevioletred;
+      font-size: 36px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #d46a6a;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      font-weight: 400;
+      text-align: center;
       margin-bottom: 20px;
-      font-family: 'Courier New', Courier, monospace;
+      color: #555;
+    }
+
+    .book-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
     }
 
     .book {
       display: flex;
-      border: 2px solid #000;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      position: relative;
+      width: 600px;
+      height: 400px;
+      border: 3px solid #d46a6a;
+      border-radius: 12px;
+      background-color: white;
+      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
     }
 
     .page {
-      width: 200px;
-      height: 300px;
+      flex: 1;
+      margin: 10px;
       padding: 20px;
-      background-color: #f7f1e3;
-      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
-      display: flex;
-      flex-direction: column;
-      text-align: center;
+      background-color: #fefdfa;
+      border-radius: 8px;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    .left-page, .right-page {
-      border: none;
-    }
-
-    .page-title, .page-body, .notes-section {
-      outline: none;
+    .page.left-page {
+      border-right: 2px solid #d46a6a;
     }
 
     .page-title {
-      font-weight: bold;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 16px;
-      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 10px;
     }
 
     .page-body {
-      font-family: 'EB Garamond', serif;
-      font-size: 14px;
-      text-align: center;
+      font-size: 16px;
+      line-height: 1.5;
+      white-space: pre-wrap;
     }
 
-    .ingredients li {
+    /* Emoji Tabs in Corners */
+    .emoji-tab {
+      font-size: 36px;
       cursor: pointer;
-      display: inline-block;
-      margin-right: 5px;
+      position: fixed;
+      transition: transform 0.3s ease;
     }
 
-    .checked {
-      text-decoration: line-through;
-      color: gray;
+    .emoji-tab:hover {
+      transform: scale(1.2);
     }
 
-    .rating, .difficulty {
-      margin: 5px 0;
-      font-family: 'Courier New', Courier, monospace;
+    .top-left {
+      top: 10px;
+      left: 10px;
     }
 
-    .star {
-      font-size: 20px;
-      cursor: pointer;
-      color: lightgray;
+    .top-right {
+      top: 10px;
+      right: 10px;
     }
 
-    .star.checked {
-      color: gold;
+    .bottom-left {
+      bottom: 10px;
+      left: 10px;
+    }
+
+    .bottom-right {
+      bottom: 10px;
+      right: 10px;
     }
 
     .controls {
@@ -105,79 +121,45 @@
     }
 
     .button {
-      padding: 8px 16px;
-      margin: 0 5px;
+      padding: 10px 20px;
       font-size: 16px;
+      border: none;
+      background-color: #d46a6a;
+      color: white;
+      border-radius: 5px;
       cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
     }
 
-    .notes-section {
-      font-family: "Patrick Hand", cursive;
-      font-size: 12px;
-      margin-top: 10px;
-    }
-
-    /* Mobile Styles */
-    @media (max-width: 600px) {
-      .title {
-        font-size: 20px;
-        margin-bottom: 15px;
-      }
-
-      .book {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .page {
-        width: 90vw;
-        height: 45vh;
-        padding: 10px;
-      }
-
-      .controls {
-        margin-top: 15px;
-      }
-
-      .button {
-        padding: 6px 12px;
-        font-size: 14px;
-      }
+    .button:hover {
+      background-color: #b84545;
     }
   </style>
 </head>
 <body>
-  <div class="title">LILA'S COOKBOOK!</div>
+  <div class="title">Lila's Cookbook</div>
+  <div class="subtitle">Lila, this is your digital cooking hub! This space is for you, and for you only.</div>
 
-  <div class="book" id="book">
-    <div class="page left-page" id="leftPage">
-      <div class="page-title" id="leftTitle" contenteditable="true" oninput="savePage()"></div>
-      <ul class="page-body ingredients" id="leftIngredients" contenteditable="true" onclick="toggleIngredient(event)" oninput="savePage()"></ul>
-      <div class="rating">
-        Rating:
-        <span class="star" onclick="rateRecipe(1)">&#9733;</span>
-        <span class="star" onclick="rateRecipe(2)">&#9733;</span>
-        <span class="star" onclick="rateRecipe(3)">&#9733;</span>
-        <span class="star" onclick="rateRecipe(4)">&#9733;</span>
-        <span class="star" onclick="rateRecipe(5)">&#9733;</span>
+  <div class="book-container">
+    <!-- Book -->
+    <div class="book" id="book">
+      <div class="page left-page" id="leftPage">
+        <div class="page-title" id="leftTitle" contenteditable="true" oninput="savePage()">Left Page Title</div>
+        <div class="page-body" id="leftBody" contenteditable="true" oninput="savePage()">Left page content...</div>
       </div>
-      <div class="difficulty">
-        Difficulty:
-        <select id="difficultyLevel" onchange="savePage()">
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
-        </select>
+      <div class="page right-page" id="rightPage">
+        <div class="page-title" id="rightTitle" contenteditable="true" oninput="savePage()">Right Page Title</div>
+        <div class="page-body" id="rightBody" contenteditable="true" oninput="savePage()">Right page content...</div>
       </div>
-      <div class="notes-section" id="leftNotes" contenteditable="true" oninput="savePage()">Notes or tips...</div>
-    </div>
-    
-    <div class="page right-page" id="rightPage">
-      <div class="page-title" id="rightTitle" contenteditable="true" oninput="savePage()"></div>
-      <ul class="page-body ingredients" id="rightIngredients" contenteditable="true" onclick="toggleIngredient(event)" oninput="savePage()"></ul>
-      <div class="notes-section" id="rightNotes" contenteditable="true" oninput="savePage()">Notes or tips...</div>
     </div>
   </div>
+
+  <!-- Emoji Tabs in Corners -->
+  <div class="emoji-tab top-left" onclick="navigateTo('grocery')">🛒</div>
+  <div class="emoji-tab top-right" onclick="navigateTo('recipes')">📖</div>
+  <div class="emoji-tab bottom-left" onclick="navigateTo('restaurants')">🍴</div>
+  <div class="emoji-tab bottom-right" onclick="navigateTo('ideas')">💡</div>
 
   <div class="controls">
     <button class="button" onclick="previousPage()">Previous Page</button>
@@ -185,76 +167,52 @@
   </div>
 
   <script>
-    let currentPage = 1;
-    const pages = JSON.parse(localStorage.getItem('pages')) || [{left: {title: "", ingredients: "", notes: "", rating: 0, difficulty: "Easy"}, right: {title: "", ingredients: "", notes: "", rating: 0, difficulty: "Easy"}}];
+    let currentPage = 0;
+    const pages = JSON.parse(localStorage.getItem('pages')) || [
+      { left: { title: "", body: "" }, right: { title: "", body: "" } }
+    ];
 
     function loadPage() {
-      const leftPage = pages[currentPage - 1].left;
-      const rightPage = pages[currentPage - 1].right;
-
-      document.getElementById("leftTitle").innerHTML = leftPage.title || "";
-      document.getElementById("leftIngredients").innerHTML = leftPage.ingredients || "";
-      document.getElementById("leftNotes").innerHTML = leftPage.notes || "";
-
-      document.getElementById("rightTitle").innerHTML = rightPage.title || "";
-      document.getElementById("rightIngredients").innerHTML = rightPage.ingredients || "";
-      document.getElementById("rightNotes").innerHTML = rightPage.notes || "";
-
-      setRating(leftPage.rating);
-      document.getElementById("difficultyLevel").value = leftPage.difficulty;
+      const page = pages[currentPage];
+      document.getElementById("leftTitle").textContent = page.left.title || "";
+      document.getElementById("leftBody").textContent = page.left.body || "";
+      document.getElementById("rightTitle").textContent = page.right.title || "";
+      document.getElementById("rightBody").textContent = page.right.body || "";
     }
 
     function savePage() {
-      pages[currentPage - 1].left = {
-        title: document.getElementById("leftTitle").innerHTML,
-        ingredients: document.getElementById("leftIngredients").innerHTML,
-        notes: document.getElementById("leftNotes").innerHTML,
-        rating: currentRating,
-        difficulty: document.getElementById("difficultyLevel").value
+      pages[currentPage] = {
+        left: {
+          title: document.getElementById("leftTitle").textContent,
+          body: document.getElementById("leftBody").textContent,
+        },
+        right: {
+          title: document.getElementById("rightTitle").textContent,
+          body: document.getElementById("rightBody").textContent,
+        },
       };
-
-      pages[currentPage - 1].right = {
-        title: document.getElementById("rightTitle").innerHTML,
-        ingredients: document.getElementById("rightIngredients").innerHTML,
-        notes: document.getElementById("rightNotes").innerHTML
-      };
-      
-      localStorage.setItem('pages', JSON.stringify(pages));
-    }
-
-    function toggleIngredient(event) {
-      if (event.target.tagName === "LI") {
-        event.target.classList.toggle("checked");
-      }
-    }
-
-    let currentRating = 0;
-    function rateRecipe(stars) {
-      currentRating = stars;
-      setRating(stars);
-      savePage();
-    }
-
-    function setRating(stars) {
-      const starElements = document.querySelectorAll(".star");
-      starElements.forEach((star, index) => {
-        star.classList.toggle("checked", index < stars);
-      });
+      localStorage.setItem("pages", JSON.stringify(pages));
     }
 
     function nextPage() {
       savePage();
+      if (!pages[currentPage + 1]) {
+        pages.push({ left: { title: "", body: "" }, right: { title: "", body: "" } });
+      }
       currentPage++;
-      if (!pages[currentPage - 1]) pages.push({left: {title: "", ingredients: "", notes: "", rating: 0, difficulty: "Easy"}, right: {title: "", ingredients: "", notes: "", rating: 0, difficulty: "Easy"}});
       loadPage();
     }
 
     function previousPage() {
-      if (currentPage > 1) {
+      if (currentPage > 0) {
         savePage();
         currentPage--;
         loadPage();
       }
+    }
+
+    function navigateTo(tab) {
+      alert(`Navigating to ${tab}...`);
     }
 
     loadPage();
