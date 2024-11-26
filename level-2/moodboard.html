@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Board</title>
+  <style>
+    @font-face {
+      font-family: 'Poppins';
+      src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background-color: #fff5f8;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: 600;
+      color: #ff6f91;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      color: #555;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .mood-board {
+      width: 100%;
+      max-width: 1200px;
+      height: calc(100vh - 120px);
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+      padding: 10px;
+    }
+
+    .draggable-image {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      cursor: grab;
+      transition: transform 0.3s ease;
+    }
+
+    .draggable-image:hover {
+      transform: scale(1.1);
+    }
+
+    .add-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff6f91;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+
+    .add-button:hover {
+      background-color: #ff5070;
+    }
+  </style>
+</head>
+<body>
+  <div class="title">Lila's Mood Board</div>
+  <div class="subtitle">Drag and drop your favorite food pics to create your own masterpiece!</div>
+
+  <div class="mood-board" id="moodBoard"></div>
+
+  <button class="add-button" onclick="addRandomImage()">+</button>
+
+  <script>
+    // Image URLs
+    const imageUrls = [
+      'https://i.pinimg.com/474x/bf/cc/3c/bfcc3c93c17f4d802b01142fe84ae209.jpg',
+      'https://i.pinimg.com/474x/d2/b9/cd/d2b9cd3a68b912c969e9256f6c9fc7cb.jpg',
+      'https://i.pinimg.com/474x/8d/74/4a/8d744ae886c94db791de26efee89497c.jpg',
+      'https://i.pinimg.com/474x/65/cf/80/65cf80bc1608c68b870489276695d6a9.jpg',
+      'https://i.pinimg.com/474x/6d/57/37/6d5737dead71ad2740863bdbf42e2b76.jpg',
+      'https://i.pinimg.com/474x/53/63/2d/53632d96cd1cde2c5e3279a8d951c2a3.jpg',
+      'https://i.pinimg.com/474x/92/b9/a7/92b9a7388b7794f78c11408eb48045b8.jpg',
+      'https://i.pinimg.com/474x/0c/51/d9/0c51d91422d74c72b94fdda02f88970f.jpg',
+    ];
+
+    const moodBoard = document.getElementById('moodBoard');
+
+    // Add images to mood board
+    imageUrls.forEach((src, index) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.classList.add('draggable-image');
+      img.style.top = `${Math.random() * 80}%`;
+      img.style.left = `${Math.random() * 80}%`;
+      img.draggable = true;
+
+      img.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', null); // Compatibility
+      });
+
+      img.addEventListener('dragend', (e) => {
+        const rect = moodBoard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        img.style.left = `${x - img.offsetWidth / 2}px`;
+        img.style.top = `${y - img.offsetHeight / 2}px`;
+      });
+
+      moodBoard.appendChild(img);
+    });
+
+    // Add random image
+    function addRandomImage() {
+      const src = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+      const img = document.createElement('img');
+      img.src = src;
+      img.classList.add('draggable-image');
+      img.style.top = `${Math.random() * 80}%`;
+      img.style.left = `${Math.random() * 80}%`;
+      img.draggable = true;
+
+      img.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', null);
+      });
+
+      img.addEventListener('dragend', (e) => {
+        const rect = moodBoard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        img.style.left = `${x - img.offsetWidth / 2}px`;
+        img.style.top = `${y - img.offsetHeight / 2}px`;
+      });
+
+      moodBoard.appendChild(img);
+    }
+  </script>
+</body>
+</html>
