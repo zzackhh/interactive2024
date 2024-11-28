@@ -10,88 +10,128 @@
       src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
     }
 
+    /* Light blue moving gradient background */
     body {
+      margin: 0;
+      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background-color: #fdf5e6;
+      background: linear-gradient(145deg, #cce7ff, #b3d9ff, #e0f2ff);
+      background-size: 400% 400%;
       font-family: 'Poppins', sans-serif;
-      color: #333;
-      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      animation: gradientBackground 8s ease infinite;
+    }
+
+    @keyframes gradientBackground {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     .title {
-      font-size: 24px;
+      font-size: 36px;
+      font-family: 'Courier New', Courier, monospace;
       font-weight: 600;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      color: #ff6f61;
+      color: #ffffff;
+      margin-top: 20px;
       text-align: center;
+      text-shadow: 2px 2px 8px rgba(255, 160, 122, 0.6);
     }
 
     .subtitle {
-      font-size: 14px;
+      font-size: 16px;
+      font-family: 'Courier New', Courier, monospace;
       font-weight: 400;
+      color: #555;
       text-align: center;
       margin-bottom: 20px;
-      color: #555;
-      padding: 0 10px;
+      padding: 0 15px;
     }
 
     .book-container {
-      position: relative;
       display: flex;
       justify-content: center;
-      align-items: center;
-      margin-bottom: 30px;
-      transform-origin: center top; /* Makes scaling proportional */
-    }
-
-    .book {
-      display: flex;
-      width: 700px;
-      height: 500px;
-      border: 3px solid #ff6f61;
-      border-radius: 12px;
-      background-color: white;
-      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
+      align-items: stretch;
+      width: 90%;
+      max-width: 1000px;
+      height: 600px;
+      border-radius: 20px;
+      background: #fff;
       overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 6px solid black; /* Cute black border */
     }
 
     .page {
       flex: 1;
-      margin: 0;
       padding: 20px;
-      background-color: #fefdfa;
-      border-radius: 0;
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+      background: #fff;
     }
 
-    .page.left-page {
-      border-right: 2px solid #ff6f61;
+    .left-page {
+      border-right: 2px solid rgba(0, 0, 0, 0.05);
     }
 
-    .page-title {
-      font-weight: 600;
-      font-size: 16px;
-      margin-bottom: 10px;
+    .image-slot {
+      width: 80%;
+      max-width: 300px;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: none;
+      border: none;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
     }
 
-    .page-body {
+    .image-slot img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .image-slot:hover img {
+      transform: scale(1.05);
+    }
+
+    .text-area {
+      width: 90%;
+      height: 150px;
+      margin-top: 15px;
+      padding: 10px;
+      font-family: 'Courier New', Courier, monospace;
       font-size: 14px;
       line-height: 1.5;
-      white-space: pre-wrap;
+      overflow-y: auto;
+      background: transparent;
+      border: none;
+      outline: none;
+      box-shadow: none;
     }
 
-    /* Emoji Tabs in Corners */
     .emoji-tab {
-      font-size: 24px;
+      font-size: 32px;
+      position: absolute;
       cursor: pointer;
-      position: fixed;
       transition: transform 0.3s ease;
     }
 
@@ -120,6 +160,10 @@
     }
 
     .controls {
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      max-width: 1000px;
       margin-top: 20px;
     }
 
@@ -127,55 +171,41 @@
       padding: 10px 20px;
       font-size: 14px;
       border: none;
-      background-color: #ff6f61;
+      background-color: #ff7043;
       color: white;
       border-radius: 5px;
       cursor: pointer;
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s;
+      transition: transform 0.3s ease, background-color 0.3s;
     }
 
     .button:hover {
       background-color: #e65b50;
-    }
-
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-      .book-container {
-        transform: scale(0.8); /* Scales the book proportionally */
-      }
-    }
-
-    @media (max-width: 576px) {
-      .book-container {
-        transform: scale(0.6); /* Scales down further for very small screens */
-      }
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <div class="title">Lila's Cookbook</div>
-  <div class="subtitle">Lila, this is your digital cooking hub! This space is for you, and for you only.</div>
+  <div class="title">LILA'S COOKBOOK!</div>
+  <div class="subtitle">
+    Hi Lila, this cookbook and cooking workspace is just for you!
+  </div>
 
   <div class="book-container">
-    <!-- Book -->
-    <div class="book" id="book">
-      <div class="page left-page" id="leftPage">
-        <div class="page-title" id="leftTitle" contenteditable="true" oninput="savePage()">Left Page Title</div>
-        <div class="page-body" id="leftBody" contenteditable="true" oninput="savePage()">Left page content...</div>
-      </div>
-      <div class="page right-page" id="rightPage">
-        <div class="page-title" id="rightTitle" contenteditable="true" oninput="savePage()">Right Page Title</div>
-        <div class="page-body" id="rightBody" contenteditable="true" oninput="savePage()">Right page content...</div>
-      </div>
+    <div class="page left-page">
+      <div class="image-slot" id="leftImageSlot" ondrop="handleDrop(event, 'left')" ondragover="allowDrop(event)"></div>
+      <textarea class="text-area" id="leftText" oninput="saveData()" placeholder="Start writing here..."></textarea>
+    </div>
+    <div class="page right-page">
+      <div class="image-slot" id="rightImageSlot" ondrop="handleDrop(event, 'right')" ondragover="allowDrop(event)"></div>
+      <textarea class="text-area" id="rightText" oninput="saveData()" placeholder="Start writing here..."></textarea>
     </div>
   </div>
 
-  <!-- Emoji Tabs in Corners -->
   <div class="emoji-tab top-left" onclick="navigateTo('grocery')">🛒</div>
   <div class="emoji-tab top-right" onclick="navigateTo('recipes')">📖</div>
   <div class="emoji-tab bottom-left" onclick="navigateTo('restaurants')">🍴</div>
-  <div class="emoji-tab bottom-right" onclick="navigateTo('moodboard')">💡</div>
+  <div class="emoji-tab bottom-right" onclick="navigateTo('ideas')">💡</div>
 
   <div class="controls">
     <button class="button" onclick="previousPage()">Previous Page</button>
@@ -185,54 +215,77 @@
   <script>
     let currentPage = 0;
     const pages = JSON.parse(localStorage.getItem('pages')) || [
-      { left: { title: "", body: "" }, right: { title: "", body: "" } }
+      { left: { img: '', text: '' }, right: { img: '', text: '' } }
     ];
+
+    function allowDrop(event) {
+      event.preventDefault();
+    }
+
+    function handleDrop(event, side) {
+      event.preventDefault();
+      const file = event.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const imgSlot = document.getElementById(`${side}ImageSlot`);
+          imgSlot.innerHTML = `<img src="${reader.result}" />`;
+          pages[currentPage][side].img = reader.result;
+          saveData();
+        };
+        reader.readAsDataURL(file);
+      }
+    }
 
     function loadPage() {
       const page = pages[currentPage];
-      document.getElementById("leftTitle").textContent = page.left.title || "";
-      document.getElementById("leftBody").textContent = page.left.body || "";
-      document.getElementById("rightTitle").textContent = page.right.title || "";
-      document.getElementById("rightBody").textContent = page.right.body || "";
+      document.getElementById('leftImageSlot').innerHTML = page.left.img
+        ? `<img src="${page.left.img}" />`
+        : '';
+      document.getElementById('leftText').value = page.left.text || '';
+      document.getElementById('rightImageSlot').innerHTML = page.right.img
+        ? `<img src="${page.right.img}" />`
+        : '';
+      document.getElementById('rightText').value = page.right.text || '';
     }
 
-    function savePage() {
+    function saveData() {
       pages[currentPage] = {
         left: {
-          title: document.getElementById("leftTitle").textContent.trim(),
-          body: document.getElementById("leftBody").textContent.trim(),
+          img: document.getElementById('leftImageSlot').querySelector('img')
+            ? document.getElementById('leftImageSlot').querySelector('img').src
+            : '',
+          text: document.getElementById('leftText').value
         },
         right: {
-          title: document.getElementById("rightTitle").textContent.trim(),
-          body: document.getElementById("rightBody").textContent.trim(),
-        },
+          img: document.getElementById('rightImageSlot').querySelector('img')
+            ? document.getElementById('rightImageSlot').querySelector('img').src
+            : '',
+          text: document.getElementById('rightText').value
+        }
       };
-      localStorage.setItem("pages", JSON.stringify(pages));
-    }
-
-    function nextPage() {
-      savePage();
-      if (!pages[currentPage + 1]) {
-        pages.push({ left: { title: "", body: "" }, right: { title: "", body: "" } });
-      }
-      currentPage++;
-      loadPage();
+      localStorage.setItem('pages', JSON.stringify(pages));
     }
 
     function previousPage() {
       if (currentPage > 0) {
-        savePage();
+        saveData();
         currentPage--;
         loadPage();
       }
     }
 
-    function navigateTo(tab) {
-      if (tab === 'grocery') {
-        window.location.href = 'grocery.html';
-      } else {
-        alert(`Navigating to ${tab}...`);
+    function nextPage() {
+      saveData();
+      if (!pages[currentPage + 1]) {
+        pages.push({ left: { img: '', text: '' }, right: { img: '', text: '' } });
       }
+      currentPage++;
+      loadPage();
+    }
+
+    function navigateTo(tab) {
+      alert(`Navigating to ${tab}...`);
     }
 
     loadPage();
