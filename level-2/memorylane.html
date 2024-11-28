@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape the Images</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background: linear-gradient(to bottom, #87cefa, #4682b4);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .game-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #87cefa, #4682b4);
+            overflow: hidden;
+        }
+
+        .player {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+
+        .falling-image {
+            position: absolute;
+            top: -150px;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .game-over {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 36px;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .game-over button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            background: #32cd32;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .game-over button:hover {
+            background: #228b22;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="score">Score: 0</div>
+        <div class="player"></div>
+        <div class="game-over">
+            <p>Game Over!</p>
+            <button onclick="restartGame()">Restart</button>
+        </div>
+    </div>
+
+    <script>
+        const gameContainer = document.querySelector('.game-container');
+        const player = document.querySelector('.player');
+        const scoreDisplay = document.querySelector('.score');
+        const gameOverDisplay = document.querySelector('.game-over');
+        let score = 0;
+        let isGameOver = false;
+        let gameInterval, imageInterval;
+
+        // List of all supplied images
+        const images = [
+            "https://i.pinimg.com/736x/5e/a4/dd/5ea4ddfe95e32a58587a401be731c9d3.jpg",
+            "https://i.pinimg.com/474x/60/26/9e/60269e0a245e816ac9e26271fbcb360e.jpg",
+            "https://i.pinimg.com/474x/cb/85/8d/cb858d041b5db325219ed5c57fc98f05.jpg",
+            "https://i.pinimg.com/736x/31/48/00/31480033e30009d02c9bc6445e1fc244.jpg",
+            "https://i.pinimg.com/736x/d7/b3/02/d7b3025abb6036cf2f1f1d6b70d3f8c0.jpg"
+        ];
+
+        // Player movement
+        window.addEventListener('keydown', (e) => {
+            if (isGameOver) return;
+            const playerRect = player.getBoundingClientRect();
+            const containerRect = gameContainer.getBoundingClientRect();
+
+            if (e.key === 'ArrowLeft' && playerRect.left > containerRect.left) {
+                player.style.left = `${player.offsetLeft - 20}px`;
+            } else if (e.key === 'ArrowRight' && playerRect.right < containerRect.right) {
+                player.style.left = `${player.offsetLeft + 20}px`;
+            }
+        });
+
+        // Spawn falling images
+        function createFallingImage() {
+            const img = document.createElement('img');
+            img.classList.add('falling-image');
+            img.src = images[Math.floor(Math.random() * images.length)];
+            img.style.left = `${Math.random() * 90}vw`;
+
+            gameContainer.appendChild(img);
+
+            const fallInterval = setInterval(() => {
+                if (isGameOver) {
+                    clearInterval(fallInterval);
+                    img.remove();
+                    return;
+                }
+
+                const imgRect = img.getBoundingClientRect();
+                const playerRect = player.getBoundingClientRect();
+
+                // Check for collision
+                if (
+                    imgRect.top < playerRect.bottom &&
+                    imgRect.bottom > playerRect.top &&
+                    imgRect.left < playerRect.right &&
+                    imgRect.right > playerRect.left
+                ) {
+                    endGame();
+                    clearInterval(fallInterval);
+                    return;
+                }
+
+                // Remove image if it goes out of bounds
+                if (imgRect.top > gameContainer.offsetHeight) {
+                    img.remove();
+                    clearInterval(fallInterval);
+                } else {
+                    img.style.top = `${img.offsetTop + 5}px`;
+                }
+            }, 30);
+        }
+
+        // Start the game
+        function startGame() {
+            score = 0;
+            isGameOver = false;
+            scoreDisplay.textContent = `Score: ${score}`;
+            gameOverDisplay.style.display = 'none';
+            player.style.left = '50%';
+
+            gameInterval = setInterval(() => {
+                if (!isGameOver) {
+                    score++;
+                    scoreDisplay.textContent = `Score: ${score}`;
+                }
+            }, 1000);
+
+            imageInterval = setInterval(createFallingImage, 700);
+        }
+
+        // End the game
+        function endGame() {
+            isGameOver = true;
+            clearInterval(gameInterval);
+            clearInterval(imageInterval);
+            gameOverDisplay.style.display = 'block';
+        }
+
+        // Restart the game
+        function restartGame() {
+            document.querySelectorAll('.falling-image').forEach((img) => img.remove());
+            startGame();
+        }
+
+        // Initialize the game
+        startGame();
+    </script>
+</body>
+</html>

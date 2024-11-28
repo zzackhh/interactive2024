@@ -203,7 +203,7 @@
   </div>
 
   <div class="emoji-tab top-left" onclick="navigateTo('grocery')">🛒</div>
-  <div class="emoji-tab top-right" onclick="navigateTo('recipes')">📖</div>
+  <div class="emoji-tab top-right" onclick="navigateTo('memory lane')">📖</div>
   <div class="emoji-tab bottom-left" onclick="navigateTo('restaurants')">🍴</div>
   <div class="emoji-tab bottom-right" onclick="navigateTo('ideas')">💡</div>
 
@@ -285,7 +285,13 @@
     }
 
     function navigateTo(tab) {
-      alert(`Navigating to ${tab}...`);
+      if (tab === 'grocery') {
+        window.location.href = 'grocery.html';
+      } else if (tab === 'memory lane') {
+        window.location.href = 'memorylane.html';
+      } else {
+        alert(`Navigating to ${tab}...`);
+      }
     }
 
     loadPage();
