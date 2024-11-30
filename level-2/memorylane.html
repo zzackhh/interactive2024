@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Doodle Jump (Enhanced)</title>
+  <title>Lila's Doodle Jump!</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <style>
@@ -9,7 +9,7 @@
       height: 100%;
       margin: 0;
       background: linear-gradient(to bottom, #4facfe, #00f2fe);
-      font-family: 'Arial', sans-serif;
+      font-family: 'Courier New', Courier, monospace;
       color: #333;
     }
 
@@ -110,6 +110,8 @@
 </head>
 <body>
 <div id="header">Let's Play Doodle Jump!</div>
+<div id="body">Let's take a trip down memory lane, revisiting some of your old creations.</div>
+
 <canvas id="game"></canvas>
 <div id="controls">
   <button id="left">⬅️</button>
@@ -135,15 +137,20 @@
   context.scale(devicePixelRatio, devicePixelRatio);
 
   const platformImages = [
-    'https://i.pinimg.com/474x/d2/b9/cd/d2b9cd3a68b912c969e9256f6c9fc7cb.jpg',
-    'https://i.pinimg.com/474x/8d/74/4a/8d744ae886c94db791de26efee89497c.jpg',
-    'https://i.pinimg.com/474x/88/5e/04/885e046a649c8ddfd2f51d3d145bd9ce.jpg',
-    'https://i.pinimg.com/474x/6d/57/37/6d5737dead71ad2740863bdbf42e2b76.jpg',
-    'https://i.pinimg.com/474x/a1/4d/83/a14d8355199a90abed99619d4687cc5c.jpg',
-    'https://i.pinimg.com/474x/92/b9/a7/92b9a7388b7794f78c11408eb48045b8.jpg',
-    'https://i.pinimg.com/474x/5c/3b/2a/5c3b2a685132060bf6ba1bc17620860a.jpg',
-    'https://i.pinimg.com/474x/99/b4/bb/99b4bb02b73c06613b6f2384076a9be1.jpg',
-    'https://i.pinimg.com/474x/7f/78/33/7f783379702fd2bffaa2c42c702140bc.jpg'
+    'https://i.pinimg.com/474x/5e/a4/dd/5ea4ddfe95e32a58587a401be731c9d3.jpg',
+    'https://i.pinimg.com/474x/60/26/9e/60269e0a245e816ac9e26271fbcb360e.jpg',
+    'https://i.pinimg.com/474x/b0/90/51/b09051d3e5e4afbed6cf9c694d201127.jpg',
+    'https://i.pinimg.com/474x/c8/02/16/c80216a5a17ff11e493c940d68239657.jpg',
+    'https://i.pinimg.com/474x/f1/bb/cc/f1bbcc7da17b6ceca3b1c8d007f13941.jpg',
+    'https://i.pinimg.com/474x/74/e0/82/74e082a4016ff78e7ed4f89b2a687b06.jpg',
+    'https://i.pinimg.com/474x/d4/24/52/d42452ebfe6145d1c4a615436560695d.jpg',
+    'https://i.pinimg.com/474x/e4/be/7c/e4be7c2f9083d14744c7292ef633e0c3.jpg',
+    'https://i.pinimg.com/474x/2d/e0/84/2de084faaf75df3f30b26900006b0483.jpg',
+    'https://i.pinimg.com/474x/b5/cb/96/b5cb96ef892ebc1c610198b8d9fe87be.jpg',
+    'https://i.pinimg.com/474x/1f/0b/e2/1f0be2626d82a3d77d2d670d607511de.jpg',
+    'https://i.pinimg.com/474x/e2/6b/4d/e26b4d8f34aa026129f62250b0fa4ca1.jpg',
+    'https://i.pinimg.com/474x/d3/f0/00/d3f000c008d448c558c1740196e61b3d.jpg',
+    
   ];
 
   const platformImageElements = platformImages.map(src => {
