@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <style>
+    /* General Reset */
     html, body {
       height: 100%;
       margin: 0;
@@ -17,6 +18,7 @@
       justify-content: center;
     }
 
+    /* Title Header */
     #header {
       font-size: 22px;
       font-family: cursive;
@@ -26,6 +28,7 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
+    /* Subtitle Text */
     #subhead {
       font-size: 16px;
       margin-bottom: 20px;
@@ -34,6 +37,7 @@
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     }
 
+    /* Game Canvas */
     canvas {
       background: white;
       border: 2px solid #333;
@@ -41,9 +45,10 @@
       max-width: 100%;
       height: auto;
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-      aspect-ratio: 1;
+      aspect-ratio: 1; /* Ensures the canvas remains a perfect circle */
     }
 
+    /* Controls Section */
     #controls {
       display: flex;
       justify-content: space-around;
@@ -51,6 +56,7 @@
       margin-top: 20px;
     }
 
+    /* Control Buttons */
     #controls button {
       width: 60px;
       height: 60px;
@@ -64,11 +70,13 @@
       transition: transform 0.1s ease, background 0.2s ease;
     }
 
+    /* Control Button Active State */
     #controls button:active {
       transform: scale(0.95);
       background: linear-gradient(to bottom, #f39c12, #e67e22);
     }
 
+    /* Game Over Message */
     #game-over {
       display: none;
       position: fixed;
@@ -86,6 +94,7 @@
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     }
 
+    /* Restart Button */
     #restart {
       display: none;
       position: fixed;
@@ -103,25 +112,72 @@
       transition: background 0.3s ease, transform 0.1s ease;
     }
 
+    /* Restart Button Hover State */
     #restart:hover {
       background: linear-gradient(to bottom, #27ae60, #1e8449);
     }
 
+    /* Restart Button Active State */
     #restart:active {
       transform: scale(0.95);
+    }
+
+    /* Home Button */
+    #home {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    #home img {
+      width: 40px;
+      height: 40px;
+    }
+
+    /* Home Button Active State */
+    #home:active {
+      transform: scale(0.95);
+      background: linear-gradient(to bottom, #e0e0e0, #d0d0d0);
     }
   </style>
 </head>
 <body>
+  <!-- Header and Subtitle -->
   <div id="header">Let's play Lila's Doodle Jump!</div>
   <div id="subhead">Let's take a trip down memory lane, revisiting some of your old creations.</div>
+  
+  <!-- Game Canvas -->
   <canvas id="game"></canvas>
+  
+  <!-- Controls -->
   <div id="controls">
     <button id="left">⬅️</button>
     <button id="right">➡️</button>
   </div>
+
+  <!-- Game Over Message -->
   <div id="game-over">Game Over</div>
+  
+  <!-- Restart Button -->
   <button id="restart">Play Again</button>
+  
+  <!-- Home Button -->
+  <div id="home">
+    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home">
+  </div>
+  
+  <!-- JavaScript Section -->
   <script>
     const canvas = document.getElementById('game');
     const context = canvas.getContext('2d');
@@ -153,7 +209,7 @@
     'https://i.pinimg.com/474x/1f/0b/e2/1f0be2626d82a3d77d2d670d607511de.jpg',
     'https://i.pinimg.com/474x/e2/6b/4d/e26b4d8f34aa026129f62250b0fa4ca1.jpg',
     'https://i.pinimg.com/474x/d3/f0/00/d3f000c008d448c558c1740196e61b3d.jpg',
-      
+
     ];
 
     const platformImageElements = platformImages.map(src => {
@@ -288,6 +344,11 @@
     Promise.all(platformImageElements.map(img => new Promise(resolve => (img.onload = resolve)))).then(() => {
       resetGame();
       loop();
+    });
+
+    const homeButton = document.getElementById('home');
+    homeButton.addEventListener('click', () => {
+      window.location.href = "index.html"; // Replace with the desired URL
     });
   </script>
 </body>
