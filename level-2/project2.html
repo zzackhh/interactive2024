@@ -3,220 +3,339 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lila's Restaurant Guide</title>
+  <title>Lila's Cookbook</title>
   <style>
-    /* General Styling */
+    @font-face {
+      font-family: 'Poppins';
+      src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: url('https://www.transparenttextures.com/patterns/old-wall.png');
+      background-color: #f8f5e1;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom, #ffe6e6, #fff7e6);
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .book {
-      width: 320px;
-      height: 480px;
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      min-height: 100vh;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
     }
 
-    /* Cover Page */
-    .cover {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background-color: #ffe4c4;
-      border-bottom: 4px solid #ffb3b3;
-    }
-
-    .cover img {
-      width: 140px;
-      height: auto;
-      border-radius: 12px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .cover h1 {
-      font-size: 1.8em;
-      margin: 0;
-      color: #ff6f61;
+    .title {
+      font-size: 48px;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 600;
+      color: #333;
+      margin-top: 20px;
       text-align: center;
     }
 
-    .cover p {
-      margin-top: 10px;
-      font-size: 0.95em;
+    .subtitle {
+      font-size: 18px;
+      font-family: 'Georgia', serif;
       color: #555;
       text-align: center;
-      max-width: 250px;
+      margin-bottom: 30px;
     }
 
-    .cover button {
-      margin-top: 20px;
-      background: #ff6f61;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 1em;
-      cursor: pointer;
-      color: white;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    .cover button:hover {
-      background: #ff4d4d;
-    }
-
-    /* Pages */
-    .pages {
-      display: none;
-      flex-direction: column;
-      padding: 15px;
-      height: 100%;
-      background: #fff;
-    }
-
-    .pages.active {
+    .book-container {
       display: flex;
+      justify-content: center;
+      align-items: stretch;
+      width: 90%;
+      max-width: 1000px;
+      height: 500px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #fffef5, #fefdf9);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid #d4c6a6;
     }
 
-    header h2 {
-      text-align: center;
-      font-size: 1.4em;
-      color: #ff6f61;
-      margin-bottom: 10px;
+    .spine {
+      width: 4%;
+      background: linear-gradient(to right, #d4c6a6, #d9cdb1);
+      box-shadow: inset -2px 0px 6px rgba(0, 0, 0, 0.2);
     }
 
-    main {
-      flex-grow: 1;
-      overflow-y: auto;
-      padding: 10px 0;
+    .page {
+      flex: 1;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background: linear-gradient(145deg, #fffef5, #fefdf9);
+      position: relative;
+      overflow: hidden;
     }
 
-    .restaurant {
+    .left-page {
+      border-right: 1px solid #d4c6a6;
+    }
+
+    .image-slot {
+      width: 80%;
+      max-width: 250px;
+      height: 180px;
       display: flex;
       align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid #f2f2f2;
-    }
-
-    .restaurant img {
-      width: 50px;
-      height: 50px;
-      object-fit: cover;
+      justify-content: center;
+      overflow: hidden;
+      background: rgba(240, 240, 240, 0.9);
       border-radius: 8px;
-      margin-right: 10px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
 
-    .restaurant div {
-      flex-grow: 1;
-      font-size: 0.95em;
+    .image-slot img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
     }
 
-    footer {
-      text-align: center;
-      padding: 10px 0;
-    }
-
-    footer button {
-      background: #ff6f61;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 0.9em;
+    .image-slot input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
       cursor: pointer;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
     }
 
-    footer button:hover {
-      background: #ff4d4d;
+    .delete-image {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .delete-image:hover {
+      background: rgba(255, 100, 100, 0.9);
+    }
+
+    .text-area {
+      width: 90%;
+      height: 180px;
+      margin-top: 20px;
+      padding: 12px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      line-height: 1.6;
+      background: #fefdf9;
+      border: 1px solid #d4c6a6;
+      border-radius: 8px;
+      outline: none;
+      resize: none;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .emoji-tab {
+      font-size: 32px;
+      position: absolute;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .emoji-tab:hover {
+      transform: scale(1.2);
+    }
+
+    .top-left {
+      top: 10px;
+      left: 10px;
+    }
+
+    .top-right {
+      top: 10px;
+      right: 10px;
+    }
+
+    .bottom-left {
+      bottom: 10px;
+      left: 10px;
+    }
+
+    .bottom-right {
+      bottom: 10px;
+      right: 10px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      width: 70%;
+      max-width: 800px;
+      margin-top: 30px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      background-color: #d4a658;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 0 5px;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .button:hover {
+      background-color: #b88f4b;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <div class="book">
-    <!-- Cover Page -->
-    <div class="cover">
-      <img src="https://i.pinimg.com/736x/13/f9/5b/13f95bddf86240ceb6fb8dbf34e8a5f1.jpg" alt="Goat Image">
-      <h1>Lila's Restaurant Guide</h1>
-      <p>"A charming collection of favorite places to eat and unwind."</p>
-      <button onclick="openBook()">Open</button>
-    </div>
+  <div class="title">LILA'S COOKBOOK!</div>
+  <div class="subtitle">Hi Lila, this cookbook and cooking workspace is just for you!</div>
 
-    <!-- Pages -->
-    <div class="pages">
-      <header>
-        <h2>Favorite Restaurants</h2>
-      </header>
-      <main id="restaurant-list">
-        <!-- Restaurants dynamically rendered here -->
-      </main>
-      <footer>
-        <button id="add-restaurant-btn">Add Restaurant</button>
-      </footer>
+  <div class="book-container">
+    <div class="spine"></div>
+    <div class="page left-page">
+      <div class="image-slot" id="leftImageSlot">
+        <input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
+        <button class="delete-image" onclick="deleteImage('left')">🗑️</button>
+      </div>
+      <textarea class="text-area" id="leftText" placeholder="Start writing here..." oninput="saveData()"></textarea>
+    </div>
+    <div class="page right-page">
+      <div class="image-slot" id="rightImageSlot">
+        <input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
+        <button class="delete-image" onclick="deleteImage('right')">🗑️</button>
+      </div>
+      <textarea class="text-area" id="rightText" placeholder="Start writing here..." oninput="saveData()"></textarea>
     </div>
   </div>
 
+  <div class="emoji-tab top-left" onclick="navigateTo('grocery')">🛒</div>
+<div class="emoji-tab top-right" onclick="navigateTo('memory lane')">📖</div>
+  <div class="emoji-tab bottom-left" onclick="navigateTo('restaurants')">🍴</div>
+  <div class="emoji-tab bottom-right" onclick="navigateTo('ideas')">💡</div>
+
+  <div class="controls">
+    <button class="button" onclick="previousPage()">Previous Page</button>
+    <button class="button" onclick="nextPage()">Next Page</button>
+  </div>
+
   <script>
-    const restaurantList = document.getElementById('restaurant-list');
-    const pages = document.querySelector('.pages');
-    const cover = document.querySelector('.cover');
+    let currentPage = 0;
+    const pages = JSON.parse(localStorage.getItem('pages')) || [{ left: { img: '', text: '' }, right: { img: '', text: '' } }];
 
-    const restaurants = [
-      { name: 'Kisa', location: 'NYC', img: 'https://source.unsplash.com/random/50x50?restaurant' },
-      { name: 'Dorian', location: 'London', img: 'https://source.unsplash.com/random/50x50?cafe' },
-      { name: 'Umu', location: 'London', img: 'https://source.unsplash.com/random/50x50?japanese' },
-      { name: "Raf's", location: 'NYC', img: 'https://source.unsplash.com/random/50x50?food' },
-      { name: "Cervo's", location: 'NYC', img: 'https://source.unsplash.com/random/50x50?dining' },
-      { name: 'Acre', location: 'Brooklyn', img: 'https://source.unsplash.com/random/50x50?pizza' },
-      { name: 'Raku Udon', location: '', img: 'https://source.unsplash.com/random/50x50?noodles' },
-    ];
-
-    function renderRestaurants() {
-      restaurantList.innerHTML = '';
-      restaurants.forEach(restaurant => {
-        const restaurantDiv = document.createElement('div');
-        restaurantDiv.className = 'restaurant';
-        restaurantDiv.innerHTML = `
-          <img src="${restaurant.img}" alt="${restaurant.name}">
-          <div>
-            <strong>${restaurant.name}</strong><br>
-            <small>${restaurant.location}</small>
-          </div>
-        `;
-        restaurantList.appendChild(restaurantDiv);
-      });
-    }
-
-    function openBook() {
-      cover.style.display = 'none';
-      pages.classList.add('active');
-    }
-
-    document.getElementById('add-restaurant-btn').addEventListener('click', () => {
-      const name = prompt('Enter restaurant name:');
-      const location = prompt('Enter restaurant location:');
-      if (name && location) {
-        restaurants.push({ name, location, img: 'https://source.unsplash.com/random/50x50?restaurant' });
-        renderRestaurants();
+    function handleImageUpload(event, side) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          document.getElementById(`${side}ImageSlot`).innerHTML = `
+            <img src="${reader.result}" />
+            <button class="delete-image" onclick="deleteImage('${side}')">🗑️</button>
+          `;
+          pages[currentPage][side].img = reader.result;
+          saveData();
+        };
+        reader.readAsDataURL(file);
       }
-    });
+    }
 
-    renderRestaurants();
+    function deleteImage(side) {
+      const slot = document.getElementById(`${side}ImageSlot`);
+      pages[currentPage][side].img = '';
+      slot.innerHTML = `
+        <input type="file" accept="image/*" onchange="handleImageUpload(event, '${side}')" />
+        <button class="delete-image" onclick="deleteImage('${side}')">🗑️</button>
+      `;
+      saveData();
+    }
+
+    function loadPage() {
+      const page = pages[currentPage];
+      const leftSlot = document.getElementById('leftImageSlot');
+      const rightSlot = document.getElementById('rightImageSlot');
+
+      leftSlot.innerHTML = page.left.img
+        ? `<img src="${page.left.img}" /><button class="delete-image" onclick="deleteImage('left')">🗑️</button>`
+        : `<input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
+           <button class="delete-image" onclick="deleteImage('left')">🗑️</button>`;
+      rightSlot.innerHTML = page.right.img
+        ? `<img src="${page.right.img}" /><button class="delete-image" onclick="deleteImage('right')">🗑️</button>`
+        : `<input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
+           <button class="delete-image" onclick="deleteImage('right')">🗑️</button>`;
+      document.getElementById('leftText').value = page.left.text || '';
+      document.getElementById('rightText').value = page.right.text || '';
+    }
+
+    function saveData() {
+      pages[currentPage] = {
+        left: {
+          img: document.getElementById('leftImageSlot').querySelector('img')
+            ? document.getElementById('leftImageSlot').querySelector('img').src
+            : '',
+          text: document.getElementById('leftText').value
+        },
+        right: {
+          img: document.getElementById('rightImageSlot').querySelector('img')
+            ? document.getElementById('rightImageSlot').querySelector('img').src
+            : '',
+          text: document.getElementById('rightText').value
+        }
+      };
+      localStorage.setItem('pages', JSON.stringify(pages));
+    }
+
+    function previousPage() {
+      if (currentPage > 0) {
+        saveData();
+        currentPage--;
+        loadPage();
+      }
+    }
+
+    function nextPage() {
+      saveData();
+      if (!pages[currentPage + 1]) {
+        pages.push({ left: { img: '', text: '' }, right: { img: '', text: '' } });
+      }
+      currentPage++;
+      loadPage();
+    }
+    
+  function navigateTo(tab) {
+    if (tab === 'grocery') {
+      window.location.href = 'grocery.html';
+    } else if (tab === 'memory lane') {
+      window.location.href = 'memorylane.html';
+    } else if (tab === 'restaurants') {
+      window.location.href = 'restaurants.html';
+    } else if (tab === 'ideas') {
+      alert('Navigating to ideas...');
+    }
+
+    }
+
+    loadPage();
+
   </script>
 </body>
 </html>
