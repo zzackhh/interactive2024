@@ -1,348 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lila's Cookbook</title>
-  <style>
-    @font-face {
-      font-family: 'Poppins';
-      src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lila's Cookbook</title>
+    <style>
+        @font-face {
+            font-family: 'Poppins';
+            src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: url('https://www.transparenttextures.com/patterns/old-wall.png');
-      background-color: #f8f5e1;
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      overflow: hidden;
-    }
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow: hidden;
+            background: 
+                linear-gradient(270deg, rgba(136, 207, 255, 0.3), rgba(0, 89, 179, 0.3)),
+                url('https://www.transparenttextures.com/patterns/old-wall.png');
+            background-blend-mode: overlay;
+            background-size: 400% 400%, auto;
+            animation: gradientAnimation 8s ease infinite;
+        }
 
-    .title {
-      font-size: 48px;
-      font-family: 'Courier New', Courier, monospace;
-      font-weight: 600;
-      color: #333;
-      margin-top: 20px;
-      text-align: center;
-    }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%, center; }
+            50% { background-position: 100% 50%, center; }
+            100% { background-position: 0% 50%, center; }
+        }
 
-    .subtitle {
-      font-size: 18px;
-      font-family: 'Georgia', serif;
-      color: #555;
-      text-align: center;
-      margin-bottom: 30px;
-    }
+        .title {
+            font-size: 48px;
+            font-family: cursive;
+            font-weight: 600;
+            color: #333;
+            margin-top: 20px;
+            text-align: center;
+        }
 
-    .book-container {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      width: 90%;
-      max-width: 1000px;
-      height: 500px;
-      border-radius: 10px;
-      background: linear-gradient(145deg, #fffef5, #fefdf9);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-      border: 1px solid #d4c6a6;
-    }
+        .subtitle {
+            font-size: 18px;
+            font-family: 'Georgia', serif;
+            color: #555;
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-    .spine {
-      width: 4%;
-      background: linear-gradient(to right, #d4c6a6, #d9cdb1);
-      box-shadow: inset -2px 0px 6px rgba(0, 0, 0, 0.2);
-    }
+        .book-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            width: 90%;
+            max-width: 1000px;
+            height: 500px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #fffef5, #fefdf9);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid #d4c6a6;
+        }
 
-    .page {
-      flex: 1;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      background: linear-gradient(145deg, #fffef5, #fefdf9);
-      position: relative;
-      overflow: hidden;
-    }
+        .spine {
+            width: 4%;
+            background: linear-gradient(to right, #d4c6a6, #d9cdb1);
+            box-shadow: inset -2px 0px 6px rgba(0, 0, 0, 0.2);
+        }
 
-    .left-page {
-      border-right: 1px solid #d4c6a6;
-    }
+        .page {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background: linear-gradient(145deg, #fffef5, #fefdf9);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .image-slot {
-      width: 80%;
-      max-width: 250px;
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: rgba(240, 240, 240, 0.9);
-      border-radius: 8px;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-      position: relative;
-    }
+        .left-page {
+            border-right: 1px solid #d4c6a6;
+        }
 
-    .image-slot img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: cover;
-    }
+        .image-slot {
+            width: 80%;
+            max-width: 250px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: rgba(240, 240, 240, 0.9);
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
 
-    .image-slot input {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: pointer;
-    }
+        .image-slot img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
 
-    .delete-image {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: rgba(255, 255, 255, 0.8);
-      border: none;
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+        .image-slot input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
 
-    .delete-image:hover {
-      background: rgba(255, 100, 100, 0.9);
-    }
+        .delete-image {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-    .text-area {
-      width: 90%;
-      height: 180px;
-      margin-top: 20px;
-      padding: 12px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 16px;
-      line-height: 1.6;
-      background: #fefdf9;
-      border: 1px solid #d4c6a6;
-      border-radius: 8px;
-      outline: none;
-      resize: none;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
+        .delete-image:hover {
+            background: rgba(255, 100, 100, 0.9);
+        }
 
-    .emoji-tab {
-      font-size: 32px;
-      position: absolute;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
+        .text-area {
+            width: 90%;
+            height: 180px;
+            margin-top: 20px;
+            padding: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            line-height: 1.6;
+            background: #fefdf9;
+            border: 1px solid #d4c6a6;
+            border-radius: 8px;
+            outline: none;
+            resize: none;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
 
-    .emoji-tab:hover {
-      transform: scale(1.2);
-    }
+        .emoji-tab {
+            font-size: 32px;
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
 
-    .top-left {
-      top: 10px;
-      left: 10px;
-    }
+        .emoji-tab:hover {
+            transform: scale(1.2);
+        }
 
-    .top-right {
-      top: 10px;
-      right: 10px;
-    }
+        .top-left {
+            top: 10px;
+            left: 10px;
+        }
 
-    .bottom-left {
-      bottom: 10px;
-      left: 10px;
-    }
+        .top-right {
+            top: 10px;
+            right: 10px;
+        }
 
-    .bottom-right {
-      bottom: 10px;
-      right: 10px;
-    }
+        .bottom-left {
+            bottom: 10px;
+            left: 10px;
+        }
 
-    .controls {
-      display: flex;
-      justify-content: center;
-      width: 70%;
-      max-width: 800px;
-      margin-top: 30px;
-    }
+        .bottom-right {
+            bottom: 10px;
+            right: 10px;
+        }
 
-    .button {
-      padding: 10px 20px;
-      font-size: 14px;
-      border: none;
-      background-color: #d4a658;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 0 5px;
-      font-family: 'Poppins', sans-serif;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-    }
+        .controls {
+            display: flex;
+            justify-content: center;
+            width: 70%;
+            max-width: 800px;
+            margin-top: 30px;
+        }
 
-    .button:hover {
-      background-color: #b88f4b;
-      transform: scale(1.05);
-    }
-  </style>
+        .button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            background-color: #d4a658;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            background-color: #b88f4b;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-  <div class="title">LILA'S COOKBOOK!</div>
-  <div class="subtitle">Hi Lila, this cookbook and cooking workspace is just for you!</div>
+    <div class="title">LILA'S COOKBOOK!</div>
+    <div class="subtitle">Hi Lila, this cookbook and cooking workspace is just for you!</div>
 
-  <div class="book-container">
-    <div class="spine"></div>
-    <div class="page left-page">
-      <div class="image-slot" id="leftImageSlot">
-        <input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
-        <button class="delete-image" onclick="deleteImage('left')">🗑️</button>
-      </div>
-      <textarea class="text-area" id="leftText" placeholder="Start writing here..." oninput="saveData()"></textarea>
+    <div class="book-container">
+        <div class="spine"></div>
+        <div class="page left-page">
+            <div class="image-slot" id="leftImageSlot">
+                <input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
+                <button class="delete-image" onclick="deleteImage('left')">🗑️</button>
+            </div>
+            <textarea class="text-area" id="leftText" placeholder="Start writing here..." oninput="saveData()"></textarea>
+        </div>
+        <div class="page right-page">
+            <div class="image-slot" id="rightImageSlot">
+                <input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
+                <button class="delete-image" onclick="deleteImage('right')">🗑️</button>
+            </div>
+            <textarea class="text-area" id="rightText" placeholder="Start writing here..." oninput="saveData()"></textarea>
+        </div>
     </div>
-    <div class="page right-page">
-      <div class="image-slot" id="rightImageSlot">
-        <input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
-        <button class="delete-image" onclick="deleteImage('right')">🗑️</button>
-      </div>
-      <textarea class="text-area" id="rightText" placeholder="Start writing here..." oninput="saveData()"></textarea>
+
+    <div class="emoji-tab top-left" onclick="navigateTo('grocery')">🛒</div>
+    <div class="emoji-tab top-right" onclick="navigateTo('memory lane')">📖</div>
+    <div class="emoji-tab bottom-left" onclick="navigateTo('restaurants')">🍴</div>
+    <div class="emoji-tab bottom-right" onclick="navigateTo('ideas')">💡</div>
+
+    <div class="controls">
+        <button class="button" onclick="previousPage()">Previous Page</button>
+        <button class="button" onclick="nextPage()">Next Page</button>
     </div>
-  </div>
 
-  <div class="emoji-tab top-left" onclick="navigateTo('grocery')">🛒</div>
-  <div class="emoji-tab top-right" onclick="navigateTo('memory lane')">📖</div>
-  <div class="emoji-tab bottom-left" onclick="navigateTo('restaurants')">🍴</div>
-  <div class="emoji-tab bottom-right" onclick="navigateTo('ideas')">💡</div>
+    <script>
+        let currentPage = 0;
+        const pages = JSON.parse(localStorage.getItem('pages')) || [{ left: { img: '', text: '' }, right: { img: '', text: '' } }];
 
-  <div class="controls">
-    <button class="button" onclick="previousPage()">Previous Page</button>
-    <button class="button" onclick="nextPage()">Next Page</button>
-  </div>
-
-  <script>
-    let currentPage = 0;
-    const pages = JSON.parse(localStorage.getItem('pages')) || [{ left: { img: '', text: '' }, right: { img: '', text: '' } }];
-
-    function handleImageUpload(event, side) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          document.getElementById(`${side}ImageSlot`).innerHTML = `
-            <img src="${reader.result}" />
-            <button class="delete-image" onclick="deleteImage('${side}')">🗑️</button>
-          `;
-          pages[currentPage][side].img = reader.result;
-          saveData();
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function deleteImage(side) {
-      const slot = document.getElementById(`${side}ImageSlot`);
-      pages[currentPage][side].img = '';
-      slot.innerHTML = `
-        <input type="file" accept="image/*" onchange="handleImageUpload(event, '${side}')" />
-        <button class="delete-image" onclick="deleteImage('${side}')">🗑️</button>
-      `;
-      saveData();
-    }
-
-    function loadPage() {
-      const page = pages[currentPage];
-      const leftSlot = document.getElementById('leftImageSlot');
-      const rightSlot = document.getElementById('rightImageSlot');
-
-      leftSlot.innerHTML = page.left.img
-        ? `<img src="${page.left.img}" /><button class="delete-image" onclick="deleteImage('left')">🗑️</button>`
-        : `<input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
-           <button class="delete-image" onclick="deleteImage('left')">🗑️</button>`;
-      rightSlot.innerHTML = page.right.img
-        ? `<img src="${page.right.img}" /><button class="delete-image" onclick="deleteImage('right')">🗑️</button>`
-        : `<input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
-           <button class="delete-image" onclick="deleteImage('right')">🗑️</button>`;
-      document.getElementById('leftText').value = page.left.text || '';
-      document.getElementById('rightText').value = page.right.text || '';
-    }
-
-    function saveData() {
-      pages[currentPage] = {
-        left: {
-          img: document.getElementById('leftImageSlot').querySelector('img')
-            ? document.getElementById('leftImageSlot').querySelector('img').src
-            : '',
-          text: document.getElementById('leftText').value
-        },
-        right: {
-          img: document.getElementById('rightImageSlot').querySelector('img')
-            ? document.getElementById('rightImageSlot').querySelector('img').src
-            : '',
-          text: document.getElementById('rightText').value
+        function handleImageUpload(event, side) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    document.getElementById(`${side}ImageSlot`).innerHTML = `
+                        <img src="${reader.result}" />
+                        <button class="delete-image" onclick="deleteImage('${side}')">🗑️</button>
+                    `;
+                    pages[currentPage][side].img = reader.result;
+                    saveData();
+                };
+                reader.readAsDataURL(file);
+            }
         }
-      };
-      localStorage.setItem('pages', JSON.stringify(pages));
-    }
 
-    function previousPage() {
-      if (currentPage > 0) {
-        saveData();
-        currentPage--;
+        function deleteImage(side) {
+            const slot = document.getElementById(`${side}ImageSlot`);
+            pages[currentPage][side].img = '';
+            slot.innerHTML = `
+                <input type="file" accept="image/*" onchange="handleImageUpload(event, '${side}')" />
+                <button class="delete-image" onclick="deleteImage('${side}')">🗑️</button>
+            `;
+            saveData();
+        }
+
+        function loadPage() {
+            const page = pages[currentPage];
+            const leftSlot = document.getElementById('leftImageSlot');
+            const rightSlot = document.getElementById('rightImageSlot');
+
+            leftSlot.innerHTML = page.left.img
+                ? `<img src="${page.left.img}" /><button class="delete-image" onclick="deleteImage('left')">🗑️</button>`
+                : `<input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
+                   <button class="delete-image" onclick="deleteImage('left')">🗑️</button>`;
+            rightSlot.innerHTML = page.right.img
+                ? `<img src="${page.right.img}" /><button class="delete-image" onclick="deleteImage('right')">🗑️</button>`
+                : `<input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
+                   <button class="delete-image" onclick="deleteImage('right')">🗑️</button>`;
+            document.getElementById('leftText').value = page.left.text || '';
+            document.getElementById('rightText').value = page.right.text || '';
+        }
+
+        function saveData() {
+            pages[currentPage] = {
+                left: {
+                    img: document.getElementById('leftImageSlot').querySelector('img')
+                        ? document.getElementById('leftImageSlot').querySelector('img').src
+                        : '',
+                    text: document.getElementById('leftText').value
+                },
+                right: {
+                    img: document.getElementById('rightImageSlot').querySelector('img')
+                        ? document.getElementById('rightImageSlot').querySelector('img').src
+                        : '',
+                    text: document.getElementById('rightText').value
+                }
+            };
+            localStorage.setItem('pages', JSON.stringify(pages));
+        }
+
+        function previousPage() {
+            if (currentPage > 0) {
+                saveData();
+                currentPage--;
+                loadPage();
+            }
+        }
+
+        function nextPage() {
+            saveData();
+            if (!pages[currentPage + 1]) {
+                pages.push({ left: { img: '', text: '' }, right: { img: '', text: '' } });
+            }
+            currentPage++;
+            loadPage();
+        }
+        
+        function navigateTo(tab) {
+            let url = '';
+            if (tab === 'grocery') url = 'grocery.html';
+            else if (tab === 'memory lane') url = 'memorylane.html';
+            else if (tab === 'restaurants') url = 'places.html';
+            else if (tab === 'ideas') url = 'ideas.html';
+
+            if (url) window.location.href = url;
+        }
+
         loadPage();
-      }
-    }
-
-    function nextPage() {
-      saveData();
-      if (!pages[currentPage + 1]) {
-        pages.push({ left: { img: '', text: '' }, right: { img: '', text: '' } });
-      }
-      currentPage++;
-      loadPage();
-    }
-    
-    function navigateTo(tab) {
-      let url = '';
-
-      if (tab === 'grocery') {
-        url = 'grocery.html';
-      } else if (tab === 'memory lane') {
-        url = 'memorylane.html';
-      } else if (tab === 'restaurants') {
-        url = 'places.html';
-      } else if (tab === 'ideas') {
-        url = 'ideas.html';
-      }
-
-      if (url) {
-        console.log(`Navigating to: ${url}`);
-        window.location.href = url;
-      } else {
-        console.error(`No URL defined for tab: ${tab}`);
-      }
-    }
-
-    loadPage();
-  </script>
+    </script>
 </body>
 </html>

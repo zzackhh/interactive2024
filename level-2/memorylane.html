@@ -106,6 +106,22 @@
     #restart:active {
       transform: scale(0.95);
     }
+
+    #home-icon {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 1.5em;
+      text-decoration: none;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease, color 0.3s ease;
+    }
+
+    #home-icon:hover {
+      transform: scale(1.2);
+      color: #f39c12;
+    }
   </style>
 </head>
 <body>
@@ -119,6 +135,8 @@
 </div>
 <div id="game-over">Game Over</div>
 <button id="restart">Play Again</button>
+<a id="home-icon" href="https://zzackhh.github.io/interactive2024/level-2/project2.html" target="_blank">🏠</a>
+
 <script>
   const canvas = document.getElementById('game');
   const context = canvas.getContext('2d');
@@ -138,19 +156,7 @@
 
   const platformImages = [
     'https://i.pinimg.com/474x/5e/a4/dd/5ea4ddfe95e32a58587a401be731c9d3.jpg',
-    'https://i.pinimg.com/474x/60/26/9e/60269e0a245e816ac9e26271fbcb360e.jpg',
-    'https://i.pinimg.com/474x/b0/90/51/b09051d3e5e4afbed6cf9c694d201127.jpg',
-    'https://i.pinimg.com/474x/c8/02/16/c80216a5a17ff11e493c940d68239657.jpg',
-    'https://i.pinimg.com/474x/f1/bb/cc/f1bbcc7da17b6ceca3b1c8d007f13941.jpg',
-    'https://i.pinimg.com/474x/74/e0/82/74e082a4016ff78e7ed4f89b2a687b06.jpg',
-    'https://i.pinimg.com/474x/d4/24/52/d42452ebfe6145d1c4a615436560695d.jpg',
-    'https://i.pinimg.com/474x/e4/be/7c/e4be7c2f9083d14744c7292ef633e0c3.jpg',
-    'https://i.pinimg.com/474x/2d/e0/84/2de084faaf75df3f30b26900006b0483.jpg',
-    'https://i.pinimg.com/474x/b5/cb/96/b5cb96ef892ebc1c610198b8d9fe87be.jpg',
-    'https://i.pinimg.com/474x/1f/0b/e2/1f0be2626d82a3d77d2d670d607511de.jpg',
-    'https://i.pinimg.com/474x/e2/6b/4d/e26b4d8f34aa026129f62250b0fa4ca1.jpg',
-    'https://i.pinimg.com/474x/d3/f0/00/d3f000c008d448c558c1740196e61b3d.jpg',
-    
+    // Add more platform image URLs here...
   ];
 
   const platformImageElements = platformImages.map(src => {

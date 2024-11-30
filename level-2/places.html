@@ -6,13 +6,21 @@
   <title>Lila's Restaurant Guide</title>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom, #ffe6e6, #fff7e6);
       margin: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(270deg, #88cfff, #0059b3);
+      background-size: 400% 400%;
+      animation: gradientAnimation 8s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .book {
@@ -26,7 +34,6 @@
       flex-direction: column;
     }
 
-    /* Cover Page */
     .cover {
       height: 100%;
       display: flex;
@@ -36,6 +43,7 @@
       padding: 20px;
       background-color: #ffe4c4;
       border-bottom: 4px solid #ffb3b3;
+      font-family: cursive;
     }
 
     .cover img {
@@ -78,7 +86,6 @@
       background: #ff4d4d;
     }
 
-    /* Pages */
     .pages {
       display: none;
       flex-direction: column;
@@ -113,11 +120,6 @@
     .restaurant:hover {
       background: #fff7e6;
       border-radius: 8px;
-    }
-
-    .restaurant div {
-      font-size: 1em;
-      color: #333;
     }
 
     footer {
@@ -199,33 +201,43 @@
     .modal-content button:hover {
       background: #ff4d4d;
     }
+
+    #home-icon {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 1.5em;
+      color: #ff6f61;
+      text-decoration: none;
+      z-index: 1000;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    #home-icon:hover {
+      transform: scale(1.2);
+      color: #ff4d4d;
+    }
   </style>
 </head>
 <body>
   <div class="book">
-    <!-- Cover Page -->
     <div class="cover">
       <img src="https://i.pinimg.com/736x/13/f9/5b/13f95bddf86240ceb6fb8dbf34e8a5f1.jpg" alt="Goat Image">
       <h1>Lila's Restaurant Guide</h1>
       <p>"All of Lila's favorite spots to eat, all in one place."</p>
       <button onclick="openBook()">Open</button>
     </div>
-
-    <!-- Pages -->
     <div class="pages">
       <header>
         <h2>Favorite Restaurants</h2>
       </header>
-      <main id="restaurant-list">
-        <!-- Restaurants dynamically rendered here -->
-      </main>
+      <main id="restaurant-list"></main>
       <footer>
         <button id="add-restaurant-btn">Add Restaurant</button>
       </footer>
     </div>
   </div>
 
-  <!-- Modal -->
   <div class="modal" id="modal">
     <div class="modal-content">
       <h3 id="modal-title">Restaurant Name</h3>
@@ -234,6 +246,8 @@
       <button onclick="closeModal()">Close</button>
     </div>
   </div>
+
+  <a id="home-icon" href="https://zzackhh.github.io/interactive2024/level-2/project2.html" target="_blank">🏠</a>
 
   <script>
     const restaurantList = document.getElementById('restaurant-list');
@@ -248,10 +262,10 @@
       { name: 'Kisa', location: 'NYC', link: 'https://www.newyorker.com/culture/the-food-scene/kisa-a-pitch-perfect-ode-to-korean-drivers-restaurants' },
       { name: 'Dorian', location: 'London', link: 'https://www.theinfatuation.com/london/reviews/dorian' },
       { name: 'Umu', location: 'London', link: 'https://www.timeout.com/london/restaurants/umu' },
-      { name: "Raf's", location: 'NYC',  link: 'https://www.nytimes.com/2023/07/04/dining/restaurant-review-rafs-nyc.html' },
-      { name: "Cervo's", location: 'NYC',  link: 'https://nymag.com/listings/restaurant/cervos/' },
+      { name: "Raf's", location: 'NYC', link: 'https://www.nytimes.com/2023/07/04/dining/restaurant-review-rafs-nyc.html' },
+      { name: "Cervo's", location: 'NYC', link: 'https://nymag.com/listings/restaurant/cervos/' },
       { name: 'Acre', location: 'Brooklyn', link: 'https://www.theinfatuation.com/new-york/reviews/acre' },
-      { name: 'Raku Udon', location: 'NYC',  link: 'https://ny.eater.com/2015/11/2/9657024/best-udon-nyc' },
+      { name: 'Raku Udon', location: 'NYC', link: 'https://ny.eater.com/2015/11/2/9657024/best-udon-nyc' },
     ];
 
     function renderRestaurants() {

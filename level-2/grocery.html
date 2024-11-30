@@ -33,10 +33,10 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5), 
-                        inset -3px -3px 10px rgba(0, 0, 0, 0.1), 
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5),
+                        inset -3px -3px 10px rgba(0, 0, 0, 0.1),
                         inset 3px 3px 10px rgba(255, 255, 255, 0.3);
-            background-image: 
+            background-image:
                 linear-gradient(to bottom, #ffeebb, #fff5c3),
                 repeating-linear-gradient(
                     to bottom,
@@ -91,6 +91,21 @@
             background: #f0e68c;
             border-radius: 3px;
         }
+
+        #home-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 1.5em;
+            text-decoration: none;
+            color: black;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        #home-icon:hover {
+            transform: scale(1.2);
+            color: #0059b3;
+        }
     </style>
 </head>
 <body>
@@ -98,7 +113,7 @@
         <h2>Lila's Perfect Grocery List</h2>
         <textarea id="note-content" placeholder="   "></textarea>
     </div>
-
+    <a id="home-icon" href="https://zzackhh.github.io/interactive2024/level-2/project2.html" target="_blank">🏠</a>
     <script>
         const noteContent = document.getElementById('note-content');
 
