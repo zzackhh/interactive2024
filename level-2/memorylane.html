@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Let's play Doodle Jump but your old creations!</title>
+  <title>Doodle Jump (Enhanced)</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <style>
     html, body {
       height: 100%;
       margin: 0;
-      background: linear-gradient(to bottom, #87CEEB, #4682B4);
+      background: linear-gradient(to bottom, #4facfe, #00f2fe);
+      font-family: 'Arial', sans-serif;
+      color: #333;
     }
 
     body {
@@ -16,22 +18,23 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      font-family: Courier New, monospace;
     }
 
     #header {
-      font-size: 18px;
-      margin: 10px 0;
+      font-size: 22px;
+      margin: 20px 0;
       text-align: center;
-      color: #333;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     canvas {
-      background: white; /* Set canvas background to white */
-      border: 1px solid black;
+      background: white;
+      border: 2px solid #333;
+      border-radius: 10px;
       max-width: 100%;
       height: auto;
-      margin-top: 10px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     }
 
     #controls {
@@ -39,7 +42,7 @@
       justify-content: center;
       width: 100%;
       position: fixed;
-      bottom: 10px;
+      bottom: 20px;
       z-index: 1000;
     }
 
@@ -51,53 +54,62 @@
       border: none;
       margin: 0 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      background-color: #f1c40f;
+      background: linear-gradient(to bottom, #ffda79, #f1c40f);
       color: #2c3e50;
-      touch-action: none;
+      cursor: pointer;
+      transition: transform 0.1s ease, background 0.2s ease;
     }
 
     #controls button:active {
-      background-color: #f39c12;
+      transform: scale(0.95);
+      background: linear-gradient(to bottom, #f39c12, #e67e22);
     }
 
     #game-over {
       display: none;
       position: fixed;
-      top: 50%;
+      top: 40%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 24px;
-      color: red;
-      background: white;
-      padding: 20px;
-      border: 3px solid black;
+      font-size: 28px;
+      color: #ff4d4d;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px 40px;
+      border: 3px solid #e74c3c;
+      border-radius: 12px;
       text-align: center;
       z-index: 1001;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     }
 
     #restart {
       display: none;
       position: fixed;
-      top: 60%;
+      top: 55%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: 18px;
-      padding: 10px 20px;
-      background: green;
+      padding: 12px 24px;
+      background: linear-gradient(to bottom, #2ecc71, #27ae60);
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      z-index: 1002;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease, transform 0.1s ease;
     }
 
     #restart:hover {
-      background: darkgreen;
+      background: linear-gradient(to bottom, #27ae60, #1e8449);
+    }
+
+    #restart:active {
+      transform: scale(0.95);
     }
   </style>
 </head>
 <body>
-<div id="header">Let's play Doodle Jump (Mobile-Friendly)!</div>
+<div id="header">Let's Play Doodle Jump!</div>
 <canvas id="game"></canvas>
 <div id="controls">
   <button id="left">⬅️</button>
@@ -110,7 +122,6 @@
   const context = canvas.getContext('2d');
   const devicePixelRatio = window.devicePixelRatio || 1;
 
-  // Responsive canvas setup
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
