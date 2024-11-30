@@ -10,12 +10,10 @@
       src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
     }
 
-    /* Universal box-sizing fix */
     * {
       box-sizing: border-box;
     }
 
-    /* Light blue moving gradient background */
     body {
       margin: 0;
       padding: 0;
@@ -23,87 +21,78 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(145deg, #cce7ff, #b3d9ff, #e0f2ff);
-      background-size: 400% 400%;
+      background: url('https://www.transparenttextures.com/patterns/old-wall.png');
+      background-color: #f8f5e1;
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
       overflow: hidden;
-      animation: gradientBackground 8s ease infinite;
-    }
-
-    @keyframes gradientBackground {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
     }
 
     .title {
-      font-size: 36px;
+      font-size: 48px;
       font-family: 'Courier New', Courier, monospace;
       font-weight: 600;
-      color: #ffffff;
+      color: #333;
       margin-top: 20px;
       text-align: center;
-      text-shadow: 2px 2px 8px rgba(255, 160, 122, 0.6);
     }
 
     .subtitle {
-      font-size: 16px;
-      font-family: 'Courier New', Courier, monospace;
-      font-weight: 400;
+      font-size: 18px;
+      font-family: 'Georgia', serif;
       color: #555;
       text-align: center;
-      margin-bottom: 20px;
-      padding: 0 15px;
+      margin-bottom: 30px;
     }
 
     .book-container {
       display: flex;
       justify-content: center;
       align-items: stretch;
-      width: 70%;
-      max-width: 800px;
-      min-height: 300px;
-      height: auto;
-      border-radius: 20px;
-      background: #fff;
-      overflow: hidden;
+      width: 90%;
+      max-width: 1000px;
+      height: 500px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #fffef5, #fefdf9);
       position: relative;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      border: 6px solid black;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid #d4c6a6;
+    }
+
+    .spine {
+      width: 4%;
+      background: linear-gradient(to right, #d4c6a6, #d9cdb1);
+      box-shadow: inset -2px 0px 6px rgba(0, 0, 0, 0.2);
     }
 
     .page {
       flex: 1;
-      padding: 20px;
+      padding: 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      background: linear-gradient(145deg, #fffef5, #fefdf9);
       position: relative;
-      background: #fff;
+      overflow: hidden;
     }
 
     .left-page {
-      border-right: 2px solid rgba(0, 0, 0, 0.05);
+      border-right: 1px solid #d4c6a6;
     }
 
     .image-slot {
       width: 80%;
-      max-width: 200px;
-      height: 150px;
+      max-width: 250px;
+      height: 180px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background: rgba(240, 240, 240, 0.8); /* Subtle background for the placeholder */
-      border-radius: 12px; /* Rounded edges */
+      background: rgba(240, 240, 240, 0.9);
+      border-radius: 8px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
       position: relative;
     }
 
@@ -111,7 +100,6 @@
       max-width: 100%;
       max-height: 100%;
       object-fit: cover;
-      border-radius: 12px;
     }
 
     .image-slot input {
@@ -126,37 +114,39 @@
 
     .delete-image {
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: 8px;
+      right: 8px;
       background: rgba(255, 255, 255, 0.8);
       border: none;
       border-radius: 50%;
-      width: 20px; /* Tiny size */
-      height: 20px;
+      width: 24px;
+      height: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px; /* Smaller icon size */
+      font-size: 12px;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
 
     .delete-image:hover {
-      background: rgba(255, 100, 100, 0.8);
+      background: rgba(255, 100, 100, 0.9);
     }
 
     .text-area {
       width: 90%;
-      height: 120px;
-      margin-top: 10px;
-      padding: 8px;
+      height: 180px;
+      margin-top: 20px;
+      padding: 12px;
       font-family: 'Courier New', Courier, monospace;
-      font-size: 12px;
-      line-height: 1.5;
-      overflow-y: auto;
-      background: transparent;
-      border: none;
+      font-size: 16px;
+      line-height: 1.6;
+      background: #fefdf9;
+      border: 1px solid #d4c6a6;
+      border-radius: 8px;
       outline: none;
+      resize: none;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     .emoji-tab {
@@ -195,74 +185,52 @@
       justify-content: center;
       width: 70%;
       max-width: 800px;
-      margin-top: 20px;
+      margin-top: 30px;
     }
 
     .button {
-      padding: 8px 15px;
-      font-size: 12px;
+      padding: 10px 20px;
+      font-size: 14px;
       border: none;
-      background-color: #ff7043;
+      background-color: #d4a658;
       color: white;
       border-radius: 5px;
       cursor: pointer;
-      transition: transform 0.3s ease, background-color 0.3s;
       margin: 0 5px;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
     }
 
     .button:hover {
-      background-color: #e65b50;
+      background-color: #b88f4b;
       transform: scale(1.05);
-    }
-
-    @media (max-width: 768px) {
-      .book-container {
-        width: 90%; 
-        height: 300px; 
-      }
-
-      .image-slot {
-        max-width: 150px; 
-        height: 120px;
-      }
-
-      .controls {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .button {
-        font-size: 10px; 
-        padding: 6px 12px;
-      }
     }
   </style>
 </head>
 <body>
   <div class="title">LILA'S COOKBOOK!</div>
-  <div class="subtitle">
-    Hi Lila, this cookbook and cooking workspace is just for you!
-  </div>
+  <div class="subtitle">Hi Lila, this cookbook and cooking workspace is just for you!</div>
 
   <div class="book-container">
+    <div class="spine"></div>
     <div class="page left-page">
       <div class="image-slot" id="leftImageSlot">
         <input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
         <button class="delete-image" onclick="deleteImage('left')">🗑️</button>
       </div>
-      <textarea class="text-area" id="leftText" oninput="saveData()" placeholder="Start writing here..."></textarea>
+      <textarea class="text-area" id="leftText" placeholder="Start writing here..." oninput="saveData()"></textarea>
     </div>
     <div class="page right-page">
       <div class="image-slot" id="rightImageSlot">
         <input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
         <button class="delete-image" onclick="deleteImage('right')">🗑️</button>
       </div>
-      <textarea class="text-area" id="rightText" oninput="saveData()" placeholder="Start writing here..."></textarea>
+      <textarea class="text-area" id="rightText" placeholder="Start writing here..." oninput="saveData()"></textarea>
     </div>
   </div>
 
   <div class="emoji-tab top-left" onclick="navigateTo('grocery')">🛒</div>
-  <div class="emoji-tab top-right" onclick="navigateTo('memory lane')">📖</div>
+<div class="emoji-tab top-right" onclick="navigateTo('memory lane')">📖</div>
   <div class="emoji-tab bottom-left" onclick="navigateTo('restaurants')">🍴</div>
   <div class="emoji-tab bottom-right" onclick="navigateTo('ideas')">💡</div>
 
@@ -273,9 +241,7 @@
 
   <script>
     let currentPage = 0;
-    const pages = JSON.parse(localStorage.getItem('pages')) || [
-      { left: { img: '', text: '' }, right: { img: '', text: '' } }
-    ];
+    const pages = JSON.parse(localStorage.getItem('pages')) || [{ left: { img: '', text: '' }, right: { img: '', text: '' } }];
 
     function handleImageUpload(event, side) {
       const file = event.target.files[0];
@@ -295,18 +261,19 @@
 
     function deleteImage(side) {
       const slot = document.getElementById(`${side}ImageSlot`);
-      pages[currentPage][side].img = ''; 
-      saveData();
+      pages[currentPage][side].img = '';
       slot.innerHTML = `
         <input type="file" accept="image/*" onchange="handleImageUpload(event, '${side}')" />
         <button class="delete-image" onclick="deleteImage('${side}')">🗑️</button>
       `;
+      saveData();
     }
 
     function loadPage() {
       const page = pages[currentPage];
       const leftSlot = document.getElementById('leftImageSlot');
       const rightSlot = document.getElementById('rightImageSlot');
+
       leftSlot.innerHTML = page.left.img
         ? `<img src="${page.left.img}" /><button class="delete-image" onclick="deleteImage('left')">🗑️</button>`
         : `<input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
@@ -353,18 +320,22 @@
       currentPage++;
       loadPage();
     }
+    
+  function navigateTo(tab) {
+    if (tab === 'grocery') {
+      window.location.href = 'grocery.html';
+    } else if (tab === 'memory lane') {
+      window.location.href = 'memorylane.html';
+    } else if (tab === 'restaurants') {
+      alert('Navigating to restaurants...');
+    } else if (tab === 'ideas') {
+      alert('Navigating to ideas...');
+    }
 
-    function navigateTo(tab) {
-      if (tab === 'grocery') {
-        window.location.href = 'grocery.html';
-      } else if (tab === 'memory lane') {
-        window.location.href = 'memorylane.html';
-      } else {
-        alert(`Navigating to ${tab}...`);
-      }
     }
 
     loadPage();
+
   </script>
 </body>
 </html>
