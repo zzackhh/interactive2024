@@ -189,12 +189,37 @@
 
     @media (max-width: 768px) {
       .book-container {
-        flex-direction: column;
+        flex-direction: column; /* Stack pages vertically */
+        width: 95%;
         height: auto;
+        margin: 10px 0;
       }
 
       .page {
         border-right: none;
+        padding: 10px;
+      }
+
+      .image-slot {
+        width: 90%;
+        height: 200px;
+      }
+
+      .text-area {
+        width: 100%;
+        height: 120px;
+        font-size: 12px;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .button {
+        width: 80%;
+        font-size: 16px;
       }
     }
   </style>
