@@ -230,7 +230,7 @@
   </div>
 
   <div class="emoji-tab top-left" onclick="navigateTo('grocery')">🛒</div>
-<div class="emoji-tab top-right" onclick="navigateTo('memory lane')">📖</div>
+  <div class="emoji-tab top-right" onclick="navigateTo('memory lane')">📖</div>
   <div class="emoji-tab bottom-left" onclick="navigateTo('restaurants')">🍴</div>
   <div class="emoji-tab bottom-right" onclick="navigateTo('ideas')">💡</div>
 
@@ -321,21 +321,28 @@
       loadPage();
     }
     
-  function navigateTo(tab) {
-    if (tab === 'grocery') {
-      window.location.href = 'grocery.html';
-    } else if (tab === 'memory lane') {
-      window.location.href = 'memorylane.html';
-    } else if (tab === 'restaurants') {
-      window.location.href = 'restaurants.html';
-    } else if (tab === 'ideas') {
-      alert('Navigating to ideas...');
-    }
+    function navigateTo(tab) {
+      let url = '';
 
+      if (tab === 'grocery') {
+        url = 'grocery.html';
+      } else if (tab === 'memory lane') {
+        url = 'memorylane.html';
+      } else if (tab === 'restaurants') {
+        url = 'restaurants.html';
+      } else if (tab === 'ideas') {
+        url = 'ideas.html';
+      }
+
+      if (url) {
+        console.log(`Navigating to: ${url}`);
+        window.location.href = url;
+      } else {
+        console.error(`No URL defined for tab: ${tab}`);
+      }
     }
 
     loadPage();
-
   </script>
 </body>
 </html>
