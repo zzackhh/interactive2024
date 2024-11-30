@@ -230,7 +230,6 @@
     <div class="modal-content">
       <h3 id="modal-title">Restaurant Name</h3>
       <p id="modal-location">Location: </p>
-      <p id="modal-rating">Rating: </p>
       <p><a href="#" target="_blank" id="modal-link">Read Review</a></p>
       <button onclick="closeModal()">Close</button>
     </div>
@@ -241,7 +240,6 @@
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modal-title');
     const modalLocation = document.getElementById('modal-location');
-    const modalRating = document.getElementById('modal-rating');
     const modalLink = document.getElementById('modal-link');
     const pages = document.querySelector('.pages');
     const cover = document.querySelector('.cover');
@@ -271,7 +269,6 @@
       const restaurant = restaurants[index];
       modalTitle.textContent = restaurant.name;
       modalLocation.textContent = `Location: ${restaurant.location}`;
-      modalRating.textContent = `Rating: ${restaurant.rating}`;
       modalLink.href = restaurant.link;
       modalLink.textContent = `Read Review`;
       modal.classList.add('active');
@@ -289,10 +286,9 @@
     document.getElementById('add-restaurant-btn').addEventListener('click', () => {
       const name = prompt('Enter restaurant name:');
       const location = prompt('Enter restaurant location:');
-      const rating = prompt('Enter restaurant rating:');
       const link = prompt('Enter restaurant review link:');
-      if (name && location && rating && link) {
-        restaurants.push({ name, location, rating, link });
+      if (name && location && link) {
+        restaurants.push({ name, location, link });
         renderRestaurants();
       }
     });
