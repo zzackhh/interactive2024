@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lila's Doodle Jump!</title>
+  <title>Let's play Lila's Doodle Jump!</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <style>
@@ -11,39 +11,44 @@
       background: linear-gradient(to bottom, #4facfe, #00f2fe);
       font-family: 'Courier New', Courier, monospace;
       color: #333;
-    }
-
-    body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
     }
 
     #header {
       font-size: 22px;
-      margin: 20px 0;
+      font-family: cursive;
+      margin-bottom: 10px;
       text-align: center;
       color: #fff;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
+    #subhead {
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #eee;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
     canvas {
       background: white;
       border: 2px solid #333;
-      border-radius: 10px;
+      border-radius: 50%;
       max-width: 100%;
       height: auto;
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      aspect-ratio: 1;
     }
 
     #controls {
       display: flex;
-      justify-content: center;
-      width: 100%;
-      position: fixed;
-      bottom: 20px;
-      z-index: 1000;
+      justify-content: space-around;
+      width: 200px;
+      margin-top: 20px;
     }
 
     #controls button {
@@ -52,7 +57,6 @@
       font-size: 24px;
       border-radius: 50%;
       border: none;
-      margin: 0 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       background: linear-gradient(to bottom, #ffda79, #f1c40f);
       color: #2c3e50;
@@ -106,192 +110,185 @@
     #restart:active {
       transform: scale(0.95);
     }
-
-    #home-icon {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      font-size: 1.5em;
-      text-decoration: none;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s ease, color 0.3s ease;
-    }
-
-    #home-icon:hover {
-      transform: scale(1.2);
-      color: #f39c12;
-    }
   </style>
 </head>
 <body>
-<div id="header">Let's Play Doodle Jump!</div>
-<div id="body">Let's take a trip down memory lane, revisiting some of your old creations.</div>
+  <div id="header">Let's play Lila's Doodle Jump!</div>
+  <div id="subhead">Let's take a trip down memory lane, revisiting some of your old creations.</div>
+  <canvas id="game"></canvas>
+  <div id="controls">
+    <button id="left">⬅️</button>
+    <button id="right">➡️</button>
+  </div>
+  <div id="game-over">Game Over</div>
+  <button id="restart">Play Again</button>
+  <script>
+    const canvas = document.getElementById('game');
+    const context = canvas.getContext('2d');
+    const devicePixelRatio = window.devicePixelRatio || 1;
 
-<canvas id="game"></canvas>
-<div id="controls">
-  <button id="left">⬅️</button>
-  <button id="right">➡️</button>
-</div>
-<div id="game-over">Game Over</div>
-<button id="restart">Play Again</button>
-<a id="home-icon" href="https://zzackhh.github.io/interactive2024/level-2/project2.html" target="_blank">🏠</a>
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
 
-<script>
-  const canvas = document.getElementById('game');
-  const context = canvas.getContext('2d');
-  const devicePixelRatio = window.devicePixelRatio || 1;
+    const logicalWidth = 400;
+    const logicalHeight = Math.min(700, Math.floor(screenHeight * 0.85));
+    canvas.width = logicalWidth * devicePixelRatio;
+    canvas.height = logicalHeight * devicePixelRatio;
+    canvas.style.width = `${logicalWidth}px`;
+    canvas.style.height = `${logicalHeight}px`;
 
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
+    context.scale(devicePixelRatio, devicePixelRatio);
 
-  const logicalWidth = 400;
-  const logicalHeight = Math.min(700, Math.floor(screenHeight * 0.85));
-  canvas.width = logicalWidth * devicePixelRatio;
-  canvas.height = logicalHeight * devicePixelRatio;
-  canvas.style.width = `${logicalWidth}px`;
-  canvas.style.height = `${logicalHeight}px`;
-
-  context.scale(devicePixelRatio, devicePixelRatio);
-
-  const platformImages = [
+    const platformImages = [
     'https://i.pinimg.com/474x/5e/a4/dd/5ea4ddfe95e32a58587a401be731c9d3.jpg',
-    // Add more platform image URLs here...
-  ];
+    'https://i.pinimg.com/474x/60/26/9e/60269e0a245e816ac9e26271fbcb360e.jpg',
+    'https://i.pinimg.com/474x/b0/90/51/b09051d3e5e4afbed6cf9c694d201127.jpg',
+    'https://i.pinimg.com/474x/c8/02/16/c80216a5a17ff11e493c940d68239657.jpg',
+    'https://i.pinimg.com/474x/f1/bb/cc/f1bbcc7da17b6ceca3b1c8d007f13941.jpg',
+    'https://i.pinimg.com/474x/74/e0/82/74e082a4016ff78e7ed4f89b2a687b06.jpg',
+    'https://i.pinimg.com/474x/d4/24/52/d42452ebfe6145d1c4a615436560695d.jpg',
+    'https://i.pinimg.com/474x/e4/be/7c/e4be7c2f9083d14744c7292ef633e0c3.jpg',
+    'https://i.pinimg.com/474x/2d/e0/84/2de084faaf75df3f30b26900006b0483.jpg',
+    'https://i.pinimg.com/474x/b5/cb/96/b5cb96ef892ebc1c610198b8d9fe87be.jpg',
+    'https://i.pinimg.com/474x/1f/0b/e2/1f0be2626d82a3d77d2d670d607511de.jpg',
+    'https://i.pinimg.com/474x/e2/6b/4d/e26b4d8f34aa026129f62250b0fa4ca1.jpg',
+    'https://i.pinimg.com/474x/d3/f0/00/d3f000c008d448c558c1740196e61b3d.jpg',
+      
+    ];
 
-  const platformImageElements = platformImages.map(src => {
-    const img = new Image();
-    img.src = src;
-    return img;
-  });
+    const platformImageElements = platformImages.map(src => {
+      const img = new Image();
+      img.src = src;
+      return img;
+    });
 
-  const platformWidth = logicalWidth / 5;
-  const doodleWidth = logicalWidth / 8;
-  const doodleHeight = logicalHeight / 10;
+    const platformWidth = logicalWidth / 5;
+    const doodleWidth = logicalWidth / 8;
+    const doodleHeight = logicalHeight / 10;
 
-  const gravity = 0.35;
-  const bounceVelocity = -12;
+    const gravity = 0.35;
+    const bounceVelocity = -12;
 
-  let platforms, doodle, gameOver, imageIndex;
+    let platforms, doodle, gameOver, imageIndex;
 
-  function resetGame() {
-    platforms = [{
-      x: logicalWidth / 2 - platformWidth / 2,
-      y: logicalHeight - 80,
-      imgIndex: 0
-    }];
-    doodle = {
-      width: doodleWidth,
-      height: doodleHeight,
-      x: logicalWidth / 2 - doodleWidth / 2,
-      y: platforms[0].y - doodleHeight,
-      dx: 0,
-      dy: 0
-    };
-    gameOver = false;
-    imageIndex = 0;
-    document.getElementById('game-over').style.display = 'none';
-    document.getElementById('restart').style.display = 'none';
-  }
-
-  function generatePlatforms() {
-    while (platforms.length < 10) {
-      const lastPlatform = platforms[platforms.length - 1];
-      const newY = lastPlatform.y - platformWidth - Math.random() * 40;
-      platforms.push({
-        x: Math.random() * (logicalWidth - platformWidth),
-        y: newY,
-        imgIndex: imageIndex % platformImageElements.length
-      });
-      imageIndex++;
+    function resetGame() {
+      platforms = [{
+        x: logicalWidth / 2 - platformWidth / 2,
+        y: logicalHeight - 80,
+        imgIndex: 0
+      }];
+      doodle = {
+        width: doodleWidth,
+        height: doodleHeight,
+        x: logicalWidth / 2 - doodleWidth / 2,
+        y: platforms[0].y - doodleHeight,
+        dx: 0,
+        dy: 0
+      };
+      gameOver = false;
+      imageIndex = 0;
+      document.getElementById('game-over').style.display = 'none';
+      document.getElementById('restart').style.display = 'none';
     }
-  }
 
-  function loop() {
-    if (gameOver) return;
-    requestAnimationFrame(loop);
-    context.clearRect(0, 0, logicalWidth, logicalHeight);
-    doodle.dy += gravity;
-
-    platforms.forEach(platform => {
-      const img = platformImageElements[platform.imgIndex];
-      const scale = platformWidth / img.width;
-      const platformHeight = img.height * scale;
-
-      if (
-        doodle.dy > 0 &&
-        doodle.x + doodle.width > platform.x &&
-        doodle.x < platform.x + platformWidth &&
-        doodle.y + doodle.height >= platform.y &&
-        doodle.y + doodle.height <= platform.y + platformHeight
-      ) {
-        doodle.dy = bounceVelocity;
-        doodle.y = platform.y - doodle.height;
+    function generatePlatforms() {
+      while (platforms.length < 10) {
+        const lastPlatform = platforms[platforms.length - 1];
+        const newY = lastPlatform.y - platformWidth - Math.random() * 40;
+        platforms.push({
+          x: Math.random() * (logicalWidth - platformWidth),
+          y: newY,
+          imgIndex: imageIndex % platformImageElements.length
+        });
+        imageIndex++;
       }
-    });
-
-    doodle.y += doodle.dy;
-    doodle.x += doodle.dx;
-
-    if (doodle.y > logicalHeight) {
-      endGame();
-      return;
     }
 
-    if (doodle.x + doodle.width < 0) doodle.x = logicalWidth;
-    if (doodle.x > logicalWidth) doodle.x = -doodle.width;
+    function loop() {
+      if (gameOver) return;
+      requestAnimationFrame(loop);
+      context.clearRect(0, 0, logicalWidth, logicalHeight);
+      doodle.dy += gravity;
 
-    if (doodle.y < logicalHeight / 2 && doodle.dy < 0) {
-      const scrollAmount = -doodle.dy;
-      platforms.forEach(platform => (platform.y += scrollAmount));
-      doodle.y += scrollAmount;
+      platforms.forEach(platform => {
+        const img = platformImageElements[platform.imgIndex];
+        const scale = platformWidth / img.width;
+        const platformHeight = img.height * scale;
+
+        if (
+          doodle.dy > 0 &&
+          doodle.x + doodle.width > platform.x &&
+          doodle.x < platform.x + platformWidth &&
+          doodle.y + doodle.height >= platform.y &&
+          doodle.y + doodle.height <= platform.y + platformHeight
+        ) {
+          doodle.dy = bounceVelocity;
+          doodle.y = platform.y - doodle.height;
+        }
+      });
+
+      doodle.y += doodle.dy;
+      doodle.x += doodle.dx;
+
+      if (doodle.y > logicalHeight) {
+        endGame();
+        return;
+      }
+
+      if (doodle.x + doodle.width < 0) doodle.x = logicalWidth;
+      if (doodle.x > logicalWidth) doodle.x = -doodle.width;
+
+      if (doodle.y < logicalHeight / 2 && doodle.dy < 0) {
+        const scrollAmount = -doodle.dy;
+        platforms.forEach(platform => (platform.y += scrollAmount));
+        doodle.y += scrollAmount;
+      }
+
+      platforms = platforms.filter(platform => platform.y < logicalHeight);
+
+      generatePlatforms();
+
+      platforms.forEach(platform => {
+        const img = platformImageElements[platform.imgIndex];
+        if (!img.complete) return;
+        const scale = platformWidth / img.width;
+        context.drawImage(img, platform.x, platform.y, platformWidth, img.height * scale);
+      });
+
+      context.fillStyle = 'yellow';
+      context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
     }
 
-    platforms = platforms.filter(platform => platform.y < logicalHeight);
+    function endGame() {
+      gameOver = true;
+      document.getElementById('game-over').style.display = 'block';
+      document.getElementById('restart').style.display = 'block';
+    }
 
-    generatePlatforms();
-
-    platforms.forEach(platform => {
-      const img = platformImageElements[platform.imgIndex];
-      if (!img.complete) return;
-      const scale = platformWidth / img.width;
-      context.drawImage(img, platform.x, platform.y, platformWidth, img.height * scale);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') doodle.dx = -4;
+      if (e.key === 'ArrowRight') doodle.dx = 4;
     });
 
-    context.fillStyle = 'yellow';
-    context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
-  }
+    document.addEventListener('keyup', () => (doodle.dx = 0));
 
-  function endGame() {
-    gameOver = true;
-    document.getElementById('game-over').style.display = 'block';
-    document.getElementById('restart').style.display = 'block';
-  }
+    if ('ontouchstart' in window) {
+      document.getElementById('left').addEventListener('touchstart', () => doodle.dx = -4);
+      document.getElementById('right').addEventListener('touchstart', () => doodle.dx = 4);
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft') doodle.dx = -4;
-    if (e.key === 'ArrowRight') doodle.dx = 4;
-  });
+      document.getElementById('left').addEventListener('touchend', () => doodle.dx = 0);
+      document.getElementById('right').addEventListener('touchend', () => doodle.dx = 0);
+    }
 
-  document.addEventListener('keyup', () => (doodle.dx = 0));
+    document.getElementById('restart').addEventListener('click', () => {
+      resetGame();
+      loop();
+    });
 
-  if ('ontouchstart' in window) {
-    document.getElementById('left').addEventListener('touchstart', () => doodle.dx = -4);
-    document.getElementById('right').addEventListener('touchstart', () => doodle.dx = 4);
-
-    document.getElementById('left').addEventListener('touchend', () => doodle.dx = 0);
-    document.getElementById('right').addEventListener('touchend', () => doodle.dx = 0);
-  }
-
-  document.getElementById('restart').addEventListener('click', () => {
-    resetGame();
-    loop();
-  });
-
-  Promise.all(platformImageElements.map(img => new Promise(resolve => (img.onload = resolve)))).then(() => {
-    resetGame();
-    loop();
-  });
-</script>
+    Promise.all(platformImageElements.map(img => new Promise(resolve => (img.onload = resolve)))).then(() => {
+      resetGame();
+      loop();
+    });
+  </script>
 </body>
 </html>
