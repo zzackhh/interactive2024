@@ -1,355 +1,194 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Let's play Lila's Doodle Jump!</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIP @lilafood123</title>
   <style>
-    /* General Reset */
-    html, body {
-      height: 100%;
+    body {
       margin: 0;
-      background: linear-gradient(to bottom, #4facfe, #00f2fe);
-      font-family: 'Courier New', Courier, monospace;
-      color: #333;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(270deg, #88cfff, #0059b3);
+      background-size: 400% 400%;
+      animation: gradientAnimation 8s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .flipbook {
+      position: relative;
+      width: 340px;
+      height: 500px;
+      background: #fff;
+      border: 10px solid #ffe4c4; /* Book border */
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .flipbook img {
+      width: 80%; /* Image inside book */
+      height: auto;
+      max-height: 80%;
+      border: 5px solid #ffb3b3; /* Border around image */
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .flipbook .cover-page {
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      background: #ffe4c4;
+      color: #ff6f61;
+      text-align: center;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      box-sizing: border-box;
     }
 
-    /* Title Header */
-    #header {
-      font-size: 22px;
-      font-family: cursive;
+    .cover-page h1 {
+      font-size: 3em; /* Large text */
       margin-bottom: 10px;
-      text-align: center;
-      color: #fff;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
-    /* Subtitle Text */
-    #subhead {
-      font-size: 16px;
-      margin-bottom: 20px;
-      text-align: center;
-      color: #eee;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    .cover-page p {
+      font-size: 1.2em; /* Smaller subtext */
+      margin-top: 0;
     }
 
-    /* Game Canvas */
-    canvas {
-      background: white;
-      border: 2px solid #333;
-      border-radius: 50%;
-      max-width: 100%;
-      height: auto;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-      aspect-ratio: 1; /* Ensures the canvas remains a perfect circle */
-    }
-
-    /* Controls Section */
-    #controls {
-      display: flex;
-      justify-content: space-around;
-      width: 200px;
-      margin-top: 20px;
-    }
-
-    /* Control Buttons */
-    #controls button {
-      width: 60px;
-      height: 60px;
-      font-size: 24px;
-      border-radius: 50%;
-      border: none;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      background: linear-gradient(to bottom, #ffda79, #f1c40f);
-      color: #2c3e50;
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2em;
+      color: rgba(0, 0, 0, 0.5);
       cursor: pointer;
-      transition: transform 0.1s ease, background 0.2s ease;
+      user-select: none;
+      z-index: 10;
     }
 
-    /* Control Button Active State */
-    #controls button:active {
-      transform: scale(0.95);
-      background: linear-gradient(to bottom, #f39c12, #e67e22);
+    .nav.left {
+      left: 10px; /* Move left arrow inside */
     }
 
-    /* Game Over Message */
-    #game-over {
-      display: none;
+    .nav.right {
+      right: 10px; /* Move right arrow inside */
+    }
+
+    .nav:hover {
+      color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Home icon styling */
+    #home-icon {
       position: fixed;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 28px;
+      bottom: 10px;
+      right: 10px;
+      font-size: 1.5em;
+      color: #ff6f61;
+      text-decoration: none;
+      z-index: 1000;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    #home-icon:hover {
+      transform: scale(1.2);
       color: #ff4d4d;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 20px 40px;
-      border: 3px solid #e74c3c;
-      border-radius: 12px;
-      text-align: center;
-      z-index: 1001;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Restart Button */
-    #restart {
-      display: none;
-      position: fixed;
-      top: 55%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 18px;
-      padding: 12px 24px;
-      background: linear-gradient(to bottom, #2ecc71, #27ae60);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s ease, transform 0.1s ease;
-    }
-
-    /* Restart Button Hover State */
-    #restart:hover {
-      background: linear-gradient(to bottom, #27ae60, #1e8449);
-    }
-
-    /* Restart Button Active State */
-    #restart:active {
-      transform: scale(0.95);
-    }
-
-    /* Home Button */
-    #home {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(to bottom, #ffffff, #f0f0f0);
-      border: 2px solid #ccc;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    #home img {
-      width: 40px;
-      height: 40px;
-    }
-
-    /* Home Button Active State */
-    #home:active {
-      transform: scale(0.95);
-      background: linear-gradient(to bottom, #e0e0e0, #d0d0d0);
     }
   </style>
 </head>
 <body>
-  <!-- Header and Subtitle -->
-  <div id="header">Let's play Lila's Doodle Jump!</div>
-  <div id="subhead">Let's take a trip down memory lane, revisiting some of your old creations.</div>
-  
-  <!-- Game Canvas -->
-  <canvas id="game"></canvas>
-  
-  <!-- Controls -->
-  <div id="controls">
-    <button id="left">⬅️</button>
-    <button id="right">➡️</button>
+  <!-- Flipbook -->
+  <div class="flipbook">
+    <div class="cover-page">
+      <h1>RIP @lilafood123</h1> <!-- Large text on the cover -->
+      <p>At the start of the pandemic, Lila began her food Instagram. Unfortunately, she was locked out of her account. While she continues her food creations, we'll take this moment to take a trip down memory lane and remember @lilafood123.</p> <!-- Subtext -->
+    </div>
+    <!-- Navigation arrows inside the book -->
+    <div class="nav left" onclick="prevPage()">❮</div>
+    <img id="flipbookImage" src="" alt="Flipbook Page">
+    <div class="nav right" onclick="nextPage()">❯</div>
   </div>
 
-  <!-- Game Over Message -->
-  <div id="game-over">Game Over</div>
-  
-  <!-- Restart Button -->
-  <button id="restart">Play Again</button>
-  
-  <!-- Home Button -->
-  <div id="home">
-    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home">
-  </div>
-  
-  <!-- JavaScript Section -->
+  <!-- House icon (home icon) -->
+  <a id="home-icon" href="https://zzackhh.github.io/interactive2024/level-2/project2.html" target="_blank">🏠</a>
+
   <script>
-    const canvas = document.getElementById('game');
-    const context = canvas.getContext('2d');
-    const devicePixelRatio = window.devicePixelRatio || 1;
-
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-
-    const logicalWidth = 400;
-    const logicalHeight = Math.min(700, Math.floor(screenHeight * 0.85));
-    canvas.width = logicalWidth * devicePixelRatio;
-    canvas.height = logicalHeight * devicePixelRatio;
-    canvas.style.width = `${logicalWidth}px`;
-    canvas.style.height = `${logicalHeight}px`;
-
-    context.scale(devicePixelRatio, devicePixelRatio);
-
-    const platformImages = [
-    'https://i.pinimg.com/474x/5e/a4/dd/5ea4ddfe95e32a58587a401be731c9d3.jpg',
-    'https://i.pinimg.com/474x/60/26/9e/60269e0a245e816ac9e26271fbcb360e.jpg',
-    'https://i.pinimg.com/474x/b0/90/51/b09051d3e5e4afbed6cf9c694d201127.jpg',
-    'https://i.pinimg.com/474x/c8/02/16/c80216a5a17ff11e493c940d68239657.jpg',
-    'https://i.pinimg.com/474x/f1/bb/cc/f1bbcc7da17b6ceca3b1c8d007f13941.jpg',
-    'https://i.pinimg.com/474x/74/e0/82/74e082a4016ff78e7ed4f89b2a687b06.jpg',
-    'https://i.pinimg.com/474x/d4/24/52/d42452ebfe6145d1c4a615436560695d.jpg',
-    'https://i.pinimg.com/474x/e4/be/7c/e4be7c2f9083d14744c7292ef633e0c3.jpg',
-    'https://i.pinimg.com/474x/2d/e0/84/2de084faaf75df3f30b26900006b0483.jpg',
-    'https://i.pinimg.com/474x/b5/cb/96/b5cb96ef892ebc1c610198b8d9fe87be.jpg',
-    'https://i.pinimg.com/474x/1f/0b/e2/1f0be2626d82a3d77d2d670d607511de.jpg',
-    'https://i.pinimg.com/474x/e2/6b/4d/e26b4d8f34aa026129f62250b0fa4ca1.jpg',
-    'https://i.pinimg.com/474x/d3/f0/00/d3f000c008d448c558c1740196e61b3d.jpg',
-
+    const images = [
+      'https://i.pinimg.com/474x/5e/a4/dd/5ea4ddfe95e32a58587a401be731c9d3.jpg',
+      'https://i.pinimg.com/474x/60/26/9e/60269e0a245e816ac9e26271fbcb360e.jpg',
+      'https://i.pinimg.com/474x/b0/90/51/b09051d3e5e4afbed6cf9c694d201127.jpg',
+      'https://i.pinimg.com/474x/c8/02/16/c80216a5a17ff11e493c940d68239657.jpg',
+      'https://i.pinimg.com/474x/f1/bb/cc/f1bbcc7da17b6ceca3b1c8d007f13941.jpg',
+      'https://i.pinimg.com/474x/74/e0/82/74e082a4016ff78e7ed4f89b2a687b06.jpg',
+      'https://i.pinimg.com/474x/d4/24/52/d42452ebfe6145d1c4a615436560695d.jpg',
+      'https://i.pinimg.com/474x/e4/be/7c/e4be7c2f9083d14744c7292ef633e0c3.jpg',
+      'https://i.pinimg.com/474x/2d/e0/84/2de084faaf75df3f30b26900006b0483.jpg',
+      'https://i.pinimg.com/474x/b5/cb/96/b5cb96ef892ebc1c610198b8d9fe87be.jpg',
+      'https://i.pinimg.com/474x/1f/0b/e2/1f0be2626d82a3d77d2d670d607511de.jpg',
+      'https://i.pinimg.com/474x/e2/6b/4d/e26b4d8f34aa026129f62250b0fa4ca1.jpg',
+      'https://i.pinimg.com/474x/d3/f0/00/d3f000c008d448c558c1740196e61b3d.jpg',
     ];
 
-    const platformImageElements = platformImages.map(src => {
-      const img = new Image();
-      img.src = src;
-      return img;
-    });
+    let currentIndex = 0;
+    const flipbook = document.querySelector('.flipbook');
+    const flipbookImage = document.getElementById('flipbookImage');
+    const coverPage = document.querySelector('.cover-page');
 
-    const platformWidth = logicalWidth / 5;
-    const doodleWidth = logicalWidth / 8;
-    const doodleHeight = logicalHeight / 10;
-
-    const gravity = 0.35;
-    const bounceVelocity = -12;
-
-    let platforms, doodle, gameOver, imageIndex;
-
-    function resetGame() {
-      platforms = [{
-        x: logicalWidth / 2 - platformWidth / 2,
-        y: logicalHeight - 80,
-        imgIndex: 0
-      }];
-      doodle = {
-        width: doodleWidth,
-        height: doodleHeight,
-        x: logicalWidth / 2 - doodleWidth / 2,
-        y: platforms[0].y - doodleHeight,
-        dx: 0,
-        dy: 0
-      };
-      gameOver = false;
-      imageIndex = 0;
-      document.getElementById('game-over').style.display = 'none';
-      document.getElementById('restart').style.display = 'none';
+    function enterFlipbook() {
+      updateFlipbook();
     }
 
-    function generatePlatforms() {
-      while (platforms.length < 10) {
-        const lastPlatform = platforms[platforms.length - 1];
-        const newY = lastPlatform.y - platformWidth - Math.random() * 40;
-        platforms.push({
-          x: Math.random() * (logicalWidth - platformWidth),
-          y: newY,
-          imgIndex: imageIndex % platformImageElements.length
-        });
-        imageIndex++;
+    function updateFlipbook() {
+      if (currentIndex === 0) {
+        flipbookImage.style.display = 'none'; // Hide the image on the cover page
+        coverPage.style.display = 'flex'; // Show cover page
+      } else {
+        flipbookImage.style.display = 'block'; // Show image
+        coverPage.style.display = 'none'; // Hide cover page
+        flipbookImage.src = images[currentIndex - 1]; // Update image
       }
     }
 
-    function loop() {
-      if (gameOver) return;
-      requestAnimationFrame(loop);
-      context.clearRect(0, 0, logicalWidth, logicalHeight);
-      doodle.dy += gravity;
+    function prevPage() {
+      if (currentIndex > 0) {
+        currentIndex--;
+      }
+      updateFlipbook();
+    }
 
-      platforms.forEach(platform => {
-        const img = platformImageElements[platform.imgIndex];
-        const scale = platformWidth / img.width;
-        const platformHeight = img.height * scale;
+    function nextPage() {
+      if (currentIndex < images.length) {
+        currentIndex++;
+      }
+      updateFlipbook();
+    }
 
-        if (
-          doodle.dy > 0 &&
-          doodle.x + doodle.width > platform.x &&
-          doodle.x < platform.x + platformWidth &&
-          doodle.y + doodle.height >= platform.y &&
-          doodle.y + doodle.height <= platform.y + platformHeight
-        ) {
-          doodle.dy = bounceVelocity;
-          doodle.y = platform.y - doodle.height;
-        }
+    function preloadImages() {
+      images.forEach(src => {
+        const img = new Image();
+        img.src = src;
       });
-
-      doodle.y += doodle.dy;
-      doodle.x += doodle.dx;
-
-      if (doodle.y > logicalHeight) {
-        endGame();
-        return;
-      }
-
-      if (doodle.x + doodle.width < 0) doodle.x = logicalWidth;
-      if (doodle.x > logicalWidth) doodle.x = -doodle.width;
-
-      if (doodle.y < logicalHeight / 2 && doodle.dy < 0) {
-        const scrollAmount = -doodle.dy;
-        platforms.forEach(platform => (platform.y += scrollAmount));
-        doodle.y += scrollAmount;
-      }
-
-      platforms = platforms.filter(platform => platform.y < logicalHeight);
-
-      generatePlatforms();
-
-      platforms.forEach(platform => {
-        const img = platformImageElements[platform.imgIndex];
-        if (!img.complete) return;
-        const scale = platformWidth / img.width;
-        context.drawImage(img, platform.x, platform.y, platformWidth, img.height * scale);
-      });
-
-      context.fillStyle = 'yellow';
-      context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
     }
 
-    function endGame() {
-      gameOver = true;
-      document.getElementById('game-over').style.display = 'block';
-      document.getElementById('restart').style.display = 'block';
-    }
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft') doodle.dx = -4;
-      if (e.key === 'ArrowRight') doodle.dx = 4;
-    });
-
-    document.addEventListener('keyup', () => (doodle.dx = 0));
-
-    if ('ontouchstart' in window) {
-      document.getElementById('left').addEventListener('touchstart', () => doodle.dx = -4);
-      document.getElementById('right').addEventListener('touchstart', () => doodle.dx = 4);
-
-      document.getElementById('left').addEventListener('touchend', () => doodle.dx = 0);
-      document.getElementById('right').addEventListener('touchend', () => doodle.dx = 0);
-    }
-
-    document.getElementById('restart').addEventListener('click', () => {
-      resetGame();
-      loop();
-    });
-
-    Promise.all(platformImageElements.map(img => new Promise(resolve => (img.onload = resolve)))).then(() => {
-      resetGame();
-      loop();
-    });
-
-    const homeButton = document.getElementById('home');
-    homeButton.addEventListener('click', () => {
-      window.location.href = "index.html"; // Replace with the desired URL
-    });
+    preloadImages();
+    enterFlipbook(); // Initial call to display the flipbook correctly
   </script>
 </body>
 </html>
