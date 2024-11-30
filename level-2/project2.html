@@ -10,6 +10,11 @@
       src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
     }
 
+    /* Universal box-sizing fix */
+    * {
+      box-sizing: border-box;
+    }
+
     /* Light blue moving gradient background */
     body {
       margin: 0;
@@ -64,7 +69,8 @@
       align-items: stretch;
       width: 70%;
       max-width: 800px;
-      height: 400px;
+      min-height: 300px;
+      height: auto;
       border-radius: 20px;
       background: #fff;
       overflow: hidden;
@@ -96,9 +102,8 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background: #fff;
-      border: 2px dashed #ccc;
-      border-radius: 12px;
+      background: rgba(240, 240, 240, 0.8); /* Subtle background for the placeholder */
+      border-radius: 12px; /* Rounded edges */
       position: relative;
     }
 
@@ -106,6 +111,7 @@
       max-width: 100%;
       max-height: 100%;
       object-fit: cover;
+      border-radius: 12px;
     }
 
     .image-slot input {
@@ -116,6 +122,27 @@
       height: 100%;
       opacity: 0;
       cursor: pointer;
+    }
+
+    .delete-image {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: 50%;
+      width: 20px; /* Tiny size */
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px; /* Smaller icon size */
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .delete-image:hover {
+      background: rgba(255, 100, 100, 0.8);
     }
 
     .text-area {
@@ -190,18 +217,13 @@
 
     @media (max-width: 768px) {
       .book-container {
-        width: 90%; /* Smaller width for mobile */
-        height: 300px; /* Adjusted height */
+        width: 90%; 
+        height: 300px; 
       }
 
       .image-slot {
-        max-width: 150px; /* Smaller image slots */
+        max-width: 150px; 
         height: 120px;
-      }
-
-      .text-area {
-        font-size: 10px; /* Adjust text size */
-        height: 100px; /* Smaller text area */
       }
 
       .controls {
@@ -210,7 +232,7 @@
       }
 
       .button {
-        font-size: 10px; /* Adjust button font size */
+        font-size: 10px; 
         padding: 6px 12px;
       }
     }
@@ -226,12 +248,14 @@
     <div class="page left-page">
       <div class="image-slot" id="leftImageSlot">
         <input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
+        <button class="delete-image" onclick="deleteImage('left')">🗑️</button>
       </div>
       <textarea class="text-area" id="leftText" oninput="saveData()" placeholder="Start writing here..."></textarea>
     </div>
     <div class="page right-page">
       <div class="image-slot" id="rightImageSlot">
         <input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
+        <button class="delete-image" onclick="deleteImage('right')">🗑️</button>
       </div>
       <textarea class="text-area" id="rightText" oninput="saveData()" placeholder="Start writing here..."></textarea>
     </div>
@@ -258,7 +282,10 @@
       if (file) {
         const reader = new FileReader();
         reader.onload = () => {
-          document.getElementById(`${side}ImageSlot`).innerHTML = `<img src="${reader.result}" />`;
+          document.getElementById(`${side}ImageSlot`).innerHTML = `
+            <img src="${reader.result}" />
+            <button class="delete-image" onclick="deleteImage('${side}')">🗑️</button>
+          `;
           pages[currentPage][side].img = reader.result;
           saveData();
         };
@@ -266,15 +293,29 @@
       }
     }
 
+    function deleteImage(side) {
+      const slot = document.getElementById(`${side}ImageSlot`);
+      pages[currentPage][side].img = ''; 
+      saveData();
+      slot.innerHTML = `
+        <input type="file" accept="image/*" onchange="handleImageUpload(event, '${side}')" />
+        <button class="delete-image" onclick="deleteImage('${side}')">🗑️</button>
+      `;
+    }
+
     function loadPage() {
       const page = pages[currentPage];
-      document.getElementById('leftImageSlot').innerHTML = page.left.img
-        ? `<img src="${page.left.img}" />`
-        : '<input type="file" accept="image/*" onchange="handleImageUpload(event, \'left\')" />';
+      const leftSlot = document.getElementById('leftImageSlot');
+      const rightSlot = document.getElementById('rightImageSlot');
+      leftSlot.innerHTML = page.left.img
+        ? `<img src="${page.left.img}" /><button class="delete-image" onclick="deleteImage('left')">🗑️</button>`
+        : `<input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
+           <button class="delete-image" onclick="deleteImage('left')">🗑️</button>`;
+      rightSlot.innerHTML = page.right.img
+        ? `<img src="${page.right.img}" /><button class="delete-image" onclick="deleteImage('right')">🗑️</button>`
+        : `<input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
+           <button class="delete-image" onclick="deleteImage('right')">🗑️</button>`;
       document.getElementById('leftText').value = page.left.text || '';
-      document.getElementById('rightImageSlot').innerHTML = page.right.img
-        ? `<img src="${page.right.img}" />`
-        : '<input type="file" accept="image/*" onchange="handleImageUpload(event, \'right\')" />';
       document.getElementById('rightText').value = page.right.text || '';
     }
 
