@@ -1,203 +1,303 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape the Images</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Courier New', Courier, monospace;
-            background: linear-gradient(to bottom, #87cefa, #4682b4);
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  <title>Lila's Doodle Jump Game</title>
+  <meta charset="UTF-8">
+  <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
 
-        .game-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, #87cefa, #4682b4);
-            overflow: hidden;
-        }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: Courier New, monospace;
+  }
 
-        .player {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            width: 60px;
-            height: 60px;
-            background: white;
-            border-radius: 50%;
-            transform: translateX(-50%);
-        }
+  #header {
+    font-size: 20px;
+    margin: 10px 0;
+    text-align: center;
+    color: #333;
+  }
 
-        .falling-image {
-            position: absolute;
-            top: -150px;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
+  canvas {
+    border: 1px solid black;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin-top: 10px;
+  }
 
-        .score {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 24px;
-            color: white;
-        }
+  #controls {
+    display: none;
+    position: fixed;
+    width: 100%;
+    bottom: 20px;
+    text-align: center;
+    z-index: 1000;
+  }
 
-        .game-over {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            font-size: 36px;
-            color: white;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-        }
+  #controls button {
+    width: 80px;
+    height: 80px;
+    font-size: 24px;
+    border-radius: 50%;
+    border: none;
+    margin: 0 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f1c40f;
+    color: #2c3e50;
+  }
 
-        .game-over button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 18px;
-            border: none;
-            background: #32cd32;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+  #controls button:active {
+    background-color: #f39c12;
+  }
 
-        .game-over button:hover {
-            background: #228b22;
-        }
-    </style>
+  #game-over {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: red;
+    background: white;
+    padding: 20px;
+    border: 3px solid black;
+    text-align: center;
+    z-index: 1001;
+  }
+
+  #restart {
+    display: none;
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    padding: 10px 20px;
+    background: green;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1002;
+  }
+
+  #restart:hover {
+    background: darkgreen;
+  }
+  </style>
 </head>
 <body>
-    <div class="game-container">
-        <div class="score">Score: 0</div>
-        <div class="player"></div>
-        <div class="game-over">
-            <p>Game Over!</p>
-            <button onclick="restartGame()">Restart</button>
-        </div>
-    </div>
+<div id="header">Let's play Doodle Jump but with some of your old creations...</div>
+<canvas id="game"></canvas>
+<div id="controls">
+  <button id="left">⬅️</button>
+  <button id="right">➡️</button>
+</div>
+<div id="game-over">Game Over</div>
+<button id="restart">Play Again</button>
+<script>
+// High-Resolution Canvas Setup
+const canvas = document.getElementById('game');
+const context = canvas.getContext('2d');
+const devicePixelRatio = window.devicePixelRatio || 1;
 
-    <script>
-        const gameContainer = document.querySelector('.game-container');
-        const player = document.querySelector('.player');
-        const scoreDisplay = document.querySelector('.score');
-        const gameOverDisplay = document.querySelector('.game-over');
-        let score = 0;
-        let isGameOver = false;
-        let gameInterval, imageInterval;
+// Set canvas dimensions
+const logicalWidth = 400; // Logical width for game design
+const logicalHeight = 700; // Logical height for game design
+canvas.width = logicalWidth * devicePixelRatio;
+canvas.height = logicalHeight * devicePixelRatio;
+canvas.style.width = `${logicalWidth}px`;
+canvas.style.height = `${logicalHeight}px`;
 
-        // List of all supplied images
-        const images = [
-            "https://i.pinimg.com/736x/5e/a4/dd/5ea4ddfe95e32a58587a401be731c9d3.jpg",
-            "https://i.pinimg.com/474x/60/26/9e/60269e0a245e816ac9e26271fbcb360e.jpg",
-            "https://i.pinimg.com/474x/cb/85/8d/cb858d041b5db325219ed5c57fc98f05.jpg",
-            "https://i.pinimg.com/736x/31/48/00/31480033e30009d02c9bc6445e1fc244.jpg",
-            "https://i.pinimg.com/736x/d7/b3/02/d7b3025abb6036cf2f1f1d6b70d3f8c0.jpg"
-        ];
+// Scale context to match pixel ratio
+context.scale(devicePixelRatio, devicePixelRatio);
 
-        // Player movement
-        window.addEventListener('keydown', (e) => {
-            if (isGameOver) return;
-            const playerRect = player.getBoundingClientRect();
-            const containerRect = gameContainer.getBoundingClientRect();
+// List of platform images
+const platformImages = [
+  'https://i.pinimg.com/474x/d2/b9/cd/d2b9cd3a68b912c969e9256f6c9fc7cb.jpg',
+  'https://i.pinimg.com/474x/8d/74/4a/8d744ae886c94db791de26efee89497c.jpg',
+  'https://i.pinimg.com/474x/88/5e/04/885e046a649c8ddfd2f51d3d145bd9ce.jpg',
+  'https://i.pinimg.com/474x/6d/57/37/6d5737dead71ad2740863bdbf42e2b76.jpg',
+  'https://i.pinimg.com/474x/a1/4d/83/a14d8355199a90abed99619d4687cc5c.jpg',
+  'https://i.pinimg.com/474x/92/b9/a7/92b9a7388b7794f78c11408eb48045b8.jpg',
+  'https://i.pinimg.com/474x/5c/3b/2a/5c3b2a685132060bf6ba1bc17620860a.jpg',
+  'https://i.pinimg.com/474x/99/b4/bb/99b4bb02b73c06613b6f2384076a9be1.jpg',
+  'https://i.pinimg.com/474x/7f/78/33/7f783379702fd2bffaa2c42c702140bc.jpg'
+];
 
-            if (e.key === 'ArrowLeft' && playerRect.left > containerRect.left) {
-                player.style.left = `${player.offsetLeft - 20}px`;
-            } else if (e.key === 'ArrowRight' && playerRect.right < containerRect.right) {
-                player.style.left = `${player.offsetLeft + 20}px`;
-            }
-        });
+const platformImageElements = platformImages.map(src => {
+  const img = new Image();
+  img.src = src;
+  return img;
+});
 
-        // Spawn falling images
-        function createFallingImage() {
-            const img = document.createElement('img');
-            img.classList.add('falling-image');
-            img.src = images[Math.floor(Math.random() * images.length)];
-            img.style.left = `${Math.random() * 90}vw`;
+// Game constants
+const platformWidth = 90; // Logical dimensions
+const doodleWidth = 50;
+const doodleHeight = 70;
 
-            gameContainer.appendChild(img);
+// Physics constants
+const gravity = 0.35;
+const bounceVelocity = -13;
+let minPlatformSpace = 20;
+let maxPlatformSpace = 40;
 
-            const fallInterval = setInterval(() => {
-                if (isGameOver) {
-                    clearInterval(fallInterval);
-                    img.remove();
-                    return;
-                }
+let platforms, doodle, gameOver, imageIndex;
 
-                const imgRect = img.getBoundingClientRect();
-                const playerRect = player.getBoundingClientRect();
+// Reset the game state
+function resetGame() {
+  platforms = [{
+    x: logicalWidth / 2 - platformWidth / 2,
+    y: logicalHeight - 80,
+    imgIndex: 0
+  }];
+  doodle = {
+    width: doodleWidth,
+    height: doodleHeight,
+    x: logicalWidth / 2 - doodleWidth / 2,
+    y: platforms[0].y - doodleHeight,
+    dx: 0,
+    dy: 0
+  };
+  gameOver = false;
+  imageIndex = 0; // Reset image rotation index
+  document.getElementById('game-over').style.display = 'none';
+  document.getElementById('restart').style.display = 'none';
+}
 
-                // Check for collision
-                if (
-                    imgRect.top < playerRect.bottom &&
-                    imgRect.bottom > playerRect.top &&
-                    imgRect.left < playerRect.right &&
-                    imgRect.right > playerRect.left
-                ) {
-                    endGame();
-                    clearInterval(fallInterval);
-                    return;
-                }
+// Generate platforms with rotating images
+function generatePlatforms() {
+  while (platforms.length < 10) {
+    const lastPlatform = platforms[platforms.length - 1];
+    const newY = lastPlatform.y - platformWidth - Math.random() * (maxPlatformSpace - minPlatformSpace) - minPlatformSpace;
+    platforms.push({
+      x: Math.random() * (logicalWidth - platformWidth),
+      y: newY,
+      imgIndex: imageIndex % platformImageElements.length // Rotate through images
+    });
+    imageIndex++; // Increment global image index for rotation
+  }
+}
 
-                // Remove image if it goes out of bounds
-                if (imgRect.top > gameContainer.offsetHeight) {
-                    img.remove();
-                    clearInterval(fallInterval);
-                } else {
-                    img.style.top = `${img.offsetTop + 5}px`;
-                }
-            }, 30);
-        }
+// Draw platforms maintaining aspect ratio
+function drawPlatform(platform) {
+  const img = platformImageElements[platform.imgIndex];
+  if (!img.complete) return;
 
-        // Start the game
-        function startGame() {
-            score = 0;
-            isGameOver = false;
-            scoreDisplay.textContent = `Score: ${score}`;
-            gameOverDisplay.style.display = 'none';
-            player.style.left = '50%';
+  const scale = platformWidth / img.width;
+  const scaledHeight = img.height * scale;
 
-            gameInterval = setInterval(() => {
-                if (!isGameOver) {
-                    score++;
-                    scoreDisplay.textContent = `Score: ${score}`;
-                }
-            }, 1000);
+  context.drawImage(img, platform.x, platform.y, platformWidth, scaledHeight);
+}
 
-            imageInterval = setInterval(createFallingImage, 700);
-        }
+// End the game
+function endGame() {
+  gameOver = true;
+  document.getElementById('game-over').style.display = 'block';
+  document.getElementById('restart').style.display = 'block';
+}
 
-        // End the game
-        function endGame() {
-            isGameOver = true;
-            clearInterval(gameInterval);
-            clearInterval(imageInterval);
-            gameOverDisplay.style.display = 'block';
-        }
+// Game loop
+function loop() {
+  if (gameOver) return;
 
-        // Restart the game
-        function restartGame() {
-            document.querySelectorAll('.falling-image').forEach((img) => img.remove());
-            startGame();
-        }
+  requestAnimationFrame(loop);
+  context.clearRect(0, 0, logicalWidth, logicalHeight);
 
-        // Initialize the game
-        startGame();
-    </script>
+  // Apply gravity
+  doodle.dy += gravity;
+
+  // Check for platform collisions
+  platforms.forEach(platform => {
+    const img = platformImageElements[platform.imgIndex];
+    const scale = platformWidth / img.width;
+    const platformHeight = img.height * scale;
+
+    if (
+      doodle.dy > 0 &&
+      doodle.x + doodle.width > platform.x &&
+      doodle.x < platform.x + platformWidth &&
+      doodle.y + doodle.height >= platform.y &&
+      doodle.y + doodle.height <= platform.y + platformHeight
+    ) {
+      doodle.dy = bounceVelocity;
+      doodle.y = platform.y - doodle.height; // Reset position
+    }
+  });
+
+  // Update doodle position
+  doodle.y += doodle.dy;
+  doodle.x += doodle.dx;
+
+  // Check if doodle falls off the screen
+  if (doodle.y > logicalHeight) {
+    endGame();
+    return;
+  }
+
+  // Wrap around screen edges
+  if (doodle.x + doodle.width < 0) doodle.x = logicalWidth;
+  if (doodle.x > logicalWidth) doodle.x = -doodle.width;
+
+  // Scroll platforms if doodle moves above midpoint
+  if (doodle.y < logicalHeight / 2 && doodle.dy < 0) {
+    const scrollAmount = -doodle.dy;
+    platforms.forEach(platform => (platform.y += scrollAmount));
+    doodle.y += scrollAmount;
+  }
+
+  // Remove platforms that fall off the screen
+  platforms = platforms.filter(platform => platform.y < logicalHeight);
+
+  // Generate new platforms
+  generatePlatforms();
+
+  // Draw platforms and doodle
+  platforms.forEach(drawPlatform);
+  context.fillStyle = 'yellow';
+  context.fillRect(doodle.x, doodle.y, doodle.width, doodle.height);
+}
+
+// Input handling
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') {
+    doodle.dx = -4;
+  } else if (e.key === 'ArrowRight') {
+    doodle.dx = 4;
+  }
+});
+
+document.addEventListener('keyup', () => (doodle.dx = 0));
+
+// Touch controls
+if ('ontouchstart' in window) {
+  document.getElementById('controls').style.display = 'block';
+
+  document.getElementById('left').addEventListener('touchstart', () => (doodle.dx = -4));
+  document.getElementById('left').addEventListener('touchend', () => (doodle.dx = 0));
+
+  document.getElementById('right').addEventListener('touchstart', () => (doodle.dx = 4));
+  document.getElementById('right').addEventListener('touchend', () => (doodle.dx = 0));
+}
+
+// Restart button
+document.getElementById('restart').addEventListener('click', () => {
+  resetGame();
+  loop();
+});
+
+// Load images and start game
+Promise.all(platformImageElements.map(img => new Promise(resolve => (img.onload = resolve)))).then(() => {
+  resetGame();
+  loop();
+});
+</script>
 </body>
 </html>

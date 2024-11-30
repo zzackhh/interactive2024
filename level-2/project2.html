@@ -59,6 +59,7 @@
 
     .book-container {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       align-items: stretch;
       width: 90%;
@@ -69,7 +70,7 @@
       overflow: hidden;
       position: relative;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      border: 6px solid black; /* Cute black border */
+      border: 6px solid black;
     }
 
     .page {
@@ -96,21 +97,25 @@
       justify-content: center;
       overflow: hidden;
       background: #fff;
-      box-shadow: none;
-      border: none;
+      border: 2px dashed #ccc;
       border-radius: 12px;
-      transition: transform 0.3s ease;
+      position: relative;
     }
 
     .image-slot img {
       max-width: 100%;
       max-height: 100%;
       object-fit: cover;
-      cursor: pointer;
     }
 
-    .image-slot:hover img {
-      transform: scale(1.05);
+    .image-slot input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
     }
 
     .text-area {
@@ -125,7 +130,6 @@
       background: transparent;
       border: none;
       outline: none;
-      box-shadow: none;
     }
 
     .emoji-tab {
@@ -175,13 +179,23 @@
       color: white;
       border-radius: 5px;
       cursor: pointer;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease, background-color 0.3s;
     }
 
     .button:hover {
       background-color: #e65b50;
       transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .book-container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .page {
+        border-right: none;
+      }
     }
   </style>
 </head>
@@ -193,11 +207,15 @@
 
   <div class="book-container">
     <div class="page left-page">
-      <div class="image-slot" id="leftImageSlot" ondrop="handleDrop(event, 'left')" ondragover="allowDrop(event)"></div>
+      <div class="image-slot" id="leftImageSlot">
+        <input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
+      </div>
       <textarea class="text-area" id="leftText" oninput="saveData()" placeholder="Start writing here..."></textarea>
     </div>
     <div class="page right-page">
-      <div class="image-slot" id="rightImageSlot" ondrop="handleDrop(event, 'right')" ondragover="allowDrop(event)"></div>
+      <div class="image-slot" id="rightImageSlot">
+        <input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
+      </div>
       <textarea class="text-area" id="rightText" oninput="saveData()" placeholder="Start writing here..."></textarea>
     </div>
   </div>
@@ -218,18 +236,12 @@
       { left: { img: '', text: '' }, right: { img: '', text: '' } }
     ];
 
-    function allowDrop(event) {
-      event.preventDefault();
-    }
-
-    function handleDrop(event, side) {
-      event.preventDefault();
-      const file = event.dataTransfer.files[0];
-      if (file && file.type.startsWith('image/')) {
+    function handleImageUpload(event, side) {
+      const file = event.target.files[0];
+      if (file) {
         const reader = new FileReader();
         reader.onload = () => {
-          const imgSlot = document.getElementById(`${side}ImageSlot`);
-          imgSlot.innerHTML = `<img src="${reader.result}" />`;
+          document.getElementById(`${side}ImageSlot`).innerHTML = `<img src="${reader.result}" />`;
           pages[currentPage][side].img = reader.result;
           saveData();
         };
@@ -241,11 +253,11 @@
       const page = pages[currentPage];
       document.getElementById('leftImageSlot').innerHTML = page.left.img
         ? `<img src="${page.left.img}" />`
-        : '';
+        : '<input type="file" accept="image/*" onchange="handleImageUpload(event, \'left\')" />';
       document.getElementById('leftText').value = page.left.text || '';
       document.getElementById('rightImageSlot').innerHTML = page.right.img
         ? `<img src="${page.right.img}" />`
-        : '';
+        : '<input type="file" accept="image/*" onchange="handleImageUpload(event, \'right\')" />';
       document.getElementById('rightText').value = page.right.text || '';
     }
 
