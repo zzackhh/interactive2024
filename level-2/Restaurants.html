@@ -5,178 +5,255 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lila's Restaurant Guide</title>
   <style>
-    /* General styling */
     body {
-      font-family: 'Georgia', serif;
-      color: #333;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #ffe6e6, #fff7e6);
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom, #accbee, #e7f0fd), url('https://i.pinimg.com/originals/ee/5e/41/ee5e41cc6d2f6748b29b4d77f56ae3e5.jpg');
-      background-size: cover;
-      background-blend-mode: overlay;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    .container {
-      max-width: 700px;
-      margin: auto;
+    .book {
+      width: 320px;
+      height: 480px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Cover Page */
+    .cover {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       padding: 20px;
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      background-color: #ffe4c4;
+      border-bottom: 4px solid #ffb3b3;
     }
 
-    header h1 {
+    .cover img {
+      width: 140px;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .cover h1 {
+      font-size: 1.8em;
+      margin: 0;
+      color: #ff6f61;
       text-align: center;
-      font-weight: normal;
-      color: #5a3e36;
-      font-size: 2em;
+    }
+
+    .cover p {
+      margin-top: 10px;
+      font-size: 0.95em;
+      color: #555;
+      text-align: center;
+      max-width: 250px;
+    }
+
+    .cover button {
+      margin-top: 20px;
+      background: #ff6f61;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 1em;
+      cursor: pointer;
+      color: white;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .cover button:hover {
+      background: #ff4d4d;
+    }
+
+    /* Pages */
+    .pages {
+      display: none;
+      flex-direction: column;
+      padding: 15px;
+      height: 100%;
+      background: #fff;
+    }
+
+    .pages.active {
+      display: flex;
+    }
+
+    header h2 {
+      text-align: center;
+      font-size: 1.4em;
+      color: #ff6f61;
+      margin-bottom: 10px;
     }
 
     main {
-      margin-top: 20px;
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 10px 0;
     }
 
     .restaurant {
-      border-bottom: 1px solid #ddd;
       padding: 10px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      border-bottom: 1px solid #f2f2f2;
+      cursor: pointer;
     }
 
-    .restaurant img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
+    .restaurant:hover {
+      background: #fff7e6;
       border-radius: 8px;
-      margin-right: 10px;
     }
 
-    .restaurant:last-child {
-      border-bottom: none;
-    }
-
-    .info {
-      display: flex;
-      align-items: center;
+    .restaurant div {
+      font-size: 1em;
+      color: #333;
     }
 
     footer {
       text-align: center;
-      margin-top: 20px;
+      padding: 10px 0;
     }
 
     footer button {
-      background-color: #0056b3;
-      color: #fff;
+      background: #ff6f61;
+      color: white;
       border: none;
       padding: 10px 20px;
-      font-size: 16px;
+      border-radius: 30px;
+      font-size: 0.9em;
       cursor: pointer;
-      border-radius: 5px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
     }
 
     footer button:hover {
-      background-color: #003d80;
+      background: #ff4d4d;
     }
 
-    #modal {
+    .modal {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
       justify-content: center;
       align-items: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s, visibility 0.3s;
     }
 
-    #modal.visible {
-      visibility: visible;
-      opacity: 1;
+    .modal.active {
+      display: flex;
     }
 
     .modal-content {
-      background: #fff;
+      background: white;
       padding: 20px;
-      border-radius: 10px;
-      width: 300px;
+      border-radius: 12px;
+      width: 280px;
       text-align: center;
     }
 
-    .modal-buttons {
-      margin-top: 20px;
+    .modal-content h3 {
+      margin: 0;
+      color: #ff6f61;
     }
 
-    .modal-buttons button {
-      margin: 5px;
-      padding: 10px 15px;
+    .modal-content p {
+      margin: 10px 0;
+      color: #555;
+    }
+
+    .modal-content a {
+      color: #ff6f61;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .modal-content a:hover {
+      text-decoration: underline;
+    }
+
+    .modal-content button {
+      background: #ff6f61;
+      color: white;
       border: none;
-      border-radius: 5px;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.9em;
       cursor: pointer;
+      margin-top: 10px;
     }
 
-    .modal-buttons button#save-btn {
-      background-color: #5cb85c;
-      color: #fff;
-    }
-
-    .modal-buttons button#cancel-btn {
-      background-color: #d9534f;
-      color: #fff;
+    .modal-content button:hover {
+      background: #ff4d4d;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Lila's Favorite Restaurants</h1>
-    </header>
-    <main id="restaurant-list">
-      <!-- Restaurant entries will be added dynamically -->
-    </main>
-    <footer>
-      <button id="add-restaurant-btn">Add New Restaurant</button>
-    </footer>
+  <div class="book">
+    <!-- Cover Page -->
+    <div class="cover">
+      <img src="https://i.pinimg.com/736x/13/f9/5b/13f95bddf86240ceb6fb8dbf34e8a5f1.jpg" alt="Goat Image">
+      <h1>Lila's Restaurant Guide</h1>
+      <p>"All of Lila's favorite spots to eat, all in one place."</p>
+      <button onclick="openBook()">Open</button>
+    </div>
+
+    <!-- Pages -->
+    <div class="pages">
+      <header>
+        <h2>Favorite Restaurants</h2>
+      </header>
+      <main id="restaurant-list">
+        <!-- Restaurants dynamically rendered here -->
+      </main>
+      <footer>
+        <button id="add-restaurant-btn">Add Restaurant</button>
+      </footer>
+    </div>
   </div>
 
-  <!-- Modal for adding/editing restaurants -->
-  <div id="modal">
+  <!-- Modal -->
+  <div class="modal" id="modal">
     <div class="modal-content">
-      <h2>Add/Edit Restaurant</h2>
-      <label for="restaurant-name">Name:</label>
-      <input type="text" id="restaurant-name">
-      <label for="restaurant-location">Location:</label>
-      <input type="text" id="restaurant-location">
-      <div class="modal-buttons">
-        <button id="save-btn">Save</button>
-        <button id="cancel-btn">Cancel</button>
-      </div>
+      <h3 id="modal-title">Restaurant Name</h3>
+      <p id="modal-location">Location: </p>
+      <p id="modal-rating">Rating: </p>
+      <p><a href="#" target="_blank" id="modal-link">Read Review</a></p>
+      <button onclick="closeModal()">Close</button>
     </div>
   </div>
 
   <script>
     const restaurantList = document.getElementById('restaurant-list');
     const modal = document.getElementById('modal');
-    const restaurantNameInput = document.getElementById('restaurant-name');
-    const restaurantLocationInput = document.getElementById('restaurant-location');
-    const addRestaurantBtn = document.getElementById('add-restaurant-btn');
-    const saveBtn = document.getElementById('save-btn');
-    const cancelBtn = document.getElementById('cancel-btn');
-    let editIndex = null;
+    const modalTitle = document.getElementById('modal-title');
+    const modalLocation = document.getElementById('modal-location');
+    const modalRating = document.getElementById('modal-rating');
+    const modalLink = document.getElementById('modal-link');
+    const pages = document.querySelector('.pages');
+    const cover = document.querySelector('.cover');
 
     const restaurants = [
-      { name: 'Kisa', location: 'NYC', img: 'https://source.unsplash.com/random/80x80?restaurant' },
-      { name: 'Dorian', location: 'London', img: 'https://source.unsplash.com/random/80x80?cafe' },
-      { name: 'Umu', location: 'London', img: 'https://source.unsplash.com/random/80x80?japanese' },
-      { name: "Raf's", location: 'NYC', img: 'https://source.unsplash.com/random/80x80?food' },
-      { name: "Cervo's", location: 'NYC', img: 'https://source.unsplash.com/random/80x80?dining' },
-      { name: 'Acre', location: 'Brooklyn', img: 'https://source.unsplash.com/random/80x80?pizza' },
-      { name: 'Raku Udon', location: '', img: 'https://source.unsplash.com/random/80x80?noodles' },
+      { name: 'Kisa', location: 'NYC', link: 'https://www.newyorker.com/culture/the-food-scene/kisa-a-pitch-perfect-ode-to-korean-drivers-restaurants' },
+      { name: 'Dorian', location: 'London', link: 'https://www.theinfatuation.com/london/reviews/dorian' },
+      { name: 'Umu', location: 'London', link: 'https://www.timeout.com/london/restaurants/umu' },
+      { name: "Raf's", location: 'NYC',  link: 'https://www.nytimes.com/2023/07/04/dining/restaurant-review-rafs-nyc.html' },
+      { name: "Cervo's", location: 'NYC',  link: 'https://nymag.com/listings/restaurant/cervos/' },
+      { name: 'Acre', location: 'Brooklyn', link: 'https://www.theinfatuation.com/new-york/reviews/acre' },
+      { name: 'Raku Udon', location: 'NYC',  link: 'https://ny.eater.com/2015/11/2/9657024/best-udon-nyc' },
     ];
 
     function renderRestaurants() {
@@ -184,63 +261,41 @@
       restaurants.forEach((restaurant, index) => {
         const restaurantDiv = document.createElement('div');
         restaurantDiv.className = 'restaurant';
-        restaurantDiv.innerHTML = `
-          <div class="info">
-            <img src="${restaurant.img}" alt="${restaurant.name}">
-            <div>
-              <strong>${restaurant.name}</strong> - ${restaurant.location}
-            </div>
-          </div>
-          <button onclick="editRestaurant(${index})">Edit</button>
-        `;
+        restaurantDiv.innerHTML = `<div>${restaurant.name}</div>`;
+        restaurantDiv.addEventListener('click', () => showDetails(index));
         restaurantList.appendChild(restaurantDiv);
       });
     }
 
-    function toggleModal() {
-      modal.classList.toggle('visible');
-    }
-
-    function addRestaurant() {
-      editIndex = null;
-      restaurantNameInput.value = '';
-      restaurantLocationInput.value = '';
-      toggleModal();
-    }
-
-    function saveRestaurant() {
-      const name = restaurantNameInput.value;
-      const location = restaurantLocationInput.value;
-
-      if (editIndex !== null) {
-        restaurants[editIndex] = { ...restaurants[editIndex], name, location };
-      } else {
-        restaurants.push({
-          name,
-          location,
-          img: 'https://source.unsplash.com/random/80x80?restaurant'
-        });
-      }
-
-      renderRestaurants();
-      toggleModal();
-    }
-
-    function editRestaurant(index) {
-      editIndex = index;
+    function showDetails(index) {
       const restaurant = restaurants[index];
-      restaurantNameInput.value = restaurant.name;
-      restaurantLocationInput.value = restaurant.location;
-      toggleModal();
+      modalTitle.textContent = restaurant.name;
+      modalLocation.textContent = `Location: ${restaurant.location}`;
+      modalRating.textContent = `Rating: ${restaurant.rating}`;
+      modalLink.href = restaurant.link;
+      modalLink.textContent = `Read Review`;
+      modal.classList.add('active');
     }
 
-    function cancelEdit() {
-      toggleModal();
+    function closeModal() {
+      modal.classList.remove('active');
     }
 
-    addRestaurantBtn.addEventListener('click', addRestaurant);
-    saveBtn.addEventListener('click', saveRestaurant);
-    cancelBtn.addEventListener('click', cancelEdit);
+    function openBook() {
+      cover.style.display = 'none';
+      pages.classList.add('active');
+    }
+
+    document.getElementById('add-restaurant-btn').addEventListener('click', () => {
+      const name = prompt('Enter restaurant name:');
+      const location = prompt('Enter restaurant location:');
+      const rating = prompt('Enter restaurant rating:');
+      const link = prompt('Enter restaurant review link:');
+      if (name && location && rating && link) {
+        restaurants.push({ name, location, rating, link });
+        renderRestaurants();
+      }
+    });
 
     renderRestaurants();
   </script>
