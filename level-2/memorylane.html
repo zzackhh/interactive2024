@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Doodle Jump Game (Mobile-Friendly)</title>
+  <title>Let's play Doodle Jump but your old creations!</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <style>
@@ -27,6 +27,7 @@
     }
 
     canvas {
+      background: white; /* Set canvas background to white */
       border: 1px solid black;
       max-width: 100%;
       height: auto;
@@ -96,7 +97,7 @@
   </style>
 </head>
 <body>
-<div id="header">Let's play Doodle Jump but with your food!</div>
+<div id="header">Let's play Doodle Jump (Mobile-Friendly)!</div>
 <canvas id="game"></canvas>
 <div id="controls">
   <button id="left">⬅️</button>
@@ -124,8 +125,14 @@
 
   const platformImages = [
     'https://i.pinimg.com/474x/d2/b9/cd/d2b9cd3a68b912c969e9256f6c9fc7cb.jpg',
-    'https://i.pinimg.com/474x/8d/74/4a/8d744ae886c94db791de26efee89497c.jpg'
-    // Add more images as needed
+    'https://i.pinimg.com/474x/8d/74/4a/8d744ae886c94db791de26efee89497c.jpg',
+    'https://i.pinimg.com/474x/88/5e/04/885e046a649c8ddfd2f51d3d145bd9ce.jpg',
+    'https://i.pinimg.com/474x/6d/57/37/6d5737dead71ad2740863bdbf42e2b76.jpg',
+    'https://i.pinimg.com/474x/a1/4d/83/a14d8355199a90abed99619d4687cc5c.jpg',
+    'https://i.pinimg.com/474x/92/b9/a7/92b9a7388b7794f78c11408eb48045b8.jpg',
+    'https://i.pinimg.com/474x/5c/3b/2a/5c3b2a685132060bf6ba1bc17620860a.jpg',
+    'https://i.pinimg.com/474x/99/b4/bb/99b4bb02b73c06613b6f2384076a9be1.jpg',
+    'https://i.pinimg.com/474x/7f/78/33/7f783379702fd2bffaa2c42c702140bc.jpg'
   ];
 
   const platformImageElements = platformImages.map(src => {
