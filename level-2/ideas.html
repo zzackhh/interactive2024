@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8 Ball Food Picker</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(270deg, #88cfff, #0059b3);
+            background-size: 400% 400%;
+            animation: gradientAnimation 8s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .title {
+            font-family: cursive;
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .center-content {
+            font-size: 8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .center-content.shake {
+            animation: shakeAnimation 0.5s ease;
+        }
+
+        @keyframes shakeAnimation {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #0059b3;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            color: #333;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            min-width: 300px;
+        }
+
+        #home-icon {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 2rem;
+            text-decoration: none;
+            color: black;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        #home-icon:hover {
+            transform: scale(1.2);
+            color: #0059b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">What should Lila cook today?</div>
+    <div class="center-content" id="eightBall">
+        🎱
+    </div>
+    <div class="result-box" id="resultBox" style="display: none;">
+        <!-- Food text will appear here -->
+    </div>
+    <a id="home-icon" href="https://zzackhh.github.io/interactive2024/level-2/project2.html" target="_blank">🏠</a>
+
+    <script>
+        // Food ideas array
+        const foodIdeas = [
+            "Spaghetti Carbonara",
+            "Chicken Stir Fry",
+            "Vegetable Curry",
+            "Tacos",
+            "Grilled Cheese Sandwich",
+            "Beef Stew",
+            "Shrimp Scampi",
+            "Margarita Pizza",
+            "Ramen",
+            "Pancakes"
+        ];
+
+        const eightBall = document.getElementById("eightBall");
+        const resultBox = document.getElementById("resultBox");
+
+        // Function to handle the shake animation and show random food
+        function handleEightBallClick() {
+            // Add shake animation
+            eightBall.classList.add("shake");
+            // Remove shake animation after it finishes
+            setTimeout(() => {
+                eightBall.classList.remove("shake");
+            }, 500);
+
+            // Generate a random food idea
+            const randomFood = foodIdeas[Math.floor(Math.random() * foodIdeas.length)];
+
+            // Display the result
+            resultBox.textContent = randomFood;
+            resultBox.style.display = "block";
+        }
+
+        // Add event listeners for both click and touchstart
+        eightBall.addEventListener("click", handleEightBallClick);
+        eightBall.addEventListener("touchstart", handleEightBallClick);
+    </script>
+</body>
+</html>
