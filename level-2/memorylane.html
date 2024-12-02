@@ -29,7 +29,7 @@
       width: 340px;
       height: 500px;
       background: #fff;
-      border: 10px solid #ffe4c4; /* Book border */
+      border: 10px solid #ffe4c4; 
       border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       display: flex;
@@ -39,10 +39,10 @@
     }
 
     .flipbook img {
-      width: 80%; /* Image inside book */
+      width: 80%; 
       height: auto;
       max-height: 80%;
-      border: 5px solid #ffb3b3; /* Border around image */
+      border: 5px solid #ffb3b3; 
       border-radius: 10px;
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
     }
@@ -64,13 +64,13 @@
     }
 
     .cover-page h1 {
-      font-size: 3em; /* Large text */
+      font-size: 3em; 
       margin-bottom: 10px;
       font-family: cursive;
     }
 
     .cover-page p {
-      font-size: 1.2em; /* Smaller subtext */
+      font-size: 1.2em; 
       margin-top: 0;
     }
 
@@ -86,18 +86,18 @@
     }
 
     .nav.left {
-      left: 10px; /* Move left arrow inside */
+      left: 10px; 
     }
 
     .nav.right {
-      right: 10px; /* Move right arrow inside */
+      right: 10px; 
     }
 
     .nav:hover {
       color: rgba(0, 0, 0, 0.8);
     }
 
-    /* Home icon styling */
+
     #home-icon {
       position: fixed;
       bottom: 10px;
@@ -116,19 +116,18 @@
   </style>
 </head>
 <body>
-  <!-- Flipbook -->
+
   <div class="flipbook">
     <div class="cover-page">
-      <h1>RIP @lilafood123</h1> <!-- Large text on the cover -->
+      <h1>RIP @lilafood123</h1> 
       <p>At the start of the pandemic, Lila began her food Instagram. Unfortunately, she was locked out of her account. While she continues her food creations, we'll take this moment to take a trip down memory lane and remember @lilafood123.</p> <!-- Subtext -->
     </div>
-    <!-- Navigation arrows inside the book -->
+
     <div class="nav left" onclick="prevPage()">❮</div>
     <img id="flipbookImage" src="" alt="Flipbook Page">
     <div class="nav right" onclick="nextPage()">❯</div>
   </div>
 
-  <!-- House icon (home icon) -->
   <a id="home-icon" href="https://zzackhh.github.io/interactive2024/level-2/project2.html" target="_blank">🏠</a>
 
   <script>
@@ -159,12 +158,12 @@
 
     function updateFlipbook() {
       if (currentIndex === 0) {
-        flipbookImage.style.display = 'none'; // Hide the image on the cover page
-        coverPage.style.display = 'flex'; // Show cover page
+        flipbookImage.style.display = 'none'; 
+        coverPage.style.display = 'flex'; 
       } else {
-        flipbookImage.style.display = 'block'; // Show image
-        coverPage.style.display = 'none'; // Hide cover page
-        flipbookImage.src = images[currentIndex - 1]; // Update image
+        flipbookImage.style.display = 'block'; 
+        coverPage.style.display = 'none'; 
+        flipbookImage.src = images[currentIndex - 1]; 
       }
     }
 
@@ -190,7 +189,7 @@
     }
 
     preloadImages();
-    enterFlipbook(); // Initial call to display the flipbook correctly
+    enterFlipbook(); 
   </script>
 </body>
 </html>
