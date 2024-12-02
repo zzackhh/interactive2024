@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is all of this?</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New';
+            background: linear-gradient(270deg, #88cfff, #0059b3);
+            background-size: 400% 400%;
+            animation: gradientAnimation 8s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #text-container {
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5),
+                        inset -3px -3px 10px rgba(0, 0, 0, 0.1),
+                        inset 3px 3px 10px rgba(255, 255, 255, 0.3);
+            overflow-y: auto;
+        }
+
+        #text-container p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        #home-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 1.5em;
+            text-decoration: none;
+            color: black;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        #home-icon:hover {
+            transform: scale(1.2);
+            color: #0059b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="text-container">
+        <p>
+            You might be wondering what all of this is! This site is for you, Lila! As you continue your cooking journey in an entirely new city,
+            it feels only right that you have a digital experience to keep track of your recipes, creations, etc, especially as you're on the move these days.
+        </p>
+
+        <p>
+            Enjoy!
+        </p>
+       
+    </div>
+    <a id="home-icon" href="https://zzackhh.github.io/interactive2024/level-2/project2.html" target="_blank">🏠</a>
+</body>
+</html>
