@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lila's Cookbook</title>
+    <title>Lila's Notebook Cookbook</title>
     <style>
         @font-face {
             font-family: 'Poppins';
@@ -15,26 +15,17 @@
         }
 
         body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
-    overflow-y: auto; 
-    background: linear-gradient(270deg, rgba(136, 207, 255, 0.3), rgba(0, 89, 179, 0.3)),
-        url('https://www.transparenttextures.com/patterns/old-wall.png');
-    background-blend-mode: overlay;
-    background-size: 400% 400%, auto;
-    animation: gradientAnimation 8s ease infinite;
-        }
-
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%, center; }
-            50% { background-position: 100% 50%, center; }
-            100% { background-position: 0% 50%, center; }
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(270deg, rgba(136, 207, 255, 0.3), rgba(0, 89, 179, 0.3)),
+                url('https://www.transparenttextures.com/patterns/old-wall.png');
+            background-blend-mode: overlay;
+            background-size: cover;
         }
 
         .title {
@@ -51,80 +42,84 @@
             font-family: 'Georgia', serif;
             color: #555;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+        }
+
+        .emoji-bar {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .emoji-tab {
+            font-size: 28px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .emoji-tab:hover {
+            transform: scale(1.2);
         }
 
         .book-container {
             display: flex;
-            justify-content: center;
-            align-items: stretch;
+            flex-direction: column;
             width: 90%;
-            max-width: 1000px;
-            height: 500px;
+            max-width: 600px;
+            height: 650px;
             border-radius: 10px;
-            background: linear-gradient(145deg, #fffef5, #fefdf9);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            border: 1px solid #d4c6a6;
-        }
-
-        .spine {
-            width: 4%;
-            background: linear-gradient(to right, #d4c6a6, #d9cdb1);
-            box-shadow: inset -2px 0px 6px rgba(0, 0, 0, 0.2);
+            background: #fff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
         }
 
         .page {
             flex: 1;
-            padding: 30px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            background: linear-gradient(145deg, #fffef5, #fefdf9);
-            position: relative;
-            overflow: hidden;
+            gap: 15px;
         }
 
-        .left-page {
-            border-right: 1px solid #d4c6a6;
+        .editable-area {
+            flex: 1;
+            padding: 15px;
+            background: linear-gradient(to bottom, transparent 39px, #e8e3d8 40px) repeat-y;
+            background-size: 100% 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-y: auto;
+            outline: none;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            min-height: 300px; /* Extend height */
         }
 
-        .image-slot {
-            width: 80%;
-            max-width: 250px;
-            height: 180px;
+        .image-area {
+            width: 100%;
+            max-width: 200px;
+            height: 150px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            background: #f9f9f9;
             display: flex;
-            align-items: center;
             justify-content: center;
-            overflow: hidden;
-            background: rgba(240, 240, 240, 0.9);
-            border-radius: 8px;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            align-items: center;
             position: relative;
+            margin: 0 auto;
         }
 
-        .image-slot img {
+        .image-area img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: cover;
-        }
-
-        .image-slot input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
+            display: block;
         }
 
         .delete-image {
             position: absolute;
-            top: 8px;
-            right: 8px;
+            top: 5px;
+            right: 5px;
             background: rgba(255, 255, 255, 0.8);
             border: none;
             border-radius: 50%;
@@ -135,273 +130,177 @@
             justify-content: center;
             font-size: 12px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
 
         .delete-image:hover {
             background: rgba(255, 100, 100, 0.9);
         }
 
-        .text-area {
-            width: 90%;
-            height: 180px;
-            margin-top: 20px;
-            padding: 12px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
-            line-height: 1.6;
-            background: #fefdf9;
-            border: 1px solid #d4c6a6;
-            border-radius: 8px;
-            outline: none;
-            resize: none;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .emoji-tab {
-            font-size: 32px;
-            position: absolute;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .emoji-tab:hover {
-            transform: scale(1.2);
-        }
-
-        .top-left {
-            top: 10px;
-            left: 10px;
-        }
-
-        .top-right {
-            top: 10px;
-            right: 10px;
-        }
-
-        .bottom-left {
-            bottom: 10px;
-            left: 10px;
-        }
-
-        .bottom-right {
-            bottom: 10px;
-            right: 10px;
-        }
-
-        .controls {
+        .navigation {
             display: flex;
-            justify-content: center;
-            width: 70%;
-            max-width: 800px;
-            margin-top: 30px;
+            justify-content: space-between;
+            padding: 10px;
+            background: #f4f4f4;
+            border-top: 1px solid #ddd;
         }
 
-        .button {
-            padding: 10px 20px;
-            font-size: 14px;
+        .navigation button {
+            background: #ffad60;
+            color: #fff;
             border: none;
-            background-color: #d4a658;
-            color: white;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            margin: 0 5px;
-            font-family: 'Poppins', sans-serif;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
         }
 
-        .button:hover {
-            background-color: #b88f4b;
-            transform: scale(1.05);
+        .navigation button:hover {
+            background: #e8b055;
         }
 
-            @media (max-width: 768px) {
-    .book-container {
-        width: 90%;
-        height: 300px; 
-    }
-
-    .title {
-        font-size: 36px; 
-    }
-
-    .subtitle {
-        font-size: 16px; 
-    }
-
-    .text-area {
-        height: 140px; 
-    }
-
-    .image-slot {
-        max-width: 200px; 
-        height: 140px; 
-
-    }
-
-    .top-left {
-        top: 5px; 
-        left: 5px; 
-    }
-
-    .top-right {
-        top: 5px; 
-        right: 5px; 
-    }
-
-    .bottom-left {
-        bottom: 5px; 
-        left: 5px; 
-    }
-
-    .bottom-right {
-        bottom: 5px; 
-        right: 5px; 
-    }
-
-    .book-container {
-        margin-top: 10px;
-
-    } 
-     .text-area {
-                width: 120%; 
-                height: 120px;
+        @media (max-width: 768px) {
+            .title {
+                font-size: 36px;
             }
 
-    .image-slot {
-                max-width: 150px;
-                height: 120px;
-    }
+            .subtitle {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
 
-    }
-        
+            .book-container {
+                height: 550px;
+            }
+
+            .editable-area {
+                min-height: 250px;
+            }
+
+            .navigation button {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            .emoji-tab {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="title">
-        <a href="description.html" style="text-decoration: none; color: inherit;">LILA'S COOKBOOK!</a>
-    </div>    
+    <div class="title">Lila's Notebook Cookbook</div>
     <div class="subtitle">Hi Lila, this cookbook and cooking workspace is just for you!</div>
 
-    <div class="book-container">
-        <div class="spine"></div>
-        <div class="page left-page">
-            <div class="image-slot" id="leftImageSlot">
-                <input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
-                <button class="delete-image" onclick="deleteImage('left')">🗑️</button>
-            </div>
-            <textarea class="text-area" id="leftText" placeholder="Start writing here..." oninput="saveData()"></textarea>
-        </div>
-        <div class="page right-page">
-            <div class="image-slot" id="rightImageSlot">
-                <input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
-                <button class="delete-image" onclick="deleteImage('right')">🗑️</button>
-            </div>
-            <textarea class="text-area" id="rightText" placeholder="Start writing here..." oninput="saveData()"></textarea>
-        </div>
+    <div class="emoji-bar">
+        <div class="emoji-tab" onclick="navigateTo('grocery')">🛒</div>
+        <div class="emoji-tab" onclick="navigateTo('memory lane')">📖</div>
+        <div class="emoji-tab" onclick="navigateTo('restaurants')">🍴</div>
+        <div class="emoji-tab" onclick="navigateTo('ideas')">💡</div>
     </div>
 
-    <div class="emoji-tab top-left" onclick="navigateTo('grocery')">🛒</div>
-    <div class="emoji-tab top-right" onclick="navigateTo('memory lane')">📖</div>
-    <div class="emoji-tab bottom-left" onclick="navigateTo('restaurants')">🍴</div>
-    <div class="emoji-tab bottom-right" onclick="navigateTo('ideas')">💡</div>
-
-    <div class="controls">
-        <button class="button" onclick="previousPage()">Previous Page</button>
-        <button class="button" onclick="nextPage()">Next Page</button>
+    <div class="book-container">
+        <div class="page" id="page">
+            <div contenteditable="true" class="editable-area" id="text-area">
+                Write your recipe here...
+            </div>
+            <div class="image-area" id="image-area">
+                <input type="file" accept="image/*" style="display: none;">
+                <p>+</p>
+            </div>
+        </div>
+        <div class="navigation">
+            <button id="prev-btn">Previous</button>
+            <button id="next-btn">Next</button>
+        </div>
     </div>
 
     <script>
         let currentPage = 0;
-        const pages = JSON.parse(localStorage.getItem('pages')) || [{ left: { img: '', text: '' }, right: { img: '', text: '' } }];
+        const pages = JSON.parse(localStorage.getItem('pages')) || [{ text: '', img: '' }];
 
-        function handleImageUpload(event, side) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = () => {
-                    document.getElementById(`${side}ImageSlot`).innerHTML = `
-                        <img src="${reader.result}" />
-                        <button class="delete-image" onclick="deleteImage('${side}')">🗑️</button>
-                    `;
-                    pages[currentPage][side].img = reader.result;
-                    saveData();
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function deleteImage(side) {
-            const slot = document.getElementById(`${side}ImageSlot`);
-            pages[currentPage][side].img = '';
-            slot.innerHTML = `
-                <input type="file" accept="image/*" onchange="handleImageUpload(event, '${side}')" />
-                <button class="delete-image" onclick="deleteImage('${side}')">🗑️</button>
-            `;
-            saveData();
+        function ensurePageExists(index) {
+            if (!pages[index]) pages[index] = { text: '', img: '' };
         }
 
         function loadPage() {
+            ensurePageExists(currentPage);
             const page = pages[currentPage];
-            const leftSlot = document.getElementById('leftImageSlot');
-            const rightSlot = document.getElementById('rightImageSlot');
-
-            leftSlot.innerHTML = page.left.img
-                ? `<img src="${page.left.img}" /><button class="delete-image" onclick="deleteImage('left')">🗑️</button>`
-                : `<input type="file" accept="image/*" onchange="handleImageUpload(event, 'left')" />
-                   <button class="delete-image" onclick="deleteImage('left')">🗑️</button>`;
-            rightSlot.innerHTML = page.right.img
-                ? `<img src="${page.right.img}" /><button class="delete-image" onclick="deleteImage('right')">🗑️</button>`
-                : `<input type="file" accept="image/*" onchange="handleImageUpload(event, 'right')" />
-                   <button class="delete-image" onclick="deleteImage('right')">🗑️</button>`;
-            document.getElementById('leftText').value = page.left.text || '';
-            document.getElementById('rightText').value = page.right.text || '';
+            document.getElementById('text-area').innerText = page.text || 'Write your recipe here...';
+            const imageArea = document.getElementById('image-area');
+            if (page.img) {
+                imageArea.innerHTML = `
+                    <img src="${page.img}" />
+                    <button class="delete-image" onclick="deleteImage()">🗑️</button>
+                `;
+            } else {
+                imageArea.innerHTML = `
+                    <input type="file" accept="image/*" style="display: none;">
+                    <p>+</p>
+                `;
+            }
         }
 
-        function saveData() {
+        function savePage() {
             pages[currentPage] = {
-                left: {
-                    img: document.getElementById('leftImageSlot').querySelector('img')
-                        ? document.getElementById('leftImageSlot').querySelector('img').src
-                        : '',
-                    text: document.getElementById('leftText').value
-                },
-                right: {
-                    img: document.getElementById('rightImageSlot').querySelector('img')
-                        ? document.getElementById('rightImageSlot').querySelector('img').src
-                        : '',
-                    text: document.getElementById('rightText').value
-                }
+                text: document.getElementById('text-area').innerText,
+                img: document.getElementById('image-area').querySelector('img')?.src || '',
             };
             localStorage.setItem('pages', JSON.stringify(pages));
         }
 
-        function previousPage() {
+        function deleteImage() {
+            const imageArea = document.getElementById('image-area');
+            imageArea.innerHTML = `
+                <input type="file" accept="image/*" style="display: none;">
+                <p>+</p>
+            `;
+            pages[currentPage].img = '';
+            savePage();
+        }
+
+        function navigateTo(tab) {
+            const urls = {
+                grocery: 'grocery.html',
+                'memory lane': 'memorylane.html',
+                restaurants: 'places.html',
+                ideas: 'ideas.html',
+            };
+            if (urls[tab]) window.location.href = urls[tab];
+        }
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
             if (currentPage > 0) {
-                saveData();
+                savePage();
                 currentPage--;
                 loadPage();
             }
-        }
+        });
 
-        function nextPage() {
-            saveData();
-            if (!pages[currentPage + 1]) {
-                pages.push({ left: { img: '', text: '' }, right: { img: '', text: '' } });
-            }
+        document.getElementById('next-btn').addEventListener('click', () => {
+            savePage();
             currentPage++;
             loadPage();
-        }
-        
-        function navigateTo(tab) {
-            let url = '';
-            if (tab === 'grocery') url = 'grocery.html';
-            else if (tab === 'memory lane') url = 'memorylane.html';
-            else if (tab === 'restaurants') url = 'places.html';
-            else if (tab === 'ideas') url = 'ideas.html';
+        });
 
-            if (url) window.location.href = url;
-        }
+        document.getElementById('image-area').addEventListener('click', () => {
+            const input = document.getElementById('image-area').querySelector('input');
+            if (input) input.click();
+        });
+
+        document.getElementById('image-area').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    document.getElementById('image-area').innerHTML = `
+                        <img src="${reader.result}" />
+                        <button class="delete-image" onclick="deleteImage()">🗑️</button>
+                    `;
+                    savePage();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
         loadPage();
     </script>
