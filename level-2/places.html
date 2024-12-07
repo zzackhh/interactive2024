@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lila's Restaurant Guide</title>
   <style>
+    /* Styles for the guide */
     body {
       margin: 0;
       height: 100vh;
@@ -42,13 +43,11 @@
       justify-content: center;
       padding: 20px;
       background-color: #ffe4c4;
-      border-bottom: 4px solid #ffb3b3;
       font-family: cursive;
     }
 
     .cover img {
       width: 140px;
-      height: auto;
       border-radius: 12px;
       margin-bottom: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -56,34 +55,7 @@
 
     .cover h1 {
       font-size: 1.8em;
-      margin: 0;
       color: #ff6f61;
-      text-align: center;
-    }
-
-    .cover p {
-      margin-top: 10px;
-      font-size: 0.95em;
-      color: #555;
-      text-align: center;
-      max-width: 250px;
-    }
-
-    .cover button {
-      margin-top: 20px;
-      background: #ff6f61;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 1em;
-      cursor: pointer;
-      color: white;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    .cover button:hover {
-      background: #ff4d4d;
     }
 
     .pages {
@@ -102,18 +74,17 @@
       text-align: center;
       font-size: 1.4em;
       color: #ff6f61;
-      margin-bottom: 10px;
-      font-family: cursive;
     }
 
     main {
       flex-grow: 1;
-      overflow-y: auto;
-      padding: 10px 0;
+      overflow-y: auto; /* Make list scrollable */
+      max-height: 300px; /* Set a maximum height for scrolling */
+      padding: 10px;
     }
 
     .restaurant {
-      padding: 10px 0;
+      padding: 10px;
       border-bottom: 1px solid #f2f2f2;
       cursor: pointer;
     }
@@ -123,25 +94,13 @@
       border-radius: 8px;
     }
 
-    footer {
-      text-align: center;
-      padding: 10px 0;
-    }
-
     footer button {
       background: #ff6f61;
       color: white;
       border: none;
       padding: 10px 20px;
       border-radius: 30px;
-      font-size: 0.9em;
       cursor: pointer;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    footer button:hover {
-      background: #ff4d4d;
     }
 
     .modal {
@@ -168,62 +127,20 @@
       text-align: center;
     }
 
-    .modal-content h3 {
-      margin: 0;
-      color: #ff6f61;
-    }
-
-    .modal-content p {
-      margin: 10px 0;
-      color: #555;
-    }
-
-    .modal-content a {
-      color: #ff6f61;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .modal-content a:hover {
-      text-decoration: underline;
-    }
-
     .modal-content button {
       background: #ff6f61;
       color: white;
       border: none;
       padding: 8px 15px;
       border-radius: 20px;
-      font-size: 0.9em;
       cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .modal-content button:hover {
-      background: #ff4d4d;
-    }
-
-    #home-icon {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      font-size: 1.5em;
-      color: #ff6f61;
-      text-decoration: none;
-      z-index: 1000;
-      transition: transform 0.3s, color 0.3s;
-    }
-
-    #home-icon:hover {
-      transform: scale(1.2);
-      color: #ff4d4d;
     }
   </style>
 </head>
 <body>
   <div class="book">
     <div class="cover">
-      <img src="https://i.pinimg.com/736x/13/f9/5b/13f95bddf86240ceb6fb8dbf34e8a5f1.jpg" alt="Goat Image">
+      <img src="https://i.pinimg.com/736x/13/f9/5b/13f95bddf86240ceb6fb8dbf34e8a5f1.jpg" alt="Cover Image">
       <h1>Lila's Restaurant Guide</h1>
       <p>All of Lila's favorite spots to eat, all in one place.</p>
       <button onclick="openBook()">Open</button>
@@ -248,26 +165,32 @@
     </div>
   </div>
 
-  <a id="home-icon" href="https://zzackhh.github.io/interactive2024/level-2/project2.html" target="_blank">🏠</a>
-
   <script>
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/YOUR_SHEET_ID/pub?output=csv'; // Replace with actual CSV link
+    const restaurants = []; // Store restaurant data here.
+
     const restaurantList = document.getElementById('restaurant-list');
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modal-title');
     const modalLocation = document.getElementById('modal-location');
     const modalLink = document.getElementById('modal-link');
-    const pages = document.querySelector('.pages');
-    const cover = document.querySelector('.cover');
 
-    const restaurants = [
-      { name: 'Kisa', location: 'NYC', link: 'https://www.newyorker.com/culture/the-food-scene/kisa-a-pitch-perfect-ode-to-korean-drivers-restaurants' },
-      { name: 'Dorian', location: 'London', link: 'https://www.theinfatuation.com/london/reviews/dorian' },
-      { name: 'Umu', location: 'London', link: 'https://www.timeout.com/london/restaurants/umu' },
-      { name: "Raf's", location: 'NYC', link: 'https://www.nytimes.com/2023/07/04/dining/restaurant-review-rafs-nyc.html' },
-      { name: "Cervo's", location: 'NYC', link: 'https://nymag.com/listings/restaurant/cervos/' },
-      { name: 'Acre', location: 'Brooklyn', link: 'https://www.theinfatuation.com/new-york/reviews/acre' },
-      { name: 'Raku Udon', location: 'NYC', link: 'https://ny.eater.com/2015/11/2/9657024/best-udon-nyc' },
-    ];
+    const fetchRestaurants = async () => {
+      try {
+        const response = await fetch(sheetUrl);
+        if (!response.ok) throw new Error(`Failed to fetch: ${response.status}`);
+        const csvText = await response.text();
+        const rows = csvText.split('\n').slice(1).map(row => row.split(','));
+        rows.forEach(([name, location, link]) => {
+          if (name && location && link) {
+            restaurants.push({ name, location, link });
+          }
+        });
+        renderRestaurants();
+      } catch (error) {
+        console.error('Error fetching sheet:', error);
+      }
+    };
 
     function renderRestaurants() {
       restaurantList.innerHTML = '';
@@ -285,7 +208,7 @@
       modalTitle.textContent = restaurant.name;
       modalLocation.textContent = `Location: ${restaurant.location}`;
       modalLink.href = restaurant.link;
-      modalLink.textContent = `Read Review`;
+      modalLink.textContent = 'Read Review';
       modal.classList.add('active');
     }
 
@@ -294,8 +217,8 @@
     }
 
     function openBook() {
-      cover.style.display = 'none';
-      pages.classList.add('active');
+      document.querySelector('.cover').style.display = 'none';
+      document.querySelector('.pages').classList.add('active');
     }
 
     document.getElementById('add-restaurant-btn').addEventListener('click', () => {
@@ -308,7 +231,7 @@
       }
     });
 
-    renderRestaurants();
+    fetchRestaurants();
   </script>
 </body>
 </html>
