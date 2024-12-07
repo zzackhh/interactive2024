@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lila's Restaurant Guide</title>
   <style>
-    /* Styles for the guide */
     body {
       margin: 0;
       height: 100vh;
@@ -78,12 +77,15 @@
 
     main {
       flex-grow: 1;
-      overflow-y: auto; /* Make list scrollable */
-      max-height: 300px; /* Set a maximum height for scrolling */
+      overflow-y: auto;
+      max-height: 300px;
       padding: 10px;
     }
 
     .restaurant {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 10px;
       border-bottom: 1px solid #f2f2f2;
       cursor: pointer;
@@ -92,6 +94,16 @@
     .restaurant:hover {
       background: #fff7e6;
       border-radius: 8px;
+    }
+
+    .restaurant button {
+      background: #ff6f61;
+      color: white;
+      border: none;
+      padding: 3px 7px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8em;
     }
 
     footer button {
@@ -103,37 +115,37 @@
       cursor: pointer;
     }
 
-    .modal {
+    .restore-button {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal.active {
-      display: flex;
-    }
-
-    .modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      width: 280px;
-      text-align: center;
-    }
-
-    .modal-content button {
-      background: #ff6f61;
-      color: white;
+      bottom: 10px;
+      left: 10px;
+      background: transparent;
       border: none;
-      padding: 8px 15px;
-      border-radius: 20px;
+      font-size: 1.5em;
       cursor: pointer;
+      text-decoration: none;
+      color: black;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .restore-button:hover {
+      transform: scale(1.2);
+      color: #0059b3;
+    }
+
+    #home-icon {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 1.5em;
+      text-decoration: none;
+      color: black;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    #home-icon:hover {
+      transform: scale(1.2);
+      color: #0059b3;
     }
   </style>
 </head>
@@ -156,65 +168,55 @@
     </div>
   </div>
 
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <h3 id="modal-title">Restaurant Name</h3>
-      <p id="modal-location">Location: </p>
-      <p><a href="#" target="_blank" id="modal-link">Read Review</a></p>
-      <button onclick="closeModal()">Close</button>
-    </div>
-  </div>
+  <a class="restore-button" onclick="restoreRestaurants()">⭐</a>
+  <a id="home-icon" href="https://zzackhh.github.io/interactive2024/level-2/project2.html" target="_blank">🏠</a>
 
   <script>
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSKX4pZdbeTPumRRSvQFchyEBcpX9biTh8I_Sr5mqiOqj6NhSIgf1JD1YmgBqFDIrTnpNyKhiGIULzB/pub?output=csv'; // Your CSV URL
-    const appScriptUrl = 'https://script.google.com/macros/s/AKfycbwkSTsqMY9XfInsVhLR_qhIHNKA3pVrvUz5zMlukc2KJQXpqnHmRJlPpDwy1n2YjjxCvQ/exec'; // Your Apps Script URL
-    const restaurants = []; // Store restaurant data here.
-
     const restaurantList = document.getElementById('restaurant-list');
-    const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalLocation = document.getElementById('modal-location');
-    const modalLink = document.getElementById('modal-link');
 
-    const fetchRestaurants = async () => {
-      try {
-        const response = await fetch(sheetUrl);
-        if (!response.ok) throw new Error(`Failed to fetch: ${response.status}`);
-        const csvText = await response.text();
-        const rows = csvText.split('\n').slice(1).map(row => row.split(','));
-        rows.forEach(([name, location, link]) => {
-          if (name && location && link) {
-            restaurants.push({ name, location, link });
-          }
-        });
-        renderRestaurants();
-      } catch (error) {
-        console.error('Error fetching sheet:', error);
-      }
-    };
+    const preloadRestaurants = [
+      { name: "Kisa", location: "NYC", link: "https://www.newyorker.com/culture/the-food-scene/kisa-a-pitch-perfect-ode-to-korean-drivers-restaurants" },
+      { name: "Dorian", location: "London", link: "https://www.theinfatuation.com/london/reviews/dorian" },
+      { name: "Umu", location: "London", link: "https://www.timeout.com/london/restaurants/umu#google_vignette" },
+      { name: "Raf's", location: "NYC", link: "https://www.nytimes.com/2023/07/04/dining/restaurant-review-rafs-nyc.html" },
+      { name: "Cervos", location: "NYC", link: "https://nymag.com/listings/restaurant/cervos/" },
+      { name: "Acre", location: "Brooklyn", link: "https://www.theinfatuation.com/new-york/reviews/acre" },
+      { name: "Raku Udon", location: "NYC", link: "https://ny.eater.com/2015/11/2/9657024/best-udon-nyc" },
+    ];
+
+    function saveRestaurantsToLocalStorage(restaurants) {
+      localStorage.setItem('restaurants', JSON.stringify(restaurants));
+    }
+
+    function getRestaurantsFromLocalStorage() {
+      const saved = localStorage.getItem('restaurants');
+      return saved ? JSON.parse(saved) : preloadRestaurants;
+    }
 
     function renderRestaurants() {
+      const restaurants = getRestaurantsFromLocalStorage();
       restaurantList.innerHTML = '';
       restaurants.forEach((restaurant, index) => {
         const restaurantDiv = document.createElement('div');
         restaurantDiv.className = 'restaurant';
-        restaurantDiv.innerHTML = `<div>${restaurant.name}</div>`;
-        restaurantDiv.addEventListener('click', () => showDetails(index));
+        restaurantDiv.innerHTML = `
+          <span onclick="showDetails(${index})">${restaurant.name}</span>
+          <button onclick="deleteRestaurant(${index})">x</button>
+        `;
         restaurantList.appendChild(restaurantDiv);
       });
     }
 
-    function showDetails(index) {
-      const restaurant = restaurants[index];
-      modalTitle.textContent = restaurant.name;
-      modalLocation.textContent = `Location: ${restaurant.location}`;
-      modalLink.href = restaurant.link;
-      modalLink.textContent = 'Read Review';
-      modal.classList.add('active');
+    function deleteRestaurant(index) {
+      const restaurants = getRestaurantsFromLocalStorage();
+      restaurants.splice(index, 1);
+      saveRestaurantsToLocalStorage(restaurants);
+      renderRestaurants();
     }
 
-    function closeModal() {
-      modal.classList.remove('active');
+    function restoreRestaurants() {
+      saveRestaurantsToLocalStorage(preloadRestaurants);
+      renderRestaurants();
     }
 
     function openBook() {
@@ -222,36 +224,7 @@
       document.querySelector('.pages').classList.add('active');
     }
 
-    document.getElementById('add-restaurant-btn').addEventListener('click', async () => {
-      const name = prompt('Enter restaurant name:');
-      const location = prompt('Enter restaurant location:');
-      const link = prompt('Enter restaurant review link:');
-      if (name && location && link) {
-        const newRestaurant = { name, location, link };
-
-        try {
-          const response = await fetch(appScriptUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newRestaurant),
-          });
-
-          const result = await response.json();
-          if (result.status === 'success') {
-            restaurants.push(newRestaurant); // Update local list
-            renderRestaurants();
-            alert('Restaurant added successfully!');
-          } else {
-            alert('Failed to add restaurant. Please try again.');
-          }
-        } catch (error) {
-          console.error('Error adding restaurant:', error);
-          alert('An error occurred. Please check the console for details.');
-        }
-      }
-    });
-
-    fetchRestaurants();
+    renderRestaurants();
   </script>
 </body>
 </html>
