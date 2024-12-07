@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lila's Notebook Cookbook</title>
+    <title>Lila's Cookbook</title>
     <style>
         @font-face {
             font-family: 'Poppins';
@@ -12,45 +12,57 @@
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
         }
 
         body {
-            margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #fdf6e3, #f3e9dc);
+            background: linear-gradient(270deg, rgba(135, 207, 255, 0.6), rgba(0, 89, 179, 0.6));
+            background-size: 400% 400%;
+            animation: gradientAnimation 8s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .title {
-            font-size: 48px;
+            font-size: clamp(18px, 3vw, 24px);
             font-family: cursive;
             font-weight: 600;
             color: #333;
-            margin-top: 20px;
             text-align: center;
+            margin-bottom: 5px;
         }
 
         .subtitle {
-            font-size: 18px;
+            font-size: clamp(12px, 2vw, 18px);
             font-family: 'Georgia', serif;
             color: #555;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .emoji-bar {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
         .emoji-tab {
-            font-size: 28px;
+            font-size: clamp(16px, 4vw, 24px);
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -62,41 +74,44 @@
         .book-container {
             display: flex;
             flex-direction: column;
-            width: 90%;
-            max-width: 600px;
-            height: 650px;
+            width: 90vw;
+            max-width: 500px;
+            height: 75vh;
             border-radius: 10px;
             background: #fff;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Added shadow */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             border: 1px solid #ddd;
         }
 
         .page {
             flex: 1;
-            padding: 20px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
         }
 
         .editable-area {
             flex: 1;
-            padding: 15px;
-            background: linear-gradient(to bottom, transparent 39px, #e8e3d8 40px) repeat-y;
-            background-size: 100% 40px;
+            padding: 10px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #fff,
+                #fff 38px,
+                #d9d9d9 39px,
+                #d9d9d9 40px
+            );
             border: 1px solid #ccc;
             border-radius: 5px;
-            overflow-y: auto;
+            overflow: hidden;
             outline: none;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
-            min-height: 300px;
+            font-size: clamp(12px, 1.5vw, 14px);
         }
 
         .image-area {
             width: 100%;
-            max-width: 200px;
-            height: 150px;
+            height: 20%;
             border: 2px dashed #ccc;
             border-radius: 5px;
             background: #f9f9f9;
@@ -104,7 +119,6 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            margin: 0 auto;
         }
 
         .image-area img {
@@ -142,45 +156,19 @@
         }
 
         .navigation button {
-            background: #ffad60;
+            background: #7ec8f5;
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
+            font-size: clamp(10px, 1.5vw, 14px);
+            transition: background 0.3s ease;
         }
 
         .navigation button:hover {
-            background: #e8b055;
-        }
-
-        @media (max-width: 768px) {
-            .title {
-                font-size: 36px;
-            }
-
-            .subtitle {
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-
-            .book-container {
-                height: 550px;
-            }
-
-            .editable-area {
-                min-height: 250px;
-            }
-
-            .navigation button {
-                padding: 8px 15px;
-                font-size: 14px;
-            }
-
-            .emoji-tab {
-                font-size: 24px;
-            }
+            background: #66b2e6;
         }
     </style>
 </head>
