@@ -200,7 +200,7 @@
         const restaurantDiv = document.createElement('div');
         restaurantDiv.className = 'restaurant';
         restaurantDiv.innerHTML = `
-          <span onclick="showDetails(${index})">${restaurant.name}</span>
+          <span onclick="window.open('${restaurant.link}', '_blank')">${restaurant.name} - ${restaurant.location}</span>
           <button onclick="deleteRestaurant(${index})">x</button>
         `;
         restaurantList.appendChild(restaurantDiv);
@@ -223,6 +223,21 @@
       document.querySelector('.cover').style.display = 'none';
       document.querySelector('.pages').classList.add('active');
     }
+
+    document.getElementById('add-restaurant-btn').addEventListener('click', () => {
+      const name = prompt("Enter the restaurant name:");
+      const location = prompt("Enter the restaurant location:");
+      const link = prompt("Enter a URL for more information:");
+
+      if (name && location && link) {
+        const restaurants = getRestaurantsFromLocalStorage();
+        restaurants.push({ name, location, link });
+        saveRestaurantsToLocalStorage(restaurants);
+        renderRestaurants();
+      } else {
+        alert("All fields are required to add a restaurant.");
+      }
+    });
 
     renderRestaurants();
   </script>
