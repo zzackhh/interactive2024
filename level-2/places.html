@@ -166,7 +166,8 @@
   </div>
 
   <script>
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/YOUR_SHEET_ID/pub?output=csv'; // Replace with actual CSV link
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSKX4pZdbeTPumRRSvQFchyEBcpX9biTh8I_Sr5mqiOqj6NhSIgf1JD1YmgBqFDIrTnpNyKhiGIULzB/pub?output=csv'; // Your CSV URL
+    const appScriptUrl = 'https://script.google.com/macros/s/AKfycbwkSTsqMY9XfInsVhLR_qhIHNKA3pVrvUz5zMlukc2KJQXpqnHmRJlPpDwy1n2YjjxCvQ/exec'; // Your Apps Script URL
     const restaurants = []; // Store restaurant data here.
 
     const restaurantList = document.getElementById('restaurant-list');
@@ -221,13 +222,32 @@
       document.querySelector('.pages').classList.add('active');
     }
 
-    document.getElementById('add-restaurant-btn').addEventListener('click', () => {
+    document.getElementById('add-restaurant-btn').addEventListener('click', async () => {
       const name = prompt('Enter restaurant name:');
       const location = prompt('Enter restaurant location:');
       const link = prompt('Enter restaurant review link:');
       if (name && location && link) {
-        restaurants.push({ name, location, link });
-        renderRestaurants();
+        const newRestaurant = { name, location, link };
+
+        try {
+          const response = await fetch(appScriptUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newRestaurant),
+          });
+
+          const result = await response.json();
+          if (result.status === 'success') {
+            restaurants.push(newRestaurant); // Update local list
+            renderRestaurants();
+            alert('Restaurant added successfully!');
+          } else {
+            alert('Failed to add restaurant. Please try again.');
+          }
+        } catch (error) {
+          console.error('Error adding restaurant:', error);
+          alert('An error occurred. Please check the console for details.');
+        }
       }
     });
 
