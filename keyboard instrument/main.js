@@ -1,97 +1,105 @@
-document.body.onkeydown = function(keypress_event) {
-  var key = keypress_event.key.toLowerCase();
-  
-  document.body.style = "";
-  document.body.innerHTML = "";
+document.body.style.margin = "0";
+document.body.style.height = "100vh";
+document.body.style.background = "linear-gradient(to bottom, #ffe6f0, #fff5f8)";
+document.body.style.display = "flex";
+document.body.justifyContent = "center";
+document.body.style.alignItems = "center";
+document.body.style.position = "relative";
 
-  if (key === "a") {
-    document.body.style.backgroundColor = "pink";
-  } else if (key === "b") {
-    let img = document.createElement("img");
-    img.src = "https://hookagency.com/wp-content/uploads/2024/08/hide-the-pain-harold-stock-photo.jpg";
-    img.style.width = "300px";
-    document.body.appendChild(img);
-  } else if (key === "c") {
-    let cText = document.createElement("div");
-    cText.innerHTML = "C";
-    cText.style.fontSize = "100px";
-    cText.style.color = "green";
-    document.body.appendChild(cText);
-  } else if (key === "d") {
-    document.body.style.backgroundColor = "yellow";
-  } else if (key === "e") {
-    let img = document.createElement("img");
-    img.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5PXp-r56xISrCJiB20RO_ADalWjJhKH5VFA&s";
-    img.style.width = "300px";
-    document.body.appendChild(img);
-  } else if (key === "f") {
-    document.body.style.backgroundColor = "lightpurple";
-  } else if (key === "g") {
-    document.body.style.fontSize = "10px";
-  } else if (key === "h") {
-    let img = document.createElement("img");
-    img.src = "https://i.pinimg.com/originals/60/0b/8a/600b8a55c715a7b7b0cc314eefa8c1df.jpg";
-    img.style.width = "300px";
-    document.body.appendChild(img);
-  } else if (key === "i") {
-    document.body.style.backgroundColor = "black";
-  } else if (key === "j") {
-    document.body.style.backgroundColor = "magenta";
-  } else if (key === "k") {
-    let img = document.createElement("img");
-    img.src = "https://thumbs.dreamstime.com/b/senior-chef-whisking-egg-kitchen-white-background-208472694.jpg";
-    img.style.width = "300px";
-    document.body.appendChild(img);
-  } else if (key === "l") {
-    document.body.style.backgroundColor = "lightorange";
-  } else if (key === "m") {
-    document.body.style.background = "linear-gradient(lightblue, darkblue)";
-  } else if (key === "n") {
-    document.body.style.backgroundColor = "gray";
-    let helloText = document.createElement("div");
-    helloText.innerHTML = "Hello";
-    helloText.style.fontSize = "50px";
-    helloText.style.position = "absolute";
-    helloText.style.top = "50%";
-    helloText.style.left = "50%";
-    helloText.style.transform = "translate(-50%, -50%)";
-    document.body.appendChild(helloText);
-  } else if (key === "o") {
-    document.body.style.backgroundColor = "indigo";
-  } else if (key === "p") {
-    document.body.style.backgroundColor = "lightpink";
-  } else if (key === "q") {
-    document.body.style.fontFamily = "Comic Sans MS";
-    document.body.style.fontSize = "50px";
-  } else if (key === "r") {
-    document.body.style.backgroundColor = "purple";
-  } else if (key === "s") {
-    let img = document.createElement("img");
-    img.src = "https://t4.ftcdn.net/jpg/04/07/73/91/360_F_407739154_jiDUMKxaBjVUER7wplCn3kCxxkDTjeWJ.jpg";
-    img.style.width = "300px";
-    document.body.appendChild(img);
-  } else if (key === "t") {
-    document.body.style.background = "linear-gradient(black, white)";
-  } else if (key === "u") {
-    document.body.style.backgroundColor = "lightblue";
-    document.body.style.fontSize = "20px";
-    document.body.style.transform = "rotate(90deg)";
-  } else if (key === "v") {
-    document.body.style.backgroundColor = "black";
-  } else if (key === "w") {
-    document.body.style.backgroundImage = "url('https://jonsatrom.wordpress.com/wp-content/uploads/2012/03/bbl-01.gif')";
-    document.body.style.backgroundSize = "cover";
-  } else if (key === "x") {
-    document.body.style.backgroundColor = "yellow";
-  } else if (key === "y") {
-    document.body.style.backgroundColor = "darkblue";
-  } else if (key === "z") {
-    document.body.style.backgroundColor = "lightblue";
-  } else {
-    document.body.style.backgroundColor = "rgb(255, 255, 255)";
-    let defaultText = document.createElement("div");
-    defaultText.style.fontSize = "30px";
-    defaultText.style.color = "black";
-    document.body.appendChild(defaultText);
+
+const dancer = document.createElement("div");
+dancer.innerHTML = "💃";
+dancer.style.fontSize = "100px";
+dancer.style.position = "absolute";
+dancer.style.top = "50%";
+dancer.style.left = "50%";
+dancer.style.transform = "translate(-50%, -50%)";
+dancer.style.transition = "all 0.3s ease-in-out";
+document.body.appendChild(dancer);
+
+const discoBall = document.createElement("div");
+discoBall.innerHTML = "🪩";
+discoBall.style.fontSize = "100px";
+discoBall.style.position = "absolute";
+discoBall.style.top = "10%";
+discoBall.style.left = "50%";
+discoBall.style.transform = "translate(-50%, -50%)";
+discoBall.style.opacity = "0";
+discoBall.style.transition = "opacity 0.5s ease-in-out";
+document.body.appendChild(discoBall);
+
+
+let x = 50; 
+let y = 50; 
+
+document.body.onkeydown = function (event) {
+  const key = event.key.toLowerCase();
+
+  
+  dancer.style.animation = "";
+  document.body.style.background = "linear-gradient(to bottom, #ffe6f0, #fff5f8)";
+  discoBall.style.opacity = "0";
+
+  switch (key) {
+    case "w": 
+      y = Math.max(5, y - 5);
+      break;
+    case "s": 
+      y = Math.min(95, y + 5);
+      break;
+    case "a": 
+      x = Math.max(5, x - 5);
+      dancer.style.transform += " scaleX(-1)"; // 
+      break;
+    case "d": 
+      x = Math.min(95, x + 5);
+      dancer.style.transform += " scaleX(1)"; // 
+      break;
+    case "r": // 
+    case "t": // 
+    case "y": // 
+      startDisco();
+      break;
+    default: // 
+      dancer.style.animation = "mini-dance 1.5s infinite";
+      break;
   }
+
+  // Apply movement
+  dancer.style.top = `${y}%`;
+  dancer.style.left = `${x}%`;
 };
+
+function startDisco() {
+  document.body.style.background = `
+    linear-gradient(90deg, #ff0080, #ff8c00, #ff0, #0f0, #0ff, #00f, #8000ff, #ff0080)`;
+  document.body.style.backgroundSize = "400% 400%";
+  document.body.style.animation = "disco-bg 3s infinite";
+
+  discoBall.style.opacity = "1";
+
+
+  dancer.style.animation = "cute-bounce 1s infinite";
+}
+
+const style = document.createElement("style");
+style.innerHTML = `
+  @keyframes cute-bounce {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -55%) scale(1.1); }
+  }
+
+  @keyframes mini-dance {
+    0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    25% { transform: translate(-48%, -52%) scale(1.1) rotate(-10deg); }
+    50% { transform: translate(-50%, -55%) scale(1.2) rotate(10deg); }
+    75% { transform: translate(-52%, -52%) scale(1.1) rotate(-10deg); }
+  }
+
+  @keyframes disco-bg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+`;
+document.head.appendChild(style);
