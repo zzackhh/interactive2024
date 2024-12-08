@@ -29,6 +29,7 @@
             background: linear-gradient(270deg, rgba(135, 207, 255, 0.6), rgba(0, 89, 179, 0.6));
             background-size: 400% 400%;
             animation: gradientAnimation 8s ease infinite;
+            min-width: 320px; /* Prevent layout issues on very small screens */
         }
 
         @keyframes gradientAnimation {
@@ -38,20 +39,21 @@
         }
 
         .title {
-            font-size: clamp(35px, 3vw, 24px);
+            font-size: clamp(24px, 5vw, 35px); /* Adjusted for smaller screens */
             font-family: "Snell Roundhand", "Brush Script MT", cursive;
             font-weight: 600;
             color: #333;
             text-align: center;
-            margin-bottom: 5px;
+            margin: 5px 10px; /* Reduced margins */
+            word-wrap: break-word; /* Ensure wrapping for longer titles */
         }
 
         .subtitle {
-            font-size: clamp(12px, 2vw, 18px);
+            font-size: clamp(10px, 3vw, 18px); /* Adjusted for smaller screens */
             font-family: 'Courier New', Courier, monospace; 
             color: #555;
             text-align: center;
-            margin-bottom: 10px;
+            margin: 0 10px 10px; /* Reduced side margins */
         }
 
         .emoji-bar {
