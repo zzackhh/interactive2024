@@ -88,7 +88,6 @@
         🎱
     </div>
     <div class="result-box" id="resultBox" style="display: none;">
-        <!-- Food text will appear here -->
     </div>
     <a id="home-icon" href="https://zzackhh.github.io/interactive2024/level-2/project2.html" target="_blank">🏠</a>
 
@@ -133,24 +132,22 @@
         const eightBall = document.getElementById("eightBall");
         const resultBox = document.getElementById("resultBox");
 
-        // Function to handle the shake animation and show random food
         function handleEightBallClick() {
-            // Add shake animation
+        
             eightBall.classList.add("shake");
-            // Remove shake animation after it finishes
+          
             setTimeout(() => {
                 eightBall.classList.remove("shake");
             }, 500);
 
-            // Generate a random food idea
+          
             const randomFood = foodIdeas[Math.floor(Math.random() * foodIdeas.length)];
 
-            // Display the result
+           
             resultBox.textContent = randomFood;
             resultBox.style.display = "block";
         }
 
-        // Add event listeners for both click and touchstart
         eightBall.addEventListener("click", handleEightBallClick);
         eightBall.addEventListener("touchstart", handleEightBallClick);
     </script>
