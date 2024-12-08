@@ -65,7 +65,6 @@ document.body.onkeydown = function (event) {
       break;
   }
 
-  // Apply movement
   dancer.style.top = `${y}%`;
   dancer.style.left = `${x}%`;
 };
