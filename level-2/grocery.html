@@ -81,7 +81,7 @@
             outline: none;
             line-height: 25px; 
             padding: 5px;
-            font-family: cursive; 
+            font-family: 'Courier New', Courier, monospace;
         }
 
         #note-content::-webkit-scrollbar {
@@ -118,7 +118,6 @@
     <script>
         const noteContent = document.getElementById('note-content');
 
-        // Load saved notes from local storage on page load
         window.onload = function() {
             const savedNotes = localStorage.getItem('groceryList');
             if (savedNotes) {
@@ -126,7 +125,6 @@
             }
         };
 
-        // Save notes to local storage whenever the content changes
         noteContent.addEventListener('input', function() {
             localStorage.setItem('groceryList', noteContent.value);
         });
